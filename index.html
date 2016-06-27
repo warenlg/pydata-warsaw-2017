@@ -25,10 +25,6 @@
 		<h2>Source code abstracts classification using CNN</h2>
 		<p>Vadim Markovtsev, <a href="http://sourced.tech">source{d}</a></p>
 		<img src="pictures/cover.png" alt="" class="cover">
-		<!--
-			To apply styles to the certain slides
-			set slide ID to get needed elements
-			-->
 		<style>
 			#cover h2 {
 				margin:30px 0 0;
@@ -198,12 +194,277 @@
 			}
 		</style>
 	</section>
-	<section>
+	<section class="slide">
 		<h2>Feature engineering</h2>
 		<p>Pygments example:</p>
+		<div class="double">
+			<pre><code># prints "Hello, World!"</code>
+<code>if True:</code>
+<code>    print("Hello, World!")</code></pre>
+			<div class="highlight"><pre><span></span><span class="c1"># prints &quot;Hello, World!&quot;</span>
+<span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span></pre></div>
+		</div>
+		<style>
+			.highlight pre {
+				white-space: pre;
+				line-height: 2;
+				font-family: PT Mono,monospace,monospace;
+			}
+			.highlight .c1 {
+				color: #969896;
+			}
+			.highlight .k {
+				color: #a71d5d;
+			}
+			.highlight .bp {
+				color: #0086b3;
+			}
+			.highlight .s2 {
+				color: #183691;
+			}
+		</style>
+	</section>
+	<section class="slide">
+		<h2>Feature engineering</h2>
+		<pre id="raw-pygments">
+<code>Token.Comment.Single	'# prints "Hello, World!"'</code>
+<code>Token.Text	'\n'</code>
+<code>Token.Keyword	'if'</code>
+<code>Token.Text	' '</code>
+<code>Token.Name.Builtin.Pseudo	'True'</code>
+<code>Token.Punctuation	':'</code>
+<code>Token.Text	'\n'</code>
+<code>Token.Text	'    '</code>
+<code>Token.Keyword	'print'</code>
+<code>Token.Punctuation	'('</code>
+<code>Token.Literal.String.Double	'"'</code>
+<code>Token.Literal.String.Double	'Hello, World!'</code>
+<code>Token.Literal.String.Double	'"'</code>
+<code>Token.Punctuation	')'</code>
+<code>Token.Text	'\n'</code>
+		</pre>
+		<style>
+			#raw-pygments code {
+				line-height: 1.1;
+			}
+		</style>
+	</section>
+	<section class="slide">
+		<h2>Feature engineering</h2>
+		<ul>
+			<li>Split stream into lines, each line contains ≤40 tokens</li>
+			<li>Merge indents</li>
+			<li>"One against all" with value length</li>
+			<li>Some tokens occupy more than 1 dimension, e.g.
+				Token.Name reflects naming style</li>
+			<li>About 200 dimensions overall</li>
+			<li>8000 features per line, most are zeros</li>
+			<li>Mean-dispersion normalization</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2>Feature engineering</h2>
+		<p>Important: though extracted, names are <em>not</em> used to solve this
+		classification problem. They are a subject of separate research and are
+		likely to dramatically improve accuracy.</p>
+	</section>
+	<section id="slide-code" class="slide">
+		<h2>Feature engineering</h2>
+		<img src="pictures/code_all.png">
+		<style>
+			#slide-code {
+				background: black;
+			}
+			#slide-code > img {
+				height: 400px;
+			}
+		</style>
+	</section>
+	<section class="slide">
+		<h2>Network architecture - classification</h2>
+		<table>
+			<tbody>
+			<tr>
+				<th scope="col">layer</th>
+				<th>kernel</th>
+				<th>pooling</th>
+				<th>number</th>
+			</tr>
+			<tr>
+				<td>convolutional</td>
+				<td>4x1</td>
+				<td>2x1</td>
+				<td>250</td>
+			</tr>
+			<tr>
+				<td>convolutional</td>
+				<td>8x2</td>
+				<td>2x2</td>
+				<td>200</td>
+			</tr>
+			<tr>
+				<td>convolutional</td>
+				<td>5x6</td>
+				<td>2x2</td>
+				<td>150</td>
+			</tr>
+			<tr>
+				<td>convolutional</td>
+				<td>2x10</td>
+				<td>2x2</td>
+				<td>100</td>
+			</tr>
+			<tr>
+				<td>all2all</td>
+				<td></td>
+				<td></td>
+				<td>512</td>
+			</tr>
+			<tr>
+				<td>all2all</td>
+				<td></td>
+				<td></td>
+				<td>64</td>
+			</tr>
+			<tr>
+				<td>all2all</td>
+				<td></td>
+				<td></td>
+				<td>output</td>
+			</tr>
+			</tbody>
+		</table>
+		<style>
+
+		</style>
+	</section>
+	<section class="slide">
+		<h2>Network architecture - classification</h2>
+		<table>
+			<tbody>
+			<tr>
+				<th scope="row">Activation</th>
+				<td>ReLU</td>
+			</tr>
+			<tr>
+				<th scope="row">Optimizer</th>
+				<td>GD with momentum (0.5)</td>
+			</tr>
+			<tr>
+				<th scope="row">Learning rate</th>
+				<td>0.002</td>
+			</tr>
+			<tr>
+				<th scope="row">Weight decay</th>
+				<td>0.955</td>
+			</tr>
+			<tr>
+				<th scope="row">Regularization</th>
+				<td>L2, 0.0005</td>
+			</tr>
+			<tr>
+				<th>Weight initialization</th>
+				<td>σ = 0.1</td>
+			</tr>
+			</tbody>
+		</table>
+	</section>
+	<section class="slide">
+		<h2>Network architecture - classification</h2>
+		<p>Merge all project files together, feed 50 LOT (lines of tokens) as a
+			single sample.</p>
+		<p>Does not converge without random shuffling files (sample borders are
+			of course fixed).</p>
+		<p>Batch size is 50.</p>
+		<p>Truncate projects by the smallest LOT.</p>
+		<p>Fragile to small metaparameter deviations.</p>
+	</section>
+	<section class="slide">
+		<h2>Implementation details</h2>
+		<ul>
+			<li>Python3 / Tensorflow / NVIDIA GPU</li>
+			<li>Special tool to extract features from software repositories in parallel</li>
+			<li>Database of features</li>
+			<li>Sparse matrices ⇒ normalization on the fly</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2>Implementation details</h2>
+		<p>Normalization
+		$$D = E(X^2) - E(X)^2$$
+			Thus we can cache the following for each source file / project:
+			\(\sum X^2\), \(\sum X\), \(N\) of samples.
+		\[m = \frac{\sum_{unit} \sum X}{\sum_{unit} N},\quad
+			\sigma = \sqrt{\frac{\sum_{unit} \sum X^2 - (\sum_{unit} \sum X)^2}{\sum_{unit} N}}\]
+		</p>
+	</section>
+	<section class="slide">
+		<h2>First results</h2>
+		<table>
+			<tbody>
+			<tr>
+				<th scope="col">projects</th>
+				<th>description</th>
+				<th>size</th>
+				<th>accuracy</th>
+			</tr>
+			<tr>
+				<th scope="row">Django vs Twisted</th>
+				<td>Web frameworks, Python</td>
+				<td>800ktok each</td>
+				<td>84%</td>
+			</tr>
+			<tr>
+				<th scope="row">Matplotlib vs Bokeh</th>
+				<td>Plotting libraries, Python</td>
+				<td>1Mtok vs 250ktok</td>
+				<td>60%</td>
+			</tr>
+			<tr>
+				<th scope="row">Matplotlib vs Django</th>
+				<td>Plotting libraries, Python</td>
+				<td>1Mtok vs 800ktok</td>
+				<td>24%</td>
+			</tr>
+			<tr>
+				<th scope="row">Django vs Guava</th>
+				<td>Python vs Java</td>
+				<td>800ktok</td>
+				<td><1%</td>
+			</tr>
+			<tr>
+				<th scope="row">Hibernate vs Guava</th>
+				<td>Java libraries</td>
+				<td>3Mtok vs 800ktok</td>
+				<td>3.5%</td>
+			</tr>
+			</tbody>
+		</table>
+	</section>
+	<section class="slide">
+		<h2>First results</h2>
+		<p>Conclusion: the network is likely to extract internal similarity in
+			each project and use it. Just like humans do.</p>
+		<p>If the languages are different, it is very easy to distinguish projects
+		(at least because of unique token types).</p>
+	</section>
+	<section class="slide">
+		<h2>First results</h2>
+		<p>Problem: how to get this for a source code network?</p>
+		<img src="pictures/kernels.png">
+	</section>
+	<section class="slide">
+		<h2>Approaches to developers clustering</h2>
 		
 	</section>
 	<div class="progress"></div>
 	<script src="node_modules/shower-core/shower.min.js"></script>
+	<script type="text/javascript" async defer
+      src="node_modules/mathjax/MathJax.js">
+	</script>
+    <script type="text/javascript" async defer
+      src="node_modules/mathjax/config/TeX-AMS_CHTML.js">
+	</script>
 </body>
 </html>

@@ -30,13 +30,14 @@
     "shower-core": "^2.0.6",
     "shower-material": "^1.0.5",
     "shower-ribbon": "^2.0.6",
-    "font-awesome": "^4.6.3"
+    "font-awesome": "^4.6.3",
+    "mathjax": "^2.6.1"
   },
   "devDependencies": {
     "del": "^2.2.1",
     "fs": "0.0.2",
     "gulp": "^3.9.1",
-    "svgo": "*",
+    "svgo": "^0.6.6",
     "gulp-gh-pages": "^0.5.4",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
