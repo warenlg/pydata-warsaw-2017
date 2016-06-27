@@ -54,12 +54,11 @@
 		<ol>
 			<li>Motivation</li>
 			<li>Source code feature engineering</li>
-			<li>Network architecture - classification</li>
+			<li>Network architecture</li>
 			<li>Implementation details</li>
 			<li>First results</li>
 			<li>Approaches to developers clustering</li>
 			<li>Distance Metric Learning</li>
-			<li>Network architecture - future</li>
 		</ol>
 		<style>
 			#qrcode {
@@ -282,7 +281,7 @@
 		</style>
 	</section>
 	<section class="slide">
-		<h2>Network architecture - classification</h2>
+		<h2>Network architecture</h2>
 		<table>
 			<tbody>
 			<tr>
@@ -340,7 +339,7 @@
 		</style>
 	</section>
 	<section class="slide">
-		<h2>Network architecture - classification</h2>
+		<h2>Network architecture</h2>
 		<table>
 			<tbody>
 			<tr>
@@ -371,7 +370,7 @@
 		</table>
 	</section>
 	<section class="slide">
-		<h2>Network architecture - classification</h2>
+		<h2>Network architecture</h2>
 		<p>Merge all project files together, feed 50 LOT (lines of tokens) as a
 			single sample.</p>
 		<p>Does not converge without random shuffling files (sample borders are
@@ -456,7 +455,26 @@
 	</section>
 	<section class="slide">
 		<h2>Approaches to developers clustering</h2>
-		
+		<p>GitHub has ≈6M of active users (and 3M after some filtering).
+			If we are able to extract various features for each, we can cluster
+			them. Current approach:</p>
+		<ol>
+			<li>Run K-means with K=45000 (using <a href="https://github.com/src-d/kmcuda">
+				src-d/kmcuda</a>)</li>
+			<li>Run t-SNE to visualize the landscape</li>
+		</ol>
+	</section>
+	<section class="slide">
+		<h2>Approaches to developers clustering</h2>
+        <img id="github-clusters" src="pictures/github_clusters.png">
+		<style>
+			#github-clusters {
+				height: 450px;
+				display: table;
+				margin-right: auto;
+				margin-left: auto;
+			}
+		</style>
 	</section>
 	<div class="progress"></div>
 	<script src="node_modules/shower-core/shower.min.js"></script>
