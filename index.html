@@ -14,7 +14,7 @@
 	</header>
 	<section class="slide" id="cover">
 		<h2>Source code abstracts classification using CNN</h2>
-		<p>Vadim Markovtsev <a href="http://sourced.tech">source{d}</a></p>
+		<p>Vadim Markovtsev, <a href="http://sourced.tech">source{d}</a></p>
 		<img src="pictures/cover.png" alt="" class="cover">
 		<!--
 			To apply styles to the certain slides
@@ -69,13 +69,66 @@
 			}
 		</style>
 	</section>
-	<!--
-		To hide progress bar from entire presentation
-		just remove “progress” element.
-		-->
+	<section class="slide">
+		<h2>Motivation</h2>
+		<blockquote>Everything is better with clusters.</blockquote>
+		<img id="motivation" src="pictures/motivation.png">
+		<style>
+			#motivation {
+				height: 360px;
+				margin-left: auto;
+				margin-right: auto;
+				display: table;
+			}
+		</style>
+	</section>
+	<section class="slide">
+		<h2>Motivation</h2>
+		<p>Customers buy goods, and software developers write code.</p>
+		<div id="compiling">
+			<img class="cstretch" src="pictures/compiling.svg">
+			<img src="pictures/arrow.png">
+			<img class="cstretch" src="pictures/cproj.png">
+		</div>
+		<style>
+			#compiling {
+				height: 340px;
+				display: flex;
+				align-items: center;
+                justify-content: center;
+			}
+			.cstretch {
+				height: 340px;
+			}
+		</style>
+	</section>
+	<section class="slide">
+		<h2>Motivation</h2>
+		<p>So to understand the latter, we need to understand what and how they
+			do what they do. Feature origins:</p>
+		<ul class="double">
+			<li>Social networks</li>
+			<li>Version control statistics
+				<ul>
+					<li>History</li>
+					<li>Style</li>
+				</ul>
+			</li>
+			<li>Source code
+				<ul>
+					<li>Algorithms</li>
+					<li>Dependency graph</li>
+					<li><span class="selection">Style</span></li>
+				</ul>
+			</li>
+		</ul>
+		<style>
+			.selection {
+			  background: linear-gradient(to top, red .19em,transparent .19em) repeat-x;
+			}
+		</style>
+	</section>
 	<div class="progress"></div>
 	<script src="node_modules/shower-core/shower.min.js"></script>
-	<!-- Copyright © 2015 Yours Truly, Famous Inc. -->
-	<!-- Photos by John Carey, fiftyfootshadows.net -->
 </body>
 </html>
