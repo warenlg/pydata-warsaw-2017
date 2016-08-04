@@ -53,8 +53,34 @@
 	<section class="slide">
 		<h2>Обо мне</h2>
 		<ol>
-			<li><img src="pictures/sourced.png"></li>
+			<li>Инженер по машинному обучению в <a href="sourced.tech" id="sourced">
+				<img src="pictures/sourced.svg">
+			</a></li>
+			<li>Опыт Go - 3 месяца</li>
+			<li>Опыт Python - 3 года</li>
+			<li>Опыт C/C++ - <span class="strikethrough">42</span> 6 лет</li>
+			<li><img class="social" src="pictures/github.png">
+				<a href="https://github.com/vmarkovtsev">vmarkovtsev</a></li>
+			<li><img class="social" src="pictures/habrahabr.png">
+				<a href="https://habrahabr.ru/users/markhor">markhor</a></li>
 		</ol>
+		<style>
+			#sourced {
+				background: none;
+			}
+			#sourced > img {
+				height: 1em;
+				object-fit: contain;
+				margin-bottom: -4px;
+			}
+			.strikethrough {
+				text-decoration: line-through;
+			}
+			.social {
+				height: 1em;
+				margin-bottom: -2.5px;
+			}
+		</style>
 	</section>
 
 	<div class="progress"></div>
