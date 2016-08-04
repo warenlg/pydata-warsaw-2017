@@ -15,6 +15,10 @@
 	<section class="slide" id="cover">
 		<h2>Работа с Go из Python</h2>
 		<img src="pictures/cover.svg" alt="" class="cover">
+		<div class="qr">
+			<a href="http://goo.gl/SYIzVP">goo.gl/SYIzVP</a>
+			<img src="pictures/qrcode.svg">
+		</div>
 		<style>
 			.cover {
 				margin-left: 100px;
@@ -26,22 +30,31 @@
 				color:#FFF;
 				text-align:center;
 				font-size:70px;
-				}
-			.cover p {
-				margin:10px 0 0;
-				text-align:center;
-				color:#FFF;
-				font-style:italic;
-				font-size:20px;
-				}
-				#cover p a {
-					color:#FFF;
-					}
+			}
+			.qr {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				display: flex;
+				flex-direction: column;
+			}
+			.qr > a {
+				text-align: center;
+				background: none;
+				color: black;
+				margin-bottom: -10px;
+			}
+			.qr > img {
+				width: 175px;
+				height: 175px;
+			}
 		</style>
 	</section>
 	<section class="slide">
-		<h2>Shower key features</h2>
-
+		<h2>Обо мне</h2>
+		<ol>
+			<li><img src="pictures/sourced.png"></li>
+		</ol>
 	</section>
 
 	<div class="progress"></div>
