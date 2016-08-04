@@ -8,22 +8,31 @@
 	<link rel="stylesheet" href="node_modules/shower-material/styles/screen-16x10.css">
 </head>
 <body class="shower list">
+<style>
+	.slide::after {
+		display: none;
+	}
+	.cover {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+</style>
 	<header class="caption">
 		<h1>Работа с Go из Python</h1>
 		<p>Вадим Марковцев, <a href="http://sourced.tech">source{d}</a></p>
 	</header>
 	<section class="slide" id="cover">
 		<h2>Работа с Go из Python</h2>
-		<img src="pictures/cover.svg" alt="" class="cover">
+		<img src="pictures/cover.svg" alt="" class="cover" id="go-in-python">
 		<div class="qr">
 			<a href="http://goo.gl/SYIzVP">goo.gl/SYIzVP</a>
 			<img src="pictures/qrcode.svg">
 		</div>
 		<style>
-			.cover {
+			#go-in-python {
 				margin-left: 100px;
-				width: 100%;
-				height: 100%;
+				object-fit: contain;
 			}
 			.cover h2 {
 				margin:30px 0 0;
@@ -113,7 +122,124 @@
 	</section>
 	<section class="slide">
 		<h2>Go-git</h2>
-		
+		<pre><code>go get -u gopkg.in/src-d/go-git.v3</code></pre>
+		<pre class="compressed">
+<code>r, _ <span class="pl-k">:=</span> git.<span class="pl-cl">NewRepository</span>(<span class="pl-s">"https://github.com/..."</span>, <span class="pl-cl">nil</span>)</code>
+<code>_ = r.<span class="pl-cl">PullDefault</span>()</code>
+<code>iter, _ <span class="pl-k">:=</span> r.<span class="pl-cl">Commits</span>()</code>
+<code><span class="pl-k">for</span> {</code>
+<code>    commit, err <span class="pl-k">:=</span> iter.<span class="pl-cl">Next</span>()</code>
+<code>    <span class="pl-k">if</span> err == io.EOF <span class="pl-k">break</span></code>
+<code>    fmt.<span class="pl-cl">Println</span>(commit)</code>
+<code>}</code>
+		</pre>
+		<style>
+			.compressed code {
+				line-height: 1.75 !important;
+			}
+			code > .pl-cl {
+				color: #0086b3;
+			}
+			code > .pl-s {
+				color: #183691;
+			}
+			code > .pl-k {
+				color: #a71d5d;
+			}
+		</style>
+	</section>
+    <section class="slide">
+		<h2 class="hell">Внутри...</h2>
+		<img src="pictures/hell.jpg" alt="" class="cover">
+		<style>
+			h2.hell {
+				color: white;
+			}
+		</style>
+	</section>
+	<section class="slide">
+		<h2>Потому что</h2>
+		<ul>
+			<li>Пришлось переписать половину
+				<a href="https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain">
+					plumbing-а</a></li>
+			<li>И все равно пришлось пойти на компромиссы, например, поддерживаются
+			репозитории только из одного <a href="https://git-scm.com/book/en/v2/Git-Internals-Packfiles">packfile</a>-а (нужен git gc)</li>
+			<li>Несмотря на то что есть документация, приходилось читать исходники оригинального git на С</li>
+			<li>git - алгоритмоемкая система</li>
+			<li>Ссылки:
+			<a href="https://codewords.recurse.com/issues/three/unpacking-git-packfiles">1</a>,
+			<a href="http://git.rsbx.net/Documents/Git_Data_Formats.txt">2</a>,
+			<a href="http://stefan.saasen.me/articles/git-clone-in-haskell-from-the-bottom-up/">3</a>
+			</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2>Зависимости</h2>
+		<pre><code>go list -f '{{ .Deps }}' github.com/src-d/go-git</code></pre>
+		<ul>
+			<li><a href="https://github.com/sergi/go-diff">sergi/go-diff</a> - сравнение файлов</li>
+			<li><a href="https://github.com/sourcegraph/go-vcsurl">sourcegraph/go-vcsurl</a> - парсинг URL</li>
+		</ul>
+	</section>
+    <section class="slide">
+		<h2>cgo</h2>
+		<ul>
+			<li>Это интерфейс взаимодействия с традиционным миром - <a href="https://golang.org/cmd/cgo/">RTFM</a></li>
+			<li>Он нужен, потому что есть GC</li>
+			<li>Работает в обе стороны</li>
+			<li>Отсутствует
+				<a href="https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D1%80%D1%88%D0%B0%D0%BB%D0%B8%D0%BD%D0%B3">маршалинг</a>,
+				потому что Go - достаточно низкоуровневый язык</li>
+			<li>Тем не менее, не zero-copy</li>
+		</ul>
+	</section>
+    <section class="slide">
+		<h2>cgo: вызов наружу</h2>
+<pre>
+<code><span class="pl-k">package</span> main</code>
+<code><span class="pl-c">/* #include &lt;stdio.h&gt;</span></code>
+<code><span class="pl-c">void cprint(const char *what) {</span></code>
+<code><span class="pl-c">  printf("%s", what);</span></code>
+<code><span class="pl-c">} */</span></code>
+<code><span class="pl-k">import</span> <span class="pl-s">"C"</span></code>
+<code><span class="pl-k">func</span> <span class="pl-en">main</span>() {</code>
+<code>  C.<span class="pl-cl">cprint</span>(C.<span class="pl-cl">CString</span>(<span class="pl-s">"Hello, world!\n"</span>))</code>
+<code>}</code>
+</pre>
+		<style>
+			code > .pl-c {
+				color: #969896;
+			}
+			code > .pl-en {
+				color: #795da3;
+			}
+		</style>
+	</section>
+    <section class="slide" id="terminal">
+		<h2>Эксперимент</h2>
+		<pre class="no-numbers compressed"><code>$ CC=wat go build test.go</code>
+<code># command-line-arguments</code>
+<code>exec: "wat": executable file not found in $PATH</code>
+<code>$ nm test|grep cprint</code>
+<code>0000000000454120 T _cgo_efd028656a81_Cfunc_cprint</code>
+<code>0000000000401510 t main._Cfunc_cprint</code>
+<code>00000000006c2130 d main._cgo_efd028656a81_Cfunc_cprint</code>
+<code>0000000000454110 T cprint</code>
+</pre>
+		<p>Компиляция выполняется хостовым CC и затем объектник линкуется</p>
+		<style>
+			#terminal {
+				background: black;
+				color: white;
+			}
+			#terminal > h2 {
+				color: white;
+			}
+			#terminal code::before {
+				display: none;
+			}
+		</style>
 	</section>
 	<div class="progress"></div>
 	<script src="node_modules/shower-core/shower.min.js"></script>
