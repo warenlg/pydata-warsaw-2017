@@ -241,6 +241,45 @@
 			}
 		</style>
 	</section>
+    <section class="slide">
+		<h2>Под капотом</h2>
+		<a href="http://stackoverflow.com/a/28354879/69708" id="cgo-source">StackOverflow</a>
+		<ol class="inline">
+			<li><pre><code>main._Cfunc_cprint</code></pre> ==
+				вызов <pre><code>C.print</code></pre> в коде main</li>
+			<li><pre><code>runtime.cgocall(_cgo_efd028656a81_Cfunc_cprint, frame)</code></pre></li>
+			<li>Далее происходит как-бы syscall; горутина останавливается,
+				вызывается C-заглушка на новом стеке</li>
+			<li>Заглушка вызывает <pre><code>cprint</code></pre> с переданными параметрами</li>
+			<li>Работает <pre><code>cprint</code></pre></li>
+			<li>Заглушка записывает результат и покидает мир C</li>
+			<li>На стороне Go происходит возврат из как-бы syscall-а</li>
+			<li>Какая-то горутина продолжает выполняться с результатом работы
+				<pre><code>cprint</code></pre></li>
+		</ol>
+		<style>
+			.inline pre, .inline code {
+				display: inline !important;
+			}
+			#cgo-source {
+				position: absolute;
+				right: 112px;
+				top: 104px;
+			}
+		</style>
+	</section>
+    <section class="slide">
+		<h2>Проблемы</h2>
+		<ul>
+			<li>Передать наружу Go-указатель легко не получится</li>
+			<li>Передать наружу Go-указатель - плохая идея</li>
+			<li>Кто-то должен освобождать память</li>
+		</ul>
+        <pre><code><span class="pl-c">void cprint(const char *what) {</span></code>
+<code><span class="pl-c">  printf("%s", what);</span></code>
+<code><span class="pl-c">  free(what);</span></code>
+<code><span class="pl-c">}</span></code></pre>
+	</section>
 	<div class="progress"></div>
 	<script src="node_modules/shower-core/shower.min.js"></script>
 </body>
