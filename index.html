@@ -52,7 +52,7 @@
 	</section>
 	<section class="slide">
 		<h2>Обо мне</h2>
-		<ol>
+		<ul>
 			<li>Инженер по машинному обучению в <a href="sourced.tech" id="sourced">
 				<img src="pictures/sourced.svg">
 			</a></li>
@@ -63,7 +63,7 @@
 				<a href="https://github.com/vmarkovtsev">vmarkovtsev</a></li>
 			<li><img class="social" src="pictures/habrahabr.png">
 				<a href="https://habrahabr.ru/users/markhor">markhor</a></li>
-		</ol>
+		</ul>
 		<style>
 			#sourced {
 				background: none;
@@ -82,7 +82,39 @@
 			}
 		</style>
 	</section>
-
+	<section class="slide">
+		<h2>Что мы делаем</h2>
+		<ul>
+			<li>У нас есть полная копия GitHub-а в Монге</li>
+			<li>Всё добро написано на Go и крутится в системе контейнеров docker в Google Cloud</li>
+			<li>Мы работаем с тех. директорами IT компаний, которые хантят, и предлагаем им
+			жемчужины из мира open source</li>
+			<li>Тех. директора за это много платят <img src="pictures/euro.png" id="euro"></li>
+			<li>Поиск жемчужин можно усложнять насколько хватит фантазии</li>
+		</ul>
+		<style>
+			#euro {
+				height: 1.5em;
+				margin-bottom: -6px;
+			}
+		</style>
+	</section>
+    <section class="slide">
+		<h2>Проблема</h2>
+		<ul>
+			<li>Ключевая технология нашей компании -
+				<a href="https://github.com/src-d/go-git">src-d/go-git</a></li>
+			<li>Это (отличная) реализация readonly клиента Git на чистом Go</li>
+			<li>Go не предназначен для исследования задач машинного обучения,
+				<a href="http://www.datadan.io/common-go-for-data-science-questions/">
+					хотя некоторые пытаются</a></li>
+			<li>Для go-git нужен мост в мир Python</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2>Go-git</h2>
+		
+	</section>
 	<div class="progress"></div>
 	<script src="node_modules/shower-core/shower.min.js"></script>
 </body>
