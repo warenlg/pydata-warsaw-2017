@@ -17,6 +17,9 @@
 		height: 100%;
 		object-fit: cover;
 	}
+	.slide a {
+		color: #2578b6;
+	}
 </style>
 	<header class="caption">
 		<h1>Работа с Go из Python</h1>
@@ -62,7 +65,8 @@
 	<section class="slide">
 		<h2>Обо мне</h2>
 		<ul>
-			<li>Инженер по машинному обучению в <a href="sourced.tech" id="sourced">
+			<li>Инженер по машинному обучению в
+				<a href="http://sourced.tech" class="sourced">
 				<img src="pictures/sourced.svg">
 			</a></li>
 			<li>Опыт Go - 3 месяца</li>
@@ -74,10 +78,10 @@
 				<a href="https://habrahabr.ru/users/markhor">markhor</a></li>
 		</ul>
 		<style>
-			#sourced {
-				background: none;
+			.sourced {
+				background: none !important;
 			}
-			#sourced > img {
+			.sourced > img {
 				height: 1em;
 				object-fit: contain;
 				margin-bottom: -4px;
@@ -601,7 +605,16 @@
     <section class="slide">
 		<img src="pictures/cover.svg" alt="" class="cover go-in-python">
 		<h2 id="end">Fin</h2>
-		<p></p>
+		<p id="hiring">We are hiring<br>
+			<a href="http://sourced.tech/about/#map-tyba" class="sourced">
+				<img src="pictures/sourced.svg"></a></p>
+		<style>
+			#hiring {
+				position: absolute;
+				right: 112px;
+				bottom: 104px;
+			}
+		</style>
 	</section>
 	<div class="progress"></div>
 	<script src="node_modules/shower-core/shower.min.js"></script>
