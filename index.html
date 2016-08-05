@@ -265,7 +265,7 @@
 				<pre><code>cprint</code></pre></li>
 		</ol>
 		<style>
-			.inline pre, .inline code {
+			pre.inline, .inline code {
 				display: inline !important;
 			}
 			#cgo-source {
@@ -452,13 +452,34 @@
 	</section>
     <section class="slide">
 		<h2>Самое главное</h2>
-		<pre>lib.goprint(go_str)</code></pre>
+		<pre><code>lib.goprint(go_str)</code></pre>
 		<p>Видите как все просто!</p>
+		<pre><code> </code></pre>
+		<pre><code> </code></pre>
+		<pre class="inline"><code>del char_ptr</code></pre> - заморочки с местным GC
 	</section>
     <section class="slide">
 		<h2>Но ведь в реальной жизни будут объекты?</h2>
 		<p>О да!</p>
 		<p>Что же делать, ведь указатели запрещены?</p>
+	</section>
+    <section class="slide">
+		<img src="pictures/pepperidge.jpg" class="cover" id="pepperidge">
+		<style>
+			#pepperidge {
+				object-fit: contain;
+			}
+		</style>
+	</section>
+    <section class="slide">
+		<h2>Хэндлы</h2>
+		<p>Идея: поддерживать двусторонний мэппинг объектов на 64-битные дескрипторы</p>
+		<pre><code><span class="pl-k">type</span> Handle <span class="pl-k">uint64</span></code>
+<code> </code>
+<code><span class="pl-k">var</span> registryHandle2Obj <span class="pl-k">map</span>[Handle]<span class="pl-k">interface</span>{} =</code>
+<code>    <span class="pl-k">map</span>[Handle]<span class="pl-k">interface</span>{}{}</code>
+<code><span class="pl-k">var</span> registryObj2Handle <span class="pl-k">map</span>[<span class="pl-k">uintptr</span>][]<span class="pl-v">Handle</span> =</code>
+<code>    <span class="pl-k">map</span>[<span class="pl-k">uintptr</span>][]<span class="pl-v">Handle</span>{}</code></pre>
 	</section>
 	<div class="progress"></div>
 	<script src="node_modules/shower-core/shower.min.js"></script>
