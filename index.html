@@ -24,13 +24,13 @@
 	</header>
 	<section class="slide" id="cover">
 		<h2>Работа с Go из Python</h2>
-		<img src="pictures/cover.svg" alt="" class="cover" id="go-in-python">
+		<img src="pictures/cover.svg" alt="" class="cover go-in-python">
 		<div class="qr">
 			<a href="http://goo.gl/SYIzVP">goo.gl/SYIzVP</a>
 			<img src="pictures/qrcode.svg">
 		</div>
 		<style>
-			#go-in-python {
+			.go-in-python {
 				margin-left: 100px;
 				object-fit: contain;
 			}
@@ -287,7 +287,7 @@
 <code><span class="pl-c">  printf("%s", what);</span></code>
 <code><span class="pl-c">  free(what);</span></code>
 <code><span class="pl-c">}</span></code>
-<code></code></pre>
+<code> </code></pre>
 		<pre class="column"><code><span class="pl-c">/* #include &lt;stdlib.h&gt; */</span></code>
 <code><span class="pl-k">import</span> <span class="pl-s">"C"</span></code>
 <code><span class="pl-k">func</span> <span class="pl-en">main</span>() {</code>
@@ -326,7 +326,7 @@
 <code>00000000000b4610 T goprint</code>
 <code>00000000000612b0 t main._cgoexpwrap_25e34a201b27_goprint</code>
 <code>00000000002fa428 d main._cgoexpwrap_25e34a201b27_goprint.f</code>
-<code></code>
+<code> </code>
 <code>$ gdb ./test</code>
 <code>b goprint</code>
 </pre>
@@ -474,12 +474,134 @@
     <section class="slide">
 		<h2>Хэндлы</h2>
 		<p>Идея: поддерживать двусторонний мэппинг объектов на 64-битные дескрипторы</p>
-		<pre><code><span class="pl-k">type</span> Handle <span class="pl-k">uint64</span></code>
+				<pre><code><span class="pl-k">func</span> <span class="pl-en">RegisterObject</span>(obj <span class="pl-k">interface</span>{}) <span class="pl-v">Handle</span></code>
+<code><span class="pl-k">func</span> <span class="pl-en">UnregisterObject</span>(<span class="pl-v">handle Handle</span>) <span class="pl-k">int</span></code>
+<code><span class="pl-k">func</span> <span class="pl-en">GetObject</span>(<span class="pl-v">handle Handle</span>) (<span class="pl-k">interface</span>{}, <span class="pl-k">bool</span>)</code>
+<code><span class="pl-k">func</span> <span class="pl-en">GetHandle</span>(obj <span class="pl-k">interface</span>{}) (<span class="pl-v">Handle</span>, bool)</code></pre>
+	</section>
+    <section class="slide">
+		<h2>Реализация</h2>
+        <pre><code><span class="pl-k">type</span> Handle <span class="pl-k">uint64</span></code>
 <code> </code>
-<code><span class="pl-k">var</span> registryHandle2Obj <span class="pl-k">map</span>[Handle]<span class="pl-k">interface</span>{} =</code>
-<code>    <span class="pl-k">map</span>[Handle]<span class="pl-k">interface</span>{}{}</code>
-<code><span class="pl-k">var</span> registryObj2Handle <span class="pl-k">map</span>[<span class="pl-k">uintptr</span>][]<span class="pl-v">Handle</span> =</code>
-<code>    <span class="pl-k">map</span>[<span class="pl-k">uintptr</span>][]<span class="pl-v">Handle</span>{}</code></pre>
+<code><span class="pl-k">var</span> registryHandle2Obj <span class="pl-k">map</span>[<span class="pl-v">Handle</span>]<span class="pl-k">interface</span>{}</code>
+<code><span class="pl-k">var</span> registryObj2Handle ???</code></pre>
+	Важно: за исключением редких случаев, всегда используем указатель на
+		структуру в качестве <pre class="inline"><code>interface{}</code></pre>, т.к. иначе будет копия.
+	<br>Проблема: интерфейс не может быть ключом в <pre class="inline"><code>map</code></pre>.
+	</section>
+    <section class="slide">
+		<h2>Решение проблемы</h2>
+		<ul>
+			<li>Если вы подумали про <pre class="inline"><code>*interface{}</code></pre> - подумайте еще раз</li>
+			<li>Зато <pre class="inline"><code>[2]uintptr</code></pre> может быть ключом</li>
+			<li>Можно ли обойтись одним <pre class="inline"><code>uintptr</code></pre> - указателем на данные?</li>
+			<li>Указатель на структуру совпадает с указателем на первый элемент.</li>
+			<li>Но это случается не часто, поэтому:</li>
+		</ul>
+		<pre><code><span class="pl-k">var</span> registryObj2Handle <span class="pl-k">map</span>[<span class="pl-k">uintptr</span>][]<span class="pl-v">Handle</span></code></pre>
+		<a href="https://github.com/src-d/go-git/blob/master/cshared/objects.go">Исходник.</a>
+	</section>
+    <section class="slide terminal darken">
+		<img class="cover" src="pictures/zombies.jpg">
+		<h2>Проблема со строками</h2>
+		<ul>
+			<li>Строки в Go - иммутабельны и зерокопибильны</li>
+			<li>Если получаем <pre class="inline"><code>string</code></pre> из внешнего мира, то он заразит собой каждую
+				сущность которая с ней встретится</li>
+			<li>А потом будет достаточно одного <pre class="inline"><code>free()</code></pre></li>
+		</ul>
+		<br>
+		<p>Лечение состоит в принудительном копировании.</p>
+		<style>
+			.darken::before {
+				content: "";
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				box-shadow: 0px 0px 0px 1000px rgba(0,0,0,0.4);
+			}
+			.darken > * {
+				position: relative;
+				z-index: 100;
+			}
+		</style>
+	</section>
+    <section class="slide">
+		<h2>Прочие проблемы</h2>
+		<ul>
+			<li>В 1.6 отсутствует <a href="https://github.com/golang/go/issues/14838">C.CBytes</a>
+				для конвертации <pre class="inline"><code>[]byte</code></pre> в
+				<pre class="inline"><code>*C.char</code></pre></li>
+			<li>Пришлось написать много оберток над стандартными контейнерами</li>
+			<li>Много рефлексии, местами непростой</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2>На стороне Python</h2>
+		<pre class="compressed"><code><span class="pl-k">class</span> <span class="pl-en">GoObject</span>(<span class="pl-cl">object</span>):</code>
+<code>    ffi = FFI()</code>
+<code>    lib = <span class="pl-cl">None</span></code>
+<code>    registry = weakref.WeakValueDictionary()</code>
+<code>    <span class="pl-k">def</span> <span class="pl-cl">__new__</span>(cls, handle, <span class="pl-k">*</span>args, <span class="pl-k">**</span>kwargs):</code>
+<code>        <span class="pl-k">assert</span> <span class="pl-v">cls</span>.lib <span class="pl-k">is not</span> <span class="pl-cl">None</span></code>
+<code>        instance = GoObject.registry.get(handle)</code>
+<code>        <span class="pl-k">if</span> instance <span class="pl-k">is not</span> <span class="pl-cl">None</span>:</code>
+<code>            <span class="pl-k">return</span> instance</code>
+<code>        <span class="pl-k">return</span> <span class="pl-cl">object</span>.<span class="pl-cl">__new__</span>(<span class="pl-v">cls</span>)</code></pre>
+	</section>
+    <section class="slide">
+		<pre class="compressed"><code>    <span class="pl-k">def</span> <span class="pl-cl">__init__</span>(self, handle):</code>
+<code>        <span class="pl-k">assert</span> <span class="pl-cl">isinstance</span>(handle, <span class="pl-cl">int</span>)</code>
+<code>        <span class="pl-k">if</span> handle <= <span class="pl-cl">0</span>:</code>
+<code>            <span class="pl-k">raise</span> <span class="pl-cl">ValueError</span>("Invalid handle")</code>
+<code>        <span class="pl-v">self</span>._handle = handle</code>
+<code>        GoObject.registry[handle] = <span class="pl-v">self</span></code>
+<code> </code>
+<code>    <span class="pl-k">def</span> <span class="pl-cl">__del__</span>(self):</code>
+<code>        handle = <span class="pl-cl">getattr</span>(<span class="pl-v">self</span>, "_handle", <span class="pl-cl">None</span>)</code>
+<code>        <span class="pl-k">if</span> handle <span class="pl-k">is not</span> <span class="pl-cl">None</span>:</code>
+<code>            <span class="pl-v">self</span>.lib.UnregisterObject(handle)</code>
+<code>        <span class="pl-v">self</span>._handle = <span class="pl-cl">0</span></code></pre>
+	</section>
+    <section class="slide">
+		<h2>Результат</h2>
+<pre><code><span class="pl-k">from</span> gypogit <span class="pl-k">import</span> Repository</code>
+<code>r = Repository.New(<span class="pl-s">"https://github.com/..."</span>)</code>
+<code>r.PullDefault()</code>
+<code><span class="pl-k">for</span> c <span class="pl-k">in</span> r.Commits():</code>
+<code>    <span class="pl-cl">print</span>(c)</code></pre>
+	</section>
+    <section class="slide">
+		<h2>Альтернативы</h2>
+		<ul>
+			<li><a href="https://github.com/sbinet/go-python">go-python</a>
+				<ul>
+					<li>Автоматическая генерация биндингов</li>
+					<li>По сути заброшен и неюзабелен (т.е. ничего сложнее hello, world)</li>
+					<li>Тяжело довести до ума, но направление выбрано верное</li>
+				</ul>
+			</li>
+			<li><a href="http://www.swig.org/">SWIG</a>
+				<ul>
+					<li>Автоматическая генерация биндингов для 100500 языков</li>
+					<li>Не в ту сторону (C -> Go)</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+    <section class="slide">
+		<h2>Выводы?</h2>
+		<ul>
+			<li>Оборачивать библиотеки на Go возможно</li>
+			<li>Но пока только вручную</li>
+			<li>В обертке необходимо тщательно следить за памятью и решать проблемы</li>
+			<li>Ждем появления проекта, который обобщит оборачивание</li>
+		</ul>
+	</section>
+    <section class="slide">
+		<img src="pictures/cover.svg" alt="" class="cover go-in-python">
+		<h2 id="end">Fin</h2>
+		<p></p>
 	</section>
 	<div class="progress"></div>
 	<script src="node_modules/shower-core/shower.min.js"></script>
