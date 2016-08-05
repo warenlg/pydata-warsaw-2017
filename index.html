@@ -309,9 +309,14 @@
 		<pre><code><span class="pl-k">package</span> main</code>
 <code><span class="pl-k">import</span> <span class="pl-s">"C"</span></code>
 <code><span class="pl-c">//export goprint</span></code>
-<code><span class="pl-k">func</span> goprint(what string) { <span class="pl-cl">print</span>(what) }</code>
+<code><span class="pl-k">func</span> <span class="pl-en">goprint</span>(<span class="pl-v">what string</span>) { <span class="pl-cl">print</span>(what) }</code>
 <code><span class="pl-k">func</span> <span class="pl-en">main</span>() { <span class="pl-cl">print</span>(<span class="pl-s">"main\n"</span>) }</code></pre>
 		<pre><code>libtest.h  libtest.so</code></pre>
+		<style>
+			code > .pl-v {
+				color: #ed6a43;
+			}
+		</style>
 	</section>
     <section class="slide terminal">
 		<h2>@ Linux</h2>
@@ -360,6 +365,40 @@
 			<li>Все очень плохо со структурами</li>
 		</ul>
 		<pre><code>Go type not supported in export: struct</code></pre>
+	</section>
+    <section class="slide">
+		<h2>Проверка указателей в рантайме</h2>
+		<pre><code><span class="pl-k">var</span> hello <span class="pl-k">string</span> = <span class="pl-s">"hello"</span></code>
+<code> </code>
+<code><span class="pl-c">//export giveme</span></code>
+<code><span class="pl-k">func</span> <span class="pl-en">giveme</span>() *<span class="pl-v">string</span> {</code>
+<code><span class="pl-k">  return</span> &hello</code>
+<code>}</code>
+</pre>
+	</section>
+    <section class="slide">
+		<h2>...</h2>
+		<pre><code>#<span class="pl-k">include</span> <span class="pl-s">&lt;stdio.h&gt</span></code>
+<code>#<span class="pl-k">include</span> <span class="pl-s">"libtest.h"</span></code>
+<code><span class="pl-k">int</span> <span class="pl-en">main</span>() {</code>
+<code>  GoString *str = <span class="pl-cl">giveme</span>();</code>
+<code>  <span class="pl-cl">printf</span>(<span class="pl-s">"%s\n"</span>, str->p);</code>
+<code>  <span class="pl-k">return</span> <span class="pl-cl">0</span>;</code>
+<code>}</code>
+</pre>
+	</section>
+    <section class="slide terminal">
+		<h2>@ Linux</h2>
+		<pre class="no-numbers compressed"><code>$ ./test</code>
+<code>panic: runtime error: cgo result has Go pointer</code>
+<code>goroutine 17 [running, locked to thread]:</code>
+<code>panic(0x7fd4d5a808a0, 0xc82007c020)</code>
+<code>	/usr/lib/go-1.6/src/runtime/panic.go:481 +0x3ea</code>
+<code>main._cgoexpwrap_b3226aa49989_giveme.func1(0xc82003cee0)</code>
+<code>	command-line-arguments/_obj/_cgo_gotypes.go:49 +0x3c</code>
+<code>main._cgoexpwrap_b3226aa49989_giveme(0x7fd4d5ad6160)</code>
+<code>	command-line-arguments/_obj/_cgo_gotypes.go:51 +0x5b</code>
+<code>Aborted (core dumped)</code></pre>
 	</section>
     <section class="slide">
 		<img class="cover" src="pictures/all.jpg">
