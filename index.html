@@ -183,9 +183,15 @@
 		</ul>
 	</section>
     <section class="slide">
+		<img class="cover" src="pictures/eralach.jpg">
+	</section>
+    <section class="slide">
+		<img class="cover" src="pictures/1+1.jpg">
+	</section>
+    <section class="slide">
 		<h2>cgo</h2>
 		<ul>
-			<li>Это интерфейс взаимодействия с традиционным миром - <a href="https://golang.org/cmd/cgo/">RTFM</a></li>
+			<li>Это интерфейс взаимодействия Go с традиционным миром - <a href="https://golang.org/cmd/cgo/">RTFM</a></li>
 			<li>Он нужен, потому что есть GC</li>
 			<li>Работает в обе стороны</li>
 			<li>Отсутствует
@@ -242,7 +248,7 @@
 		</style>
 	</section>
     <section class="slide">
-		<h2>Под капотом</h2>
+		<h2>Что происходит?</h2>
 		<a href="http://stackoverflow.com/a/28354879/69708" id="cgo-source">StackOverflow</a>
 		<ol class="inline">
 			<li><pre><code>main._Cfunc_cprint</code></pre> ==
@@ -275,10 +281,27 @@
 			<li>Передать наружу Go-указатель - плохая идея</li>
 			<li>Кто-то должен освобождать память</li>
 		</ul>
-        <pre><code><span class="pl-c">void cprint(const char *what) {</span></code>
+		<div class="double rule">
+        <pre><code><span class="pl-c">void ...(const char *what) {</span></code>
 <code><span class="pl-c">  printf("%s", what);</span></code>
 <code><span class="pl-c">  free(what);</span></code>
-<code><span class="pl-c">}</span></code></pre>
+<code><span class="pl-c">}</span></code>
+<code></code></pre>
+		<pre class="column"><code><span class="pl-c">/* #include &lt;stdlib.h&gt; */</span></code>
+<code><span class="pl-k">import</span> <span class="pl-s">"C"</span></code>
+<code><span class="pl-k">func</span> <span class="pl-en">main</span>() {</code>
+<code>  C.<span class="pl-cl">free</span>(C.<span class="pl-cl">CString</span>(<span class="pl-s">"..."</span>))</code>
+<code>}</code>
+</pre>
+			</div>
+		<style>
+			.column {
+				break-before: column;
+			}
+			.double.rule {
+				column-rule: solid #4caf50;
+			}
+		</style>
 	</section>
 	<div class="progress"></div>
 	<script src="node_modules/shower-core/shower.min.js"></script>
