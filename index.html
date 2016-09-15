@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Source code abstracts classification using CNN</title>
+	<title>Using deep RNN to model source code</title>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,14 +18,23 @@
 </head>
 <body class="shower list">
 	<header class="caption">
-		<h1>Source code abstracts classification using CNN</h1>
-		<p>Vadim Markovtsev, <a href="http://sourced.tech">source{d}</a></p>
+		<h1>Using deep RNN to model source code</h1>
+		<p>Eiso Kant, <a href="http://sourced.tech">source{d}</a></p>
 	</header>
 	<section class="slide" id="cover">
-		<h2>Source code abstracts classification using CNN</h2>
-		<p>Vadim Markovtsev, <a href="http://sourced.tech">source{d}</a></p>
+		<h2>Using deep RNN to model source code</h2>
+		<p>Eiso Kant, <a href="http://sourced.tech">source{d}</a></p>
 		<img src="pictures/cover.png" alt="" class="cover">
 		<style>
+		  .slide::after {
+				display: none;
+			}
+		  #cover a {
+				background: none !important;
+			}
+		  #cover {
+				background-color: #282c34;
+			}
 			#cover h2 {
 				margin:30px 0 0;
 				color:#FFF;
@@ -48,7 +57,7 @@
 		<h2>Plan</h2>
 		<div id="qrcode">
 			<img src="pictures/qrcode.svg">
-			<a class="noaline" href="http://goo.gl/4zq8g9">goo.gl/4zq8g9</a>
+			<a class="noaline" href="https://goo.gl/wRQCLS">goo.gl/wRQCLS</a>
 			<div>(view this on your device)</div>
 		</div>
 		<ol>
@@ -57,7 +66,7 @@
 			<li>Network architecture</li>
 			<li>Implementation details</li>
 			<li>First results</li>
-			<li>Approaches to developers clustering</li>
+			<li>Other work</li>
 		</ol>
 		<style>
 			#qrcode {
