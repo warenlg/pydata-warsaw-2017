@@ -21,7 +21,7 @@
 		<h1>Using deep RNN to model source code</h1>
 		<p>Eiso Kant, <a href="http://sourced.tech">source{d}</a></p>
 	</header>
-	<section class="slide" id="cover">
+	<section class="slide atom" id="cover" >
 		<h2>Using deep RNN to model source code</h2>
 		<p>Eiso Kant, <a href="http://sourced.tech">source{d}</a></p>
 		<img src="pictures/cover.png" alt="" class="cover">
@@ -32,25 +32,28 @@
 		  #cover a {
 				background: none !important;
 			}
-		  #cover {
+			.atom {
 				background-color: #282c34;
+				color: #FFF;
+			}
+			.atom h2 {
+				color: #FFF;
 			}
 			#cover h2 {
 				margin:30px 0 0;
-				color:#FFF;
+				color: #FFF;
 				text-align:center;
 				font-size:70px;
 			}
 			#cover p {
 				margin:10px 0 0;
 				text-align:center;
-				color:#FFF;
 				font-style:italic;
 				font-size:20px;
 			}
-			    #cover p a {
-				    color:#FFF;
-			    }
+	    #cover p a {
+		    color: #FFF;
+	    }
 		</style>
 	</section>
 	<section class="slide">
@@ -170,7 +173,7 @@
 		<h2>Feature engineering</h2>
 		<p>(1) and (2) are solved by <i class="fa fa-github"></i>
 			<a href="https://github.com/github/linguist">github/linguist</a></p>
-		<p>...source{d} has it's own, just no Python bindings exist at the moment</p>
+		<p>...source{d} has it's own which feels the same but works 10x faster</p>
 		<ul>
 			<li>Used by GihHub for language bars</li>
 			<li>Supports 400+ languages</li>
@@ -266,28 +269,13 @@
 		<ul>
 			<li>Split stream into lines, each line contains ≤40 tokens</li>
 			<li>Merge indents</li>
-			<li>"One against all" with value length</li>
+			<li>One-hot encoding with variable magnitude</li>
 			<li>Some tokens occupy more than 1 dimension, e.g.
 				Token.Name reflects naming style</li>
-			<li>About 200 dimensions overall</li>
+			<li>≈200 dimensions overall</li>
 			<li>8000 features per line, most are zeros</li>
 			<li>Mean-dispersion normalization</li>
 		</ul>
-	</section>
-	<section class="slide">
-		<h2>Feature engineering</h2>
-		<p>Though extracted, names as words are <em>not</em> used to solve this
-		classification problem. They are a subject of separate research and are
-		likely to dramatically improve accuracy.</p>
-		<img id="bag" src="pictures/bag.png">
-		<style>
-			#bag {
-				height: 220px;
-				display: table;
-				margin-right: auto;
-				margin-left: auto;
-			}
-		</style>
 	</section>
 	<section id="slide-code" class="slide">
 		<h2>Feature engineering</h2>
@@ -302,90 +290,104 @@
 		</style>
 	</section>
 	<section class="slide">
-		<h2>Network architecture</h2>
-		<table>
-			<tbody>
-			<tr>
-				<th scope="col">layer</th>
-				<th>kernel</th>
-				<th>pooling</th>
-				<th>number</th>
-			</tr>
-			<tr>
-				<td>convolutional</td>
-				<td>4x1</td>
-				<td>2x1</td>
-				<td>250</td>
-			</tr>
-			<tr>
-				<td>convolutional</td>
-				<td>8x2</td>
-				<td>2x2</td>
-				<td>200</td>
-			</tr>
-			<tr>
-				<td>convolutional</td>
-				<td>5x6</td>
-				<td>2x2</td>
-				<td>150</td>
-			</tr>
-			<tr>
-				<td>convolutional</td>
-				<td>2x10</td>
-				<td>2x2</td>
-				<td>100</td>
-			</tr>
-			<tr>
-				<td>all2all</td>
-				<td></td>
-				<td></td>
-				<td>512</td>
-			</tr>
-			<tr>
-				<td>all2all</td>
-				<td></td>
-				<td></td>
-				<td>64</td>
-			</tr>
-			<tr>
-				<td>all2all</td>
-				<td></td>
-				<td></td>
-				<td>output</td>
-			</tr>
-			</tbody>
-		</table>
+		<h2>Feature engineering</h2>
+		<p>Though extracted, names as words may <em>not</em> used in this scheme.</p>
+		<p>We've checked out two approaches for using such extra information:</p>
+		<ol>
+			<li>LSTM sequence modelling (the topic of this talk)</li>
+			<li>ARTM topic modelling (article is pending in our blog)</li>
+		</ol>
+		<img id="bag" src="pictures/bag.png">
 		<style>
-
+			#bag {
+				height: 220px;
+				right: 80px;
+				bottom: 50px;
+				position: absolute;
+			}
 		</style>
+	</section>
+	<section class="slide">
+		<h2>Network architecture</h2>
+		<p>Idea: apply NLP-style LSTM to Python source code.</p>
+		<p>We will experiment with [django/django](https://github.com/django/djnago).</p>
+		<p>Parse the code into tokens with Pygments and treat each as a word.</p>
+		<p>Comments, strings should be squashed - we do not want NLP inside our NLP.</p>
+		<img id="yo-dawg" src="pictures/yo_dawg.png">
+		<style>
+		#yo-dawg {
+			position: absolute;
+			right: 0px;
+			bottom: -20px;
+			height: 200px;
+		}
+		</style>
+	</section>
+	<section class="slide atom" id="lstm_explain">
+		<h2>Network architecture</h2>
+		<br><br><br><br><br>
+		<pre>
+			<code>{ "if": 1, "self": 2, ".": 3, "active": 4,  "(": 5, ")": 6,</code>
+<code>  "and": 7,  "Weather": 8, "raining": 9, "\n": 10,</code>
+<code>  "open_umbrella": 11, "*": 12, "hands": 13 }</code>
+		</pre>
+		<style>
+		#lstm_explain {
+			background-image: url("pictures/lstm_explain.png");
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+		#lstm_explain code:before {
+			display: none;
+		}
+		</style>
+	</section>
+	<section class="slide">
+		<h2>Network architecture</h2>
+		<p>Model from "Recurrent Neural Network Regularization" by Zaremba et al. ([arXiv](http://arxiv.org/abs/1409.2329))</p>
+		<img id="lstm" src="pictures/lstm.png">
+		<style>
+		#lstm {
+			display: table;
+			margin-left: auto;
+			margin-right: auto;
+			height: 300px;
+		}
+		</style>
+	</section>
+	<section class="slide">
+		<h2>Network architecture</h2>
+		<ul>
+			<li>First layer: <a href="https://www.tensorflow.org/versions/r0.9/api_docs/python/rnn_cell.html#BasicLSTMCell">tf.nn.rnn_cell.BasicLSTMCell</a></li>
+			<li>Dropout does not improve the perplexity in our case so is not used</li>
+			<li>Second layer: <a href="https://www.tensorflow.org/versions/r0.9/api_docs/python/rnn_cell.html#MultiRNNCell">tf.nn.rnn_cell.MultiRNNCell</a></li>
+			<li>Softmax sequence loss.</li>
+		</ul>
 	</section>
 	<section class="slide">
 		<h2>Network architecture</h2>
 		<table>
 			<tbody>
 			<tr>
-				<th scope="row">Activation</th>
-				<td>ReLU</td>
-			</tr>
-			<tr>
 				<th scope="row">Optimizer</th>
-				<td>GD with momentum (0.5)</td>
+				<td>GD with clipping to 5.0</td>
 			</tr>
 			<tr>
 				<th scope="row">Learning rate</th>
-				<td>0.002</td>
+				<td>1.0</td>
 			</tr>
 			<tr>
 				<th scope="row">Weight decay</th>
-				<td>0.955</td>
+				<td>0.5 after 4 epochs</td>
 			</tr>
 			<tr>
-				<th scope="row">Regularization</th>
-				<td>L2, 0.0005</td>
+				<th scope="row">History size</th>
+				<td>20</td>
 			</tr>
 			<tr>
-				<th>Weight initialization</th>
-				<td>σ = 0.1</td>
+				<th>First layer size</th>
+				<td>200</td>
 			</tr>
 			</tbody>
 		</table>
@@ -393,118 +395,65 @@
 	<section class="slide">
 		<h2>Network architecture</h2>
 		<ul>
-			<li>Merge all project files together, feed 50 LOT (lines of tokens) as a
-			single sample.</li>
-			<li>Does not converge without random shuffling files (sample borders are
-				of course fixed).</li>
-			<li>Batch size is 50.</li>
-			<li>Truncate projects by the smallest LOT.</li>
-			<li>Fragile to small metaparameter deviations.</li>
-		</ul>
-	</section>
-	<section class="slide">
-		<h2>Implementation details</h2>
-		<ul>
 			<li>Python3 / Tensorflow / NVIDIA GPU</li>
-			<li>Special tool to extract features from software repositories in parallel</li>
-			<li>Database of features</li>
-			<li>Sparse matrices ⇒ normalization on the fly</li>
+			<li>Really slow even with GPU (1 hour to complete 13 epochs)</li>
+			<li>Interactive forward prop app</li>
 		</ul>
 	</section>
 	<section class="slide">
-		<h2>Implementation details</h2>
-		<p>Normalization
-		$$D = E(X^2) - E(X)^2$$
-			Thus we can cache the following for each source file / project:
-			\(\sum X^2\), \(\sum X\), \(N\) of samples.
-		\[m = \frac{\sum_{unit} \sum X}{\sum_{unit} N},\quad
-			\sigma = \sqrt{\frac{\sum_{unit} \sum X^2 - (\sum_{unit} \sum X)^2}{\sum_{unit} N}}\]
-		</p>
+		<h2>Results</h2>
+		<ul>
+			<li>Perplexity is insanely low: &lt; 3 (on PTB dataset one gets 100)</li>
+			<li>The network predicts the first 1-3 tokens exactly what the programmer wants to write</li>
+			<li>After first 1-3 tokens fantasy starts</li>
+			<li>The more the project is homogeneous, the more the fantasy looks like you want to get</li>
+		</ul>
 	</section>
-	<section class="slide">
-		<h2>First results</h2>
-		<table>
-			<tbody>
-			<tr>
-				<th scope="col">projects</th>
-				<th>description</th>
-				<th>size</th>
-				<th>accuracy</th>
-			</tr>
-			<tr>
-				<th scope="row">Django vs Twisted</th>
-				<td>Web frameworks, Python</td>
-				<td>800ktok each</td>
-				<td>84%</td>
-			</tr>
-			<tr>
-				<th scope="row">Matplotlib vs Bokeh</th>
-				<td>Plotting libraries, Python</td>
-				<td>1Mtok vs 250ktok</td>
-				<td>60%</td>
-			</tr>
-			<tr>
-				<th scope="row">Matplotlib vs Django</th>
-				<td>Plotting libraries, Python</td>
-				<td>1Mtok vs 800ktok</td>
-				<td>76%</td>
-			</tr>
-			<tr>
-				<th scope="row">Django vs Guava</th>
-				<td>Python vs Java</td>
-				<td>800ktok</td>
-				<td>>99%</td>
-			</tr>
-			<tr>
-				<th scope="row">Hibernate vs Guava</th>
-				<td>Java libraries</td>
-				<td>3Mtok vs 800ktok</td>
-				<td>96%</td>
-			</tr>
-			</tbody>
-		</table>
-	</section>
-	<section class="slide">
-		<h2>First results</h2>
-		<p>Conclusion: the network is likely to extract internal similarity in
-			each project and use it. Just like humans do.</p>
-		<p>If the languages are different, it is very easy to distinguish projects
-		(at least because of unique token types).</p>
-	</section>
-	<section class="slide" id="squirrels-slide">
-		<h2>First results</h2>
-		<img src="pictures/squirrels.png">
+	<section class="slide atom" id="showcase">
+		<h2>Results</h2>
+		<ul>
+      <li><div>Before:</div><img id="cbefore" src="pictures/completion_before.png"></li>
+		  <li><div>After:</div><img id="cafter" src="pictures/completion_after.png"></li>
+	  </ul>
 		<style>
-			#squirrels-slide {
-				background: #2b2b2b;
-			}
-			#squirrels-slide > img {
-				height: 400px;
-			}
+		#showcase li {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+		#showcase li > div {
+			width: 100px;
+		}
+		#showcase li:before {
+			display: none;
+		}
 		</style>
 	</section>
 	<section class="slide">
-		<h2>First results</h2>
-		<p>Problem: how to get this for a source code network?</p>
-		<img src="pictures/kernels.png">
+		<h2>Results</h2>
+		Can be useful for
+		<ul>
+			<li>Next-gen intelligent code completion which adapts to the project being developed</li>
+			<li>Coupled with CNN on higher levels the network can turn abstract algorithms expressed with a natural language into source code</li>
+			<li>Self-programming AI</li>
+			<li>...and we use it just for the embedding</li>
+		</ul>
+		<img id="terminator" src="pictures/terminator.jpg">
+		<style>
+		#terminator {
+			position: absolute;
+			right: -35px;
+			bottom: -35px;
+			width: 250px;
+			transform: rotate(-45deg);
+		}
+		</style>
 	</section>
 	<section class="slide">
-		<h2>Approaches to developers clustering</h2>
-		<p>GitHub has ≈6M of active users (and 3M after some filtering).
-			If we are able to extract various features for each, we can cluster
-			them. Current approach:</p>
-		<ol>
-			<li>Run K-means with K=45000 (using <a href="https://github.com/src-d/kmcuda">
-				src-d/kmcuda</a>)</li>
-			<li>Run <a href="https://lvdmaaten.github.io/tsne/">t-SNE</a> to visualize the landscape</li>
-		</ol>
-		<br>
-		<p class="note">BTW, kmcuda implements <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/ding15.pdf">
-			Yinyang k-means</a>.</p>
-	</section>
-	<section class="slide">
-		<h2>Approaches to developers clustering</h2>
+		<h2>Other work - KMeans for devs clustering</h2>
         <img id="github-clusters" src="pictures/github_clusters.png">
+				<a id="kmcuda" href="https://github.com/src-d/kmcuda">src-d/kmcuda</a>
 		<style>
 			#github-clusters {
 				height: 450px;
@@ -512,19 +461,21 @@
 				margin-right: auto;
 				margin-left: auto;
 			}
+			#kmcuda {
+				position: absolute;
+				right: 80px;
+				bottom: 50px;
+			}
 		</style>
 	</section>
 	<section class="slide">
-		<h2>Approaches to developers clustering</h2>
-        <p>Another way is to employ Distance Metric Learning (DML).</p>
-        <ul>
-			<li>Efficient in image recognition as described in
-				<a href="http://arxiv.org/pdf/1511.05939.pdf">the recent Facebook article</a>
-			about Magnet Loss</li>
-			<li>We hope to apply DML to our source code network architecture</li>
-			<li>We can use developers instead of images and projects instead of
-			categories</li>
-		</ul>
+		<h2>Other work - CNN for code classification</h2>
+   <ul>
+		 <li>Classify source code abstracts between 2 different projects</li>
+		 <li>Presented at RE·WORK in Berlin (June 2016)</li>
+		 <li>50% copied to here</li>
+		 <li><a href="https://goo.gl/4zq8g9">Slides</a></li>
+	 </ul>
 	</section>
 	<section class="slide">
 		<h2>Thank you</h2>
