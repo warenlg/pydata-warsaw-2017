@@ -1,3 +1,3 @@
-# Source code abstracts classification using CNN
+# Source code modelling with LSTM.
 
-Source code of the presentation for \#REWORKMI @ Berlin, 2016.
+Source code of the presentation for \#REWORKMI @ London, 2016.
