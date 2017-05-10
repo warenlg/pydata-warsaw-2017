@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Shower Presentation Engine</title>
+	<title>GitHub Contributions Graph: Analyzing PageRank &amp; Proving The 6 Handshakes Theory - DevDays 2017</title>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,196 +10,212 @@
 <body class="shower list">
 
 	<header class="caption">
-		<h1>Shower Presentation Engine</h1>
-		<p>Yours Truly, Famous Inc.</p>
+		<h1>GitHub Contributions Graph: Analyzing PageRank &amp; Proving The 6 Handshakes Theory</h1>
+		<p>Vadim Markovtsev, <a href="https://sourced.tech">source{d}</a>.</p>
 	</header>
 
+	<style>
+		body {
+			-webkit-font-smoothing: antialiased;
+			-webkit-tap-highlight-color: transparent;
+		}
+		@media not print {
+			.slide {
+				color: white;
+				background: black;
+			}
+		}
+		.slide::after {
+			display: none;
+		}
+		.no-link {
+			background: none !important;
+		}
+	</style>
+
 	<section class="slide" id="cover">
-		<h2>Shower Presentation Engine</h2>
-		<p>Brought to you by <a href="http://pepelsbey.net">Vadim Makeev</a></p>
+		<h2>GitHub Contributions Graph: Analyzing PageRank &amp; Proving The 6 Handshakes Theory</h2>
+		<p>Vadim Markovtsev, <a class="no-link" href="https://sourced.tech">source{d}</a></p>
 		<figure>
-			<img class="cover" src="pictures/cover.jpg" alt="Hands on the orange typewriter in a park">
-			<figcaption class="white">
-				<a href="http://fiftyfootshadows.net/">© John Carey</a>
-			</figcaption>
+			<img class="cover" src="pictures/graph_2048.jpg" alt="GitHub contributions graph - 22M nodes">
 		</figure>
+		<!--https://goo.gl/NxldTP-->
 		<style>
 			#cover h2 {
 				margin:30px 0 0;
 				color:#FFF;
 				text-align:center;
 				font-size:70px;
-				}
+			}
 			#cover p {
 				margin:10px 0 0;
 				text-align:center;
 				color:#FFF;
 				font-style:italic;
 				font-size:20px;
-				}
+			}
 				#cover p a {
 					color:#FFF;
-					}
+				}
+			#cover img {
+				width: 100%;
+				object-fit: cover;
+			}
 		</style>
 	</section>
 
 	<section class="slide">
-		<h2>Shower key features</h2>
-		<ol>
-			<li>Built on HTML, CSS and vanilla JavaScript</li>
-			<li>Works in all modern browsers</li>
-			<li>Themes are separated from engine</li>
-			<li>Modular and extensible</li>
-			<li>Fully keyboard accessible</li>
-			<li>Printable to PDF</li>
-		</ol>
-		<p class="note">Shower ['ʃəuə] noun. A person or thing that shows.</p>
-	</section>
-
-	<section class="slide">
-		<h2>Plain text on your slides</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur <a href="#4">adipisicing</a> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <em>quis nostrud</em> exercitation ullamco laboris <strong>nisi ut aliquip</strong> ex ea commodo consequat. Duis aute irure <i>dolor</i> in reprehenderit in voluptate velit esse cillum <b>dolore</b> eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in <code>&lt;culpa&gt;</code> qui officia deserunt mollit anim id est laborum.</p>
-	</section>
-
-	<section class="slide">
-		<h2>Two columns if you like</h2>
-		<p class="double">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-	</section>
-
-	<section class="slide">
-		<h2>All kind of lists</h2>
-		<ol>
-			<li>Simple lists are marked with bullets</li>
-			<li>Ordered lists begin with a number</li>
-			<li>You can even nest lists one inside another
-				<ul>
-					<li>Or mix their types</li>
-					<li>But do not go too far</li>
-					<li>Otherwise audience will be bored</li>
-				</ul>
-			</li>
-			<li>Look, seven rows exactly!</li>
-		</ol>
-	</section>
-
-	<section class="slide">
-		<h2>Serious citations</h2>
-		<figure>
-			<blockquote>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-			</blockquote>
-			<figcaption>Marcus Tullius Cicero</figcaption>
-		</figure>
-	</section>
-
-	<section class="slide">
-		<h2>Code samples</h2>
-		<pre>
-			<code>&lt;!DOCTYPE html&gt;</code>
-			<code class="mark">&lt;html lang="en"&gt;</code>
-			<code><mark>&lt;head&gt;</mark> <span class="comment">&lt;!--Comment--&gt;</span></code>
-			<code>    &lt;title&gt;Shower&lt;/title&gt;</code>
-			<code>    &lt;meta charset="<mark class="important">UTF-8</mark>"&gt;</code>
-			<code>    &lt;link rel="stylesheet" href="screen.css"&gt;</code>
-			<code><mark>&lt;/head&gt;</mark></code>
-		</pre>
-	</section>
-
-	<section class="slide">
-		<h2>Even tables</h2>
-		<table>
-		<tr>
-			<th scope="col">Locavore</th>
-			<th>Umami</th>
-			<th>Helvetica</th>
-			<th>Vegan</th>
-		</tr>
-		<tr>
-			<th scope="row">Fingerstache</th>
-			<td>Kale</td>
-			<td>Chips</td>
-			<td>Keytar</td>
-		</tr>
-		<tr>
-			<th scope="row">Sriracha</th>
-			<td>Gluten-free</td>
-			<td>Ennui</td>
-			<td>Keffiyeh</td>
-		</tr>
-		<tr>
-			<th scope="row">Thundercats</th>
-			<td>Jean</td>
-			<td>Shorts</td>
-			<td>Biodiesel</td>
-		</tr>
-		<tr>
-			<th scope="row">Terry</th>
-			<td>Richardson</td>
-			<td>Swag</td>
-			<td>Blog</td>
-		</tr>
-		</table>
-		<p>It’s good to have information organized.</p>
-	</section>
-
-	<section class="slide" id="picture">
-		<h2>Pictures</h2>
-		<figure>
-			<img class="cover" src="pictures/picture.jpg" alt="Orange typewriter on a wooden table close-up">
-			<figcaption class="white">
-				<a href="http://fiftyfootshadows.net/">© John Carey</a>
-			</figcaption>
-		</figure>
+		<h2>Read this on your device</h2>
+		<!-- <img> with @media srcset does not work! -->
+		<div id="qrcode"></div>
 		<style>
-			#picture h2 {
-				color:#FFF;
+			#qrcode {
+				width: 350px;
+				height: 350px;
+				margin-left: auto;
+				margin-right: auto;
+				display: table;
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+				background-image: url("pictures/qrcode_black.svg");
+			}
+			@media not print {
+				#qrcode {
+					background-image: url("pictures/qrcode_white.svg");
 				}
+			}
 		</style>
 	</section>
 
 	<section class="slide">
-		<h2 class="shout shrink">You can even shout this way</h2>
+		<h2>About me</h2>
+		<ul>
+			<li>Lead Engineer, Machine Learning @ <a href="https://sourced.tech">source{d}</a></li>
+			<li>Education: compiler technologies</li>
+			<li>Switched to ML/DS in 2013</li>
+			<li>Python, C/C++, Go, HTML5</li>
+		</ul>
+	</section>	
+
+	<section class="slide">
+		<h2>About source{d}</h2>
+		<ul>
+			<li>&lt; 20 people in Madrid, Spain</li>
+			<li>Developed <a href="https://github.com/src-d/go-git">src-d/go-git</a>, Git implementation in Go</li>	
+			<li>Fetch all repositories from GitHub/BitBucket/etc.</li>
+			<li>Do crazy ML and DS on top of them</li>
+			<li>Project <a href="https://doc.bblf.sh/">Babelfish</a> extracts Abstract Syntax Trees from them</li>					
+		</ul>
 	</section>
 
 	<section class="slide">
-		<h2>Inner navigation</h2>
-		<ol>
-			<li>Lets you reveal list items one by one</li>
-			<li class="next">To keep some key points</li>
-			<li class="next">In secret from audience</li>
-			<li class="next">But it will work only once</li>
-			<li class="next">Nobody wants to see the same joke twice</li>
-		</ol>
+		<h2>About this talk</h2>
+		<ul>
+			<li>Based on the <a href="https://blog.sourced.tech/post/handshakes_pagerank/">blog post</a></li>
+			<li>3 parts</li>
+			<li>Math inside</li>
+			<li>Python code inside</li>
+			<li>Data inside</li>
+		</ul>
 	</section>
 
-	<section class="slide grid">
-		<h2>All nicely aligned to grid</h2>
+	<section class="slide" id="first-cover">
+		<h2>Part I</h2>
 	</section>
+	<style>
+		#first-cover {
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-image: url("pictures/armin_ronacher_black.png");
+		}
+		@media not print {
+			#first-cover {
+				background-image: url("pictures/armin_ronacher_white.png");
+			}
+		}
+	</style>
 
-	<section class="slide" id="see-more">
-		<h2 class="shout">
-			<img src="pictures/logo.svg" alt="Shower logo">
-			<a href="https://github.com/shower/shower">See more on GitHub</a>
-		</h2>
+	<section class="slide">
+		<h2>GitHub in numbers <a id="github-in-numbers-origin" href="https://octoverse.github.com/">octoverse.github.com</a></h2>
+		<div id="github-in-numbers">
+			<div>
+				<div>
+					<div class="github-in-numbers-title">5.8M+</div>
+					<div class="github-in-numbers-subtitle">active users</div>
+					<p>Like <a href="http://github.com/acabunoc" target="_blank">@acabunoc</a>, Lead Developer for Open Source Engagement at the <a href="https://github.com/MozillaFoundation" target="_blank">Mozilla Foundation</a> who is developing new ways to engage contributors on open source projects.</p>
+				</div>
+				<div>
+					<div class="github-in-numbers-title">331k+</div>
+					<div class="github-in-numbers-subtitle">active organizations</div>
+					<p>Like the <a href="https://github.com/datproject/" target="_blank">Dat project</a> who are working openly to develop a peer to peer tool for distributing datasets in science, journalism and government.</p>
+				</div>
+			</div>
+			<div>
+				<div>
+					<div class="github-in-numbers-title">19.4M+</div>
+					<div class="github-in-numbers-subtitle">active repositories</div>
+					<p>Like the <a href="https://github.com/WhiteHouse/source-code-policy" target="_blank">Federal Source Code Policy on GitHub</a> released by <a href="https://github.com/WhiteHouse" target="_blank">The White House</a>, who this year solicited community feedback on GitHub.</p>
+				</div>
+				<div>
+					<div class="github-in-numbers-title">10.7M+</div>
+					<div class="github-in-numbers-subtitle">active issues</div>
+					<p>Like <a href="https://github.com/golang/go/issues/14595" target="_blank">this one</a> opened in the <a href="https://github.com/golang/go" target="_blank">Go programming language repo</a> that used <a href="https://github.com/blog/2201-making-open-source-data-more-available" target="_blank">open source data</a> on Google’s BiqQuery to help decide whether to add new functionality to a Go standard library.</p>
+				</div>
+			</div>
+		</div>
 		<style>
-			#see-more h2 {
-				font-size:100px
-				}
-			#see-more img {
-				width:0.72em;
-				height:0.72em;
-				}
+			#github-in-numbers-origin {
+				float: right;
+			}
+			#github-in-numbers {
+				display: flex;
+				font-family: "Karla", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif;
+			}
+			#github-in-numbers > div {
+				display: flex;
+				flex-direction: column;
+				width: 50%;
+			}
+			#github-in-numbers > div > div {
+				height: 50%;
+			}
+			#github-in-numbers > div:first-of-type {
+				padding-right: 24px;
+			}
+			.github-in-numbers-title {
+				font-size: 3em;
+				font-weight: 400;
+				line-height: 1;
+				margin-bottom: 0;
+			}
+			.github-in-numbers-subtitle {
+				margin-bottom: 12px;
+				font-weight: 700;
+				line-height: 1;
+				font-size: 0.857em;
+			}
+			#github-in-numbers p {
+				font-size: 0.701em;
+				line-height: 1.1;
+			}
 		</style>
 	</section>
 
-	<footer class="badge">
-		<a href="https://github.com/shower/shower">Fork me on GitHub</a>
-	</footer>
+	<section class="slide">
+		<h2>Commit datasets</h2>
+		<p>How to build the contributions graph?</p>
+		<ol>
+			<li><span style="font-family: monospace;">commits</span> table in <a href="https://bigquery.cloud.google.com/table/bigquery-public-data:github_repos.commits">Google BigQuery</a> (145M)</li>
+			<li>source{d}'s <a href="https://data.world/vmarkovtsev/452-m-commits-on-github">452M dataset</a></li>
+		</ol>
+		<p style="color: red;">BigQuery will charge you money.</p>
+	</section>
 
 	<div class="progress"></div>
 
 	<script src="node_modules/shower-core/shower.min.js"></script>
-	<!-- Copyright © 2017 Yours Truly, Famous Inc. -->
 
 </body>
 </html>
