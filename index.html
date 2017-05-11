@@ -24,6 +24,9 @@
 				color: white;
 				background: black;
 			}
+				.slide h2 {
+					color: #8b8d91;
+				}
 		}
 		.slide::after {
 			display: none;
@@ -120,19 +123,32 @@
 		</ul>
 	</section>
 
-	<section class="slide" id="first-cover">
+	<section class="slide vista ar-2">
 		<h2>Part I</h2>
 	</section>
 	<style>
-		#first-cover {
+		.vista {
 			background-size: contain;
 			background-repeat: no-repeat;
 			background-position: center;
-			background-image: url("pictures/armin_ronacher_black.png");
+		}
+		.vista-cover {
+			background-size: cover;
+		}
+		.ar-2 {
+			background-image: url("pictures/armin_ronacher_2_black.png");
 		}
 		@media not print {
-			#first-cover {
-				background-image: url("pictures/armin_ronacher_white.png");
+			.ar-2 {
+				background-image: url("pictures/armin_ronacher_2_white.png");
+			}
+		}
+		.ar-3 {
+			background-image: url("pictures/armin_ronacher_3_black.png");
+		}
+		@media not print {
+			.ar-3 {
+				background-image: url("pictures/armin_ronacher_3_white.png");
 			}
 		}
 	</style>
@@ -204,14 +220,135 @@
 	</section>
 
 	<section class="slide">
-		<h2>Commit datasets</h2>
-		<p>How to build the contributions graph?</p>
+		<h2>Where to take the data?</h2>
+		<p>Commit datasets:</p>
 		<ol>
-			<li><span style="font-family: monospace;">commits</span> table in <a href="https://bigquery.cloud.google.com/table/bigquery-public-data:github_repos.commits">Google BigQuery</a> (145M)</li>
+			<li><a href="http://ghtorrent.org/">GHTorrent</a> (145M)</li>
+			<li><span style="font-family: monospace;">commits</span> table in <a href="https://bigquery.cloud.google.com/table/bigquery-public-data:github_repos.commits">Google BigQuery</a> - equivalent to GHTorrent</li>
 			<li>source{d}'s <a href="https://data.world/vmarkovtsev/452-m-commits-on-github">452M dataset</a></li>
 		</ol>
 		<p style="color: red;">BigQuery will charge you money.</p>
 	</section>
+
+	<section class="slide">
+		<h2>How to build the graph?</h2>
+		<ul>
+			<li>Binary undirected edges</li>
+			<li>Weighted directed edges
+				<ul>
+					<li>Implies contribution volume estimation</li>
+				</ul>
+			</li>
+		</ul>
+		<p>At large scale, it is useless to distinguish developers and repositories.<p>
+	</section>
+
+	<section class="slide">
+		<p class="teaser">Binary undirected edges</p>
+	</section>
+
+	<style>
+		.teaser {
+			font-size: 2em;
+		}
+	</style>
+
+	<section class="slide">
+		<h2>Gephi</h2>
+		<ul>
+			<li><a href="https://gephi.org">gephi.org</a></li>
+			<li>Open source, Java</li>
+			<li>Most popular graph visualization software</li>
+			<li>And very... special</li>
+			<li style="color: red;">Does not handle millions of nodes</li>
+		</ul>
+	</section>
+	
+	<section class="slide vista ar-2">
+		<h2>Armin Ronacher,<br>2 levels</h2>
+		<p class="graph-notice">Armin is in the center.<br>8k nodes, 11k edges.</p>
+	</section>
+
+	<style>
+		.graph-notice {
+			position: absolute;
+    		bottom: 0;
+			line-height: 1.1;
+		}
+	</style>
+
+	<section class="slide vista vista-cover ar-3">
+		<h2>3 levels</h2>
+		<p class="graph-notice">Armin is in the center.<br>200k nodes, 300k edges.</p>
+	</section>
+
+	<section class="slide">
+		<h2>Heatmap</h2>
+		<p>Color depends on how many hops the dot is distant from the root.</p>
+		<p>IMAGE NEEDED!!!!!!</p>
+	</section>
+
+	<section class="slide vista vista-cover rp-3">
+		<h2>Rob Pike, 3 levels, zoomed</h2>
+	</section>
+
+	<style>
+		.rp-3 {
+			background-image: url("pictures/rob_pike_3.png");
+		}
+		.rp-3 > h2 {
+			position: absolute;
+    		bottom: 50px;
+		}
+	</style>
+
+	<section class="slide vista rp-repos">		
+	</section>
+
+	<section class="slide">
+		<h2>Oops</h2>
+		<p>Actually Rob Pike did not contribute to <a href="https://github.com/cmars/oo">cmars/oo</a> and <a href="https://github.com/cmars/tools">cmars/tools</a>.</p>
+		<p>Author forgery is perfectly possible on GitHub.</p>
+	</section>
+
+	<style>
+		.rp-repos {
+			background-image: url("pictures/rob_pike_repos_black.png");
+		}
+		@media not print {
+			.rp-repos {
+				background-image: url("pictures/rob_pike_repos_white.png");
+			}
+		}
+	</style>
+
+	<section class="slide">
+		<p class="teaser">Weighted directed edges</p>
+	</section>
+
+	<section class="slide">
+		<h2>Adjacency matrix</h2>
+		<div id="adj-matrix"></div>
+		<p>C_ij description</p>
+	</section>
+
+	<style>
+		#adj-matrix {
+			width: 400px;
+			height: 400px;
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			float: left;
+			margin-right: 100px;
+			background-image: url("pictures/adj_matrix_black.svg");
+		}
+		@media not print {
+			#adj-matrix {
+				background-image: url("pictures/adj_matrix_white.svg");
+			}
+		}
+	</style>
 
 	<div class="progress"></div>
 
