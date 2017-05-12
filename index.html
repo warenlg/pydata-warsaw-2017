@@ -28,11 +28,29 @@
 					color: #8b8d91;
 				}
 		}
+		.slide p {
+			line-height: 1.25;
+		}
 		.slide::after {
 			display: none;
 		}
 		.no-link {
 			background: none !important;
+		}
+		.center {
+			display: table;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		h2.bottom {
+			position: absolute;
+			bottom: 50px;
+		}
+		.important {
+			color: red;
+		}
+		.mono {
+			font-family: monospace;
 		}
 	</style>
 
@@ -125,33 +143,33 @@
 
 	<section class="slide vista ar-2">
 		<h2>Part I</h2>
-	</section>
-	<style>
-		.vista {
-			background-size: contain;
-			background-repeat: no-repeat;
-			background-position: center;
-		}
-		.vista-cover {
-			background-size: cover;
-		}
-		.ar-2 {
-			background-image: url("pictures/armin_ronacher_2_black.png");
-		}
-		@media not print {
+		<style>
+			.vista {
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+			.vista-cover {
+				background-size: cover;
+			}
 			.ar-2 {
-				background-image: url("pictures/armin_ronacher_2_white.png");
+				background-image: url("pictures/armin_ronacher_2_black.png");
 			}
-		}
-		.ar-3 {
-			background-image: url("pictures/armin_ronacher_3_black.png");
-		}
-		@media not print {
+			@media not print {
+				.ar-2 {
+					background-image: url("pictures/armin_ronacher_2_white.png");
+				}
+			}
 			.ar-3 {
-				background-image: url("pictures/armin_ronacher_3_white.png");
+				background-image: url("pictures/armin_ronacher_3_black.png");
 			}
-		}
-	</style>
+			@media not print {
+				.ar-3 {
+					background-image: url("pictures/armin_ronacher_3_white.png");
+				}
+			}
+		</style>
+	</section>
 
 	<section class="slide">
 		<h2>GitHub in numbers <a id="github-in-numbers-origin" href="https://octoverse.github.com/">octoverse.github.com</a></h2>
@@ -224,10 +242,23 @@
 		<p>Commit datasets:</p>
 		<ol>
 			<li><a href="http://ghtorrent.org/">GHTorrent</a> (145M)</li>
-			<li><span style="font-family: monospace;">commits</span> table in <a href="https://bigquery.cloud.google.com/table/bigquery-public-data:github_repos.commits">Google BigQuery</a> - equivalent to GHTorrent</li>
+			<li><span class="mono">commits</span> table in <a href="https://bigquery.cloud.google.com/table/bigquery-public-data:github_repos.commits">Google BigQuery</a> - equivalent to GHTorrent</li>
 			<li>source{d}'s <a href="https://data.world/vmarkovtsev/452-m-commits-on-github">452M dataset</a></li>
 		</ol>
-		<p style="color: red;">BigQuery will charge you money.</p>
+		<p class="important">BigQuery will charge you money.</p>
+	</section>
+
+	<section class="slide">
+		<h2>Problem</h2>
+		<p>There are no GitHub user <-> email associations in both datasets.<p>
+		<p class="important">We need to do identity matching.</p>
+		<pre>
+			<code>mcuadros@gmail.com</code>
+			<code>maximo@sourced.tech</code>
+			<code>mcuadros@maximos-macbook.local</code>
+			<code>mcuadros@maximos-mac-pro.local</code>
+			<code>root@localhost</code>
+		</pre>
 	</section>
 
 	<section class="slide">
@@ -241,7 +272,7 @@
 			</li>
 		</ul>
 		<p>At large scale, it is useless to distinguish developers and repositories.<p>
-	</section>
+	</section>	
 
 	<section class="slide">
 		<p class="teaser">Binary undirected edges</p>
@@ -258,9 +289,9 @@
 		<ul>
 			<li><a href="https://gephi.org">gephi.org</a></li>
 			<li>Open source, Java</li>
-			<li>Most popular graph visualization software</li>
+			<li>Most popular graph visualization software, has GUI</li>
 			<li>And very... special</li>
-			<li style="color: red;">Does not handle millions of nodes</li>
+			<li class="important">Does not handle millions of nodes</li>
 		</ul>
 	</section>
 	
@@ -272,35 +303,35 @@
 	<style>
 		.graph-notice {
 			position: absolute;
-    		bottom: 0;
-			line-height: 1.1;
+    		bottom: 20px;
 		}
 	</style>
 
 	<section class="slide vista vista-cover ar-3">
-		<h2>3 levels</h2>
-		<p class="graph-notice">Armin is in the center.<br>200k nodes, 300k edges.</p>
+		<h2 class="bottom">3 levels</h2>
+		<p class="graph-notice">200k nodes, 300k edges.</p>
 	</section>
 
 	<section class="slide">
 		<h2>Heatmap</h2>
 		<p>Color depends on how many hops the dot is distant from the root.</p>
-		<p>IMAGE NEEDED!!!!!!</p>
-	</section>
+		<img alt="Sequence of 4 circles with increasing redness" src="pictures/heatmap.svg" class="center" id="heatmap">
+		<style>
+			#heatmap {
+				margin-top: 100px;
+				width: 500px;
+			}
+		</style>
+	</section>	
 
 	<section class="slide vista vista-cover rp-3">
-		<h2>Rob Pike, 3 levels, zoomed</h2>
-	</section>
-
-	<style>
-		.rp-3 {
-			background-image: url("pictures/rob_pike_3.png");
-		}
-		.rp-3 > h2 {
-			position: absolute;
-    		bottom: 50px;
-		}
-	</style>
+		<h2 class="bottom">Rob Pike, 3 levels, zoomed</h2>
+		<style>
+			.rp-3 {
+				background-image: url("pictures/rob_pike_3.png");
+			}
+		</style>
+	</section>	
 
 	<section class="slide vista rp-repos">		
 	</section>
@@ -309,18 +340,17 @@
 		<h2>Oops</h2>
 		<p>Actually Rob Pike did not contribute to <a href="https://github.com/cmars/oo">cmars/oo</a> and <a href="https://github.com/cmars/tools">cmars/tools</a>.</p>
 		<p>Author forgery is perfectly possible on GitHub.</p>
-	</section>
-
-	<style>
-		.rp-repos {
-			background-image: url("pictures/rob_pike_repos_black.png");
-		}
-		@media not print {
+		<style>
 			.rp-repos {
-				background-image: url("pictures/rob_pike_repos_white.png");
+				background-image: url("pictures/rob_pike_repos_black.png");
 			}
-		}
-	</style>
+			@media not print {
+				.rp-repos {
+					background-image: url("pictures/rob_pike_repos_white.png");
+				}
+			}
+		</style>
+	</section>
 
 	<section class="slide">
 		<p class="teaser">Weighted directed edges</p>
@@ -329,30 +359,149 @@
 	<section class="slide">
 		<h2>Adjacency matrix</h2>
 		<div id="adj-matrix"></div>
-		<p>C_ij description</p>
+		<p>C<sub>ij</sub> is the number of commits done by developer i to repository j</p>
+		<p>C<sub>ij</sub> = C<sub>ji</sub></p>
+		<p>Non-zero elements: &lt;10<sup>-7</sup></p>
+		<style>
+			#adj-matrix {
+				width: 400px;
+				height: 400px;
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+				float: left;
+				margin-right: 50px;
+				background-image: url("pictures/adj_matrix_black.svg");
+			}
+			@media not print {
+				#adj-matrix {
+					background-image: url("pictures/adj_matrix_white.svg");
+				}
+			}
+		</style>
 	</section>
 
-	<style>
-		#adj-matrix {
-			width: 400px;
-			height: 400px;
-			background-size: contain;
-			background-repeat: no-repeat;
-			background-position: center;
-			float: left;
-			margin-right: 100px;
-			background-image: url("pictures/adj_matrix_black.svg");
-		}
-		@media not print {
-			#adj-matrix {
-				background-image: url("pictures/adj_matrix_white.svg");
+	<section class="slide">
+		<h2>Adjacency matrix</h2>
+		<p>We normalize values in every column.</p>
+		<p>$$\sum_i C_{ij}=1$$</p>
+		<p class="important">The matrix is no longer symmetric.</p>
+		<ul>
+			<li>Developer: measure of attention</li>
+			<li>Repository: measure if impact</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>LargeVis</h2>		
+		<ul>
+			<li><a href="https://github.com/lferry007/LargeVis">lferry007/LargeVis</a></li>
+			<li>C++, Python</li>			
+			<li>Handles millions of nodes</li>
+			<li class="important">Unmaintained</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>LargeVis</h2>		
+		<ul>
+			<li>Write every non-zero matrix element (edge) to a text file</li>
+			<li>Apply LargeVis command-line application</li>
+			<li>23M nodes, 28M edges, 32 cores: <64GB RAM, 2 days</li>
+			<li>Plot the resulting node coordinates</li>
+		</ul>
+		<a href="https://drive.google.com/file/d/0B-w8jGUJto0ibmhpQ1JWamh5UVE">Resulting node coordinates - 264MB.</a>
+	</section>
+
+	<section class="slide">
+		<h2>Problem</h2>		
+		<p>How to plot 22,000,000 dots?</p>
+		<ul>
+			<li>Brute-force scatter plot</li>
+			<li>Brute-force scatter plot with semi-transparent dots</li>
+			<li>Heatmap density estimatiion
+				<ul>
+					<li class="mono">numpy.histogram2d + matplotlib.pyplot.imshow</li>
+					<li class="mono">matplotlib.pyplot.hexbin</li>
+				</ul>
+			</li>
+		</ul>
+		<a href="graph.ipynb">Jupyter notebook.</a>
+	</section>
+
+	<section class="slide vista" id="scatter">
+		<h2>Brute-force scatter plot</h2>
+		<style>	
+			#scatter {
+				background-image: url("pictures/graph_scatter.png");
 			}
-		}
-	</style>
+		</style>
+	</section>
+
+	<section class="slide vista" id="scatter_alpha">
+		<h2>&amp; transparency (0.1)</h2>
+		<style>	
+			#scatter_alpha {
+				background-image: url("pictures/graph_scatter_alpha.png");
+			}
+		</style>
+	</section>
+
+	<section class="slide vista" id="histogram2d">
+		<h2>Heatmap (log)</h2>
+		<style>	
+			#histogram2d {
+				background-image: url("pictures/graph_histogram2d.png");
+			}
+		</style>
+	</section>
+
+	<section class="slide" id="handshake">
+		<div class="vista"></div>
+		<h2>Part II</h2>
+		<style>
+			#handshake > div {
+				transform: scaleX(-1);
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-image: url("pictures/handshake_black.svg");
+			}
+			@media not print {
+				#handshake > div {
+					background-image: url("pictures/handshake_white.svg");
+				}
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Statement</h2>
+		<p>Given that two developers "know" each other if they contributed to the same project, how far are they from each other on average?</p>
+	</section>
+
+	<section class="slide">
+		<h2>Plan</h2>
+		<ol>
+			<li>Find all the <a href="https://en.wikipedia.org/wiki/Connected_component_(graph_theory)">connected components</a>
+			of the graph.</li>
+
+			<li>Pick the core component, or simply “the core”. Calculate the size of the
+			<a href="https://en.wikipedia.org/wiki/Sampling_(statistics)">representative sample</a>
+			of the pairs of nodes.</li>
+
+			<li>Calculate the distances between sampled node pairs.</li>
+
+			<li>Plot the histogram, draw the conclusion.</li>
+		</ol>
+	</section>
 
 	<div class="progress"></div>
 
 	<script src="node_modules/shower-core/shower.min.js"></script>
 
+	<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"></script>
 </body>
 </html>
