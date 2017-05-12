@@ -52,6 +52,10 @@
 		.mono {
 			font-family: monospace;
 		}
+		.video {
+			padding-top: 0;
+			padding-bottom: 10px;
+		}
 	</style>
 
 	<section class="slide" id="cover">
@@ -447,10 +451,10 @@
 		</style>
 	</section>
 
-	<section class="slide vista" id="histogram2d">
+	<section class="slide vista histogram2d">
 		<h2>Heatmap (log)</h2>
 		<style>	
-			#histogram2d {
+			.histogram2d {
 				background-image: url("pictures/graph_histogram2d.png");
 			}
 		</style>
@@ -479,7 +483,8 @@
 
 	<section class="slide">
 		<h2>Statement</h2>
-		<p>Given that two developers "know" each other if they contributed to the same project, how far are they from each other on average?</p>
+		<p>Given that two developers "know" each other if they contributed to the same project,
+			how far are they from each other on average, if there is a connection?</p>
 	</section>
 
 	<section class="slide">
@@ -496,6 +501,123 @@
 
 			<li>Plot the histogram, draw the conclusion.</li>
 		</ol>
+	</section>
+
+	<section class="slide">
+		<h2>Connected components</h2>
+		<p>We run a series of graph traversals</p>
+		<p>Any type works: DFS, BFS, RFS</p>
+		<p>Python, 22M nodes - 5 min</p>
+		<p>Result: 10200912, 10229, ...</p>
+	</section>
+
+	<section class="slide vista histogram2d">
+		<div id="core-border"></div>
+		<span id="core-label">THE CORE</span>
+		<style>
+			#core-border {
+				position: absolute;
+				left: calc(50% - 200px);
+				top: calc(50% - 200px);
+				width: 400px;
+				height: 400px;
+				border: 5px dashed white;
+				border-radius: 50%;
+			}
+			#core-label {
+				position: absolute;
+				left: calc(50% + 180px);
+				top: calc(50% - 180px);				
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Core statistics</h2>
+		<p>The size is 10200912 / 22000000 < 50% of the whole graph</p>
+		<p>33% of the developers; this is 11% of the whole GitHub userbase</p>
+	</section>
+
+	<section class="slide">
+		<h2>Distances</h2>
+		<p>There are \[\frac{N_{core}(N_{core} + 1)}{2}\] possible distance pairs</p>
+		<p>That is, 2.3 trillions (10<sup>12</sup>)</p>
+		<p>Do we need to evaluate them all? No!</p>
+	</section>
+
+	<section class="slide">
+		<h2>Representative sample</h2>
+		<p>Statistics for the win! Let's define our random variable as the distance between two random developers.</p>
+		<p>For sufficiently large N<sub>core</sub>, the distribution of \[{\displaystyle {\hat {p_d}}} = \frac{X_d}{N_{core}}\] will be closely approximated by a normal distribution.</p>
+		<a href="https://en.wikipedia.org/wiki/Sample_size_determination">Sample size on Wikipedia.</a>
+	</section>
+
+	<section class="slide">
+		<h2>Representative sample</h2>
+		<ul>
+			<li>Margin of error: 1% (lower is better)</li>
+			<li>Confidence level: 95% (higher is better)</li>
+			<li>Result: 10,000 evaluations</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Distances calculation</h2>
+		<p>Which algorithm to choose?</p>
+		<ul>
+			<li><a href="https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm">Floyd–Warshall</a> works in O(V<sup>3</sup>) time and eats O(V<sup>2</sup>) memory</li>
+			<li><a href="https://en.wikipedia.org/wiki/Dijkstra's_algorithm">Dijkstra</a> is O(|E| + |V|log|V|) time and O(|V|) space</li>
+			<li>▶ <a href="https://en.wikipedia.org/wiki/Bidirectional_search">Bidirectional search</a> - similar to Dijkstra, but optimized for pairs ◀</li>
+		</ul>
+		<p class="important">We need to avoid the "generational explosion" as much as possible.</p>
+	</section>
+
+	<section class="slide video">
+		<video width="100%" height="100%" src="pictures/bidisearch_white.webm" poster="pictures/bs000.png" controls>
+			Your browser does not support the video tag.
+		</video>
+	</section>
+
+	<section class="slide">
+		<h2>Result</h2>
+		<div id="handshakes" class="vista center"></div>
+		<style>
+			#handshakes {
+				width: 400px;
+				height: 400px;
+				background-image: url("pictures/histogram_black.png");
+			}
+			@media not print {
+				#handshakes {
+					background-image: url("pictures/histogram_white.png");
+				}
+			}
+		</style>
+	</section>
+
+	<section class="slide" id="pagerank">
+		<div class="vista"></div>
+		<h2>Part III</h2>
+		<style>
+			#pagerank > div {
+				transform: scaleX(-1);
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-image: url("pictures/handshake_black.svg");
+			}
+			@media not print {
+				#pagerank > div {
+					background-image: url("pictures/handshake_white.svg");
+				}
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Contacts</h2>
 	</section>
 
 	<div class="progress"></div>
