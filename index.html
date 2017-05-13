@@ -25,7 +25,7 @@
 				background: black;
 			}
 				.slide h2 {
-					color: #8b8d91;
+					color: #bababa;
 				}
 		}
 		.slide p {
@@ -55,6 +55,17 @@
 		.video {
 			padding-top: 0;
 			padding-bottom: 10px;
+		}
+		.success {
+		    color: green;
+		}
+		.vista {
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+		.vista-cover {
+			background-size: cover;
 		}
 	</style>
 
@@ -92,17 +103,11 @@
 	<section class="slide">
 		<h2>Read this on your device</h2>
 		<!-- <img> with @media srcset does not work! -->
-		<div id="qrcode"></div>
+		<div class="vista center" id="qrcode"></div>
 		<style>
 			#qrcode {
 				width: 350px;
 				height: 350px;
-				margin-left: auto;
-				margin-right: auto;
-				display: table;
-				background-size: contain;
-				background-repeat: no-repeat;
-				background-position: center;
 				background-image: url("pictures/qrcode_black.svg");
 			}
 			@media not print {
@@ -148,14 +153,6 @@
 	<section class="slide vista ar-2">
 		<h2>Part I</h2>
 		<style>
-			.vista {
-				background-size: contain;
-				background-repeat: no-repeat;
-				background-position: center;
-			}
-			.vista-cover {
-				background-size: cover;
-			}
 			.ar-2 {
 				background-image: url("pictures/armin_ronacher_2_black.png");
 			}
@@ -362,12 +359,12 @@
 
 	<section class="slide">
 		<h2>Adjacency matrix</h2>
-		<div id="adj-matrix"></div>
+		<div class="adj-matrix"></div>
 		<p>C<sub>ij</sub> is the number of commits done by developer i to repository j</p>
 		<p>C<sub>ij</sub> = C<sub>ji</sub></p>
 		<p>Non-zero elements: &lt;10<sup>-7</sup></p>
 		<style>
-			#adj-matrix {
+			.adj-matrix {
 				width: 400px;
 				height: 400px;
 				background-size: contain;
@@ -378,7 +375,7 @@
 				background-image: url("pictures/adj_matrix_black.svg");
 			}
 			@media not print {
-				#adj-matrix {
+				.adj-matrix {
 					background-image: url("pictures/adj_matrix_white.svg");
 				}
 			}
@@ -576,6 +573,25 @@
 		<video width="100%" height="100%" src="pictures/bidisearch_white.webm" poster="pictures/bs000.png" controls>
 			Your browser does not support the video tag.
 		</video>
+		<style>
+		@media not print {
+		    video::-webkit-media-controls {
+		        z-index: 100;
+		    }
+		    video /deep/ input[type=range] {
+                background-color: "#f56100";
+            }
+		    video::-webkit-media-controls-panel {
+                background-color: #202020;
+            }
+            video::-webkit-media-controls-volume-slider {
+                background-color: #f56100;
+            }
+            video::-webkit-media-controls-timeline {
+                background-color: #f56100;
+            }
+        }
+		</style>
 	</section>
 
 	<section class="slide">
@@ -602,18 +618,178 @@
 			#pagerank > div {
 				transform: scaleX(-1);
 				position: absolute;
-				left: 0;
-				top: 0;
-				width: 100%;
-				height: 100%;
-				background-image: url("pictures/handshake_black.svg");
+				left: 10%;
+				top: 10%;
+				width: 80%;
+				height: 80%;
+				background-image: url("pictures/crown_black.svg");
 			}
 			@media not print {
 				#pagerank > div {
-					background-image: url("pictures/handshake_white.svg");
+					background-image: url("pictures/crown_white.svg");
 				}
 			}
 		</style>
+	</section>
+	
+	<section class="slide">
+		<h2>Statement</h2>
+		<p>What developers and repositories are the most important?</p>
+	</section>
+	
+	<section class="slide vista" id="pagerank-armin">
+		<style>
+		    #pagerank-armin {
+				background-image: url("pictures/pagerank_armin_black.svg");
+			}
+			@media not print {
+				#pagerank-armin {
+					background-image: url("pictures/pagerank_armin_white.svg");
+				}
+			}
+		</style>
+	</section>
+	
+	<section class="slide">
+	    <h2>Importance</h2>
+	    <p>"Importance" is defined recursively: we gain ego if we contribute to repositories to which other important developers contribute.</p>
+	    <p>\[x_ {AR} = \frac{w_ 1 x_ 1 + w_ 2 x_ 2 + w_ 3 x_ 3 + ...}{\lambda} = \frac{1}{\lambda} \sum w_ i x_ i\]</p>
+	    <p>We do not distinguish developers and repositories here.</p>
+	</section>
+	
+	<section class="slide">
+	    <h2>Return of the adjacency matrix</h2>
+	    <div id="hcenter">
+		<div class="adj-matrix"></div>
+		<p class="center">$$\sum_i C_{ij}=1$$$$C_{ij} \neq C_{ji}$$</p>
+		</div>
+		<style>
+		    #hcenter {
+		        display: flex;
+		        align-items: center;
+		    }
+		</style>
+	</section>
+	
+	<section class="slide">
+	    <h2>Perron–Frobenius theorem</h2>
+	    <p>If \(C_{ij} > 0\) then \(\vec{x}\) is the first eigenvector of C and \(x_i\) is positive.</p>
+	    <p class="important">This is not our case: only 10<sup>-7</sup> elements are positive, the rest are zeros.</p>
+	</section>
+	
+	<section class="slide">
+	    <h2>Google in 1998</h2>
+	    <p>Larry and Sergey had exactly the same objective and problems with WWW.</p>
+	    <p>C<sub>ij</sub>  is 1 if web page i links to j and 0 otherwise.</p>
+	    <p>They invented the trick to make C have all elements positive.</p>
+	    <p>They called it <a href="http://snap.stanford.edu/class/cs246-2013/slides/09-pagerank.pdf">PageRank</a>.</p>
+	</section>
+	
+	<section class="slide">
+	    <h2>PageRank</h2>
+	    <p>$$
+G = \beta C + \frac{1-\beta}{N}\left( \begin{array}{cccc}
+1 & 1 & ... & 1 \\
+1 & 1 & ... & 1 \\
+... & ... & \ddots & ... \\
+1 & 1 & ... & 1 \end{array} \right)
+$$</p>
+        <p>β is the dampening or random walk factor, usually 0.85.</p>
+        <p>Our matrix becomes acyclic and irreducible, aka the Google matrix.</p>
+    </section>
+    
+    <section class="slide">
+		<h2>Power iteration</h2>
+		<p>An efficient algorithm to calculate the first eigenvector.</p>
+		<p>$$x_{i+1} = G\cdot x_i$$</p>
+		<p>Sparse friendly.</p>
+		<p>22M nodes need less than 50 iterations.</p>
+		<p class="success">GitHub specific: there are no "dead ends".</p>
+	</section>
+	
+	<section class="slide">
+		<h2>Power iteration</h2>
+		<pre>
+		<code class="python">def page_rank(m, beta=0.85, niter=50):</code>
+<code class="python">    N = m.shape[0]</code>
+<code class="python">    x = numpy.ones(N, dtype=numpy.float32) / N</code>
+<code class="python">    for i in range(niter):</code>
+<code class="python">        x_next = m.dot(x) * beta + (1 - beta) / N</code>
+<code class="python">        xdiff = numpy.linalg.norm(x - x_next, ord=1)</code>
+<code class="python">        x = x_next</code>
+<code class="python">    return x</code>
+		</pre>
+	</section>
+	
+	<section class="slide">
+		<h2>Convergence</h2>
+		<div class="vista center" id="pagerank-conv"></div>
+		<style>
+		    #pagerank-conv {
+		        height: 400px;
+		        width: 600px;
+		        background-image: url("pictures/pagerank_black.png");
+		    }
+		    @media not print {
+				#pagerank-conv {
+					background-image: url("pictures/pagerank_white.png");
+				}
+			}
+		</style>
+	</section>
+	
+	<section class="slide">
+		<h2>Who is the most important on GitHub?</h2>
+		<p><a href="https://github.com/ryanfb">Ryan Baumann aka ryanfb</a> (at the time the research was conducted - Jan 2017)</p>
+		<img class="center" src="pictures/ryanfb.png">
+	</section>
+	
+	<section class="slide vista" id="ryanfb">
+	    <style>
+	        #ryanfb {
+	            background-image: url("pictures/unicorn.png");
+	        }
+	    </style>
+	</section>
+	
+	<section class="slide">
+	    <h2>Who is the most important on GitHub?</h2>
+	    <p>Ryan created more than 1,000 repositories, and each repository gives a small amount of importance.</p>
+	    <p class="important">Link farm failure.</p>
+	    <p>Identity matching is not perfect, so the leaderboard is polluted with such anomalies.</p>
+	    <p class="success">PageRank works to compare specific people.</p>
+	</section>
+	
+	<section class="slide">
+	    <h2>Who is the most important on GitHub?</h2>
+	    Linus Torvalds: 2.7 10-5
+	    Armin Ronacher: 0.8 10-5
+	    Maximo Cuadros  0.26 10-5
+	    Vadim Markovtsev 0.16 10-5
+	 </section>
+
+    <section class="slide">
+	    <h2>What is the most important on GitHub?</h2>
+	    <ol id="repo-list">
+            <li><a href="https://github.com/nguyendtu/patchwork">nguyendtu/patchwork</a></li>
+            <li><a href="https://github.com/coeligena/homebrew-customized-copy">coeligena/homebrew-customized-copy</a></li>
+            <li><a href="https://github.com/KenStanley/reflections">KenStanley/reflections</a></li>
+            <li><a href="https://github.com/torvalds/linux">torvalds/linux</a></li>
+            <li><a href="https://github.com/enkidevs/commit">enkidevs/commit</a></li>
+            <li><a href="https://github.com/gentoo/wikiclone">gentoo/wikiclone</a></li>
+            <li><a href="https://github.com/Homebrew/homebrew-core">Homebrew/homebrew-core</a></li>
+            <li><a href="https://github.com/renoirb/test">renoirb/test</a></li>
+            <li><a href="https://github.com/SopraConsulting/CocoapodsSpecs">SopraConsulting/CocoapodsSpecs</a></li>
+            <li><a href="https://github.com/openSUSE/salt">openSUSE/salt</a></li>
+            <li><a href="https://github.com/caskroom/homebrew-cask">caskroom/homebrew-cask</a></li>
+            <li><a href="https://github.com/borisyankov/DefinitelyTyped">borisyankov/DefinitelyTyped</a></li>
+            <li><a href="https://github.com/openstack/openstack">openstack/openstack</a></li>
+         </ol>
+         <style>
+            #repo-list {
+                font-size: 0.7em;
+            }
+         </style>
 	</section>
 
 	<section class="slide">
@@ -625,5 +801,8 @@
 	<script src="node_modules/shower-core/shower.min.js"></script>
 
 	<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"></script>
+	<link rel="stylesheet" href="styles/darcula.css">
+	<script src="js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
