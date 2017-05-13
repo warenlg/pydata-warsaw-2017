@@ -762,10 +762,28 @@ $$</p>
 	
 	<section class="slide">
 	    <h2>Who is the most important on GitHub?</h2>
-	    Linus Torvalds: 2.7 10-5
-	    Armin Ronacher: 0.8 10-5
-	    Maximo Cuadros  0.26 10-5
-	    Vadim Markovtsev 0.16 10-5
+	    <table class="tg">
+          <tr>
+            <th>Person</th>
+            <th>PageRank, 10<sup>-5</sup></th>
+          </tr>
+          <tr>
+            <td>Linus Torvalds</td>
+            <td>2.7</td>
+          </tr>
+          <tr>
+            <td>Armin Ronacher</td>
+            <td>0.8</td>
+          </tr>
+          <tr>
+            <td>Maximo Cuadros</td>
+            <td>0.26</td>
+          </tr>
+          <tr>
+            <td>Vadim Markovtsev</td>
+            <td>0.16</td>
+          </tr>
+        </table>
 	 </section>
 
     <section class="slide">
@@ -784,10 +802,20 @@ $$</p>
             <li><a href="https://github.com/caskroom/homebrew-cask">caskroom/homebrew-cask</a></li>
             <li><a href="https://github.com/borisyankov/DefinitelyTyped">borisyankov/DefinitelyTyped</a></li>
             <li><a href="https://github.com/openstack/openstack">openstack/openstack</a></li>
+            <li><a href="https://github.com/TheOdinProject/curriculum">TheOdinProject/curriculum</a></li>
          </ol>
          <style>
             #repo-list {
-                font-size: 0.7em;
+                font-size: 0.9em;
+                overflow: hidden;
+            }
+            #repo-list > li {
+                float: left;
+                width: 50%;
+                text-indent: 0;
+            }
+            #repo-list > li:before {
+                display: none;
             }
          </style>
 	</section>
