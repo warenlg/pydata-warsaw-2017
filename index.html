@@ -67,6 +67,16 @@
 		.vista-cover {
 			background-size: cover;
 		}
+		i.fa {
+		    font-style: normal;
+		}
+		ul.no-bullets > li::before {
+		    display: none;
+		    text-indent: 0;
+		}
+		ul.no-bullets > li {
+		    text-indent: 0;
+		}
 	</style>
 
 	<section class="slide" id="cover">
@@ -819,9 +829,35 @@ $$</p>
             }
          </style>
 	</section>
+	
+	<section class="slide">
+		<h2>Conclusion</h2>
+		<ul>
+		    <li>GitHub contributions graph can be visualized and has a structure</li>
+		    <li>11% of GitHub users form the (strongly) connected core</li>
+		    <li>85% of the core is ≤6 hops from each other</li>
+		    <li>PageRank allows for measuring the socially validated impact</li>
+		</ul>
+	</section>
+	
+	<section class="slide">
+		<h2>Used materials</h2>
+		<ul>
+		    <li>Dataset on <a href="https://data.world/vmarkovtsev/452-m-commits-on-github">data.world</a>, <a href="https://drive.google.com/file/d/0B-w8jGUJto0ibVI3QUVBdXJnN1E">pickled graph</a></li>
+		    <li>Code: <a href="graph.ipynb">visualization</a>, <a href="https://blog.sourced.tech/post/handshakes_pagerank/">the rest in the blog post</a></li>
+		    <li><a href="http://snap.stanford.edu/class/cs246-2013/slides/09-pagerank.pdf">CS246</a></li>
+		</ul>
+	</section>
 
 	<section class="slide">
 		<h2>Contacts</h2>
+		<ul class="no-bullets">
+		    <li><i class="fa fa-envelope"></i> <a href="mailto://vadim@sourced.tech">vadim@sourced.tech</a></li>
+		    <li><i class="fa fa-twitter"></i> <a href="https://twitter.com/tmarkhor">tmarkhor</a></li>
+		    <li><i class="fa fa-github"></i> <a href="https://github.com/vmarkovtsev">vmarkovtsev</a></li>
+		    <li><i class="fa fa-rss"></i> <a href="https://blog.sourced.tech">blog.sourced.tech</a></li>
+		</ul>
+		<p class="success">We are hiring!</p>
 	</section>
 
 	<div class="progress"></div>
@@ -829,6 +865,7 @@ $$</p>
 	<script src="node_modules/shower-core/shower.min.js"></script>
 
 	<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"></script>
+	<script async src="https://use.fontawesome.com/72adc0539b.js"></script>
 	<link rel="stylesheet" href="styles/darcula.css">
 	<script src="js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
