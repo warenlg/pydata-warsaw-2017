@@ -113,6 +113,9 @@
 		code.inline:before {
 			display: none;
 		}
+		code.inline {
+			padding: 0;
+		}
     </style>
 
 	<section class="slide" id="cover">
@@ -165,6 +168,276 @@
     </section>
 
 	<section class="slide">
+		<h2>Objective</h2>
+		<p><code class="inline">git blame foo.py</code></p>
+		<div id="obj" class="blame">
+			<div><span><span class="f2014">●</span>2014</span>
+				<pre><code class="b2014">class Foo:</code>
+<code class="b2014">  def bar(self):</code>
+<code class="b2014">    print("!")</code></pre>
+			</div>
+			<div><span><span class="f2015">●</span>2015</span><pre><code class="b2014">class Foo:</code>
+<code class="b2014">  def bar(self):</code>
+<code class="b2015">    print("?")</code>
+<code class="b2015"> </code>
+<code class="b2015">  def baz(self):</code>
+<code class="b2014">    print("!")</code></pre></div>
+			<div><span><span class="f2016">●</span>2016</span><pre><code class="b2016">class FooBarBaz:</code>
+<code class="b2014">  def bar(self):</code>
+<code class="b2016">    """..."""</code>
+<code class="b2016">    print("yo")</code>
+<code class="b2015"> </code>
+<code class="b2015">  def baz(self):</code>
+<code class="b2014">    print("!")</code></pre></div>
+		</div>
+		<style>
+			#obj {
+				display: flex;
+				height: 400px;
+			}
+			#obj > div {
+				flex-grow: 1;
+				flex-basis: 0;
+				height: 100%;
+				padding-left: 5px;
+				padding-right: 5px;
+			}
+			#obj > div > span {
+				text-align: center;
+				width: 100%;
+				display: block;
+			}
+			.blame code {
+				font-size: 0.8em !important;
+				margin-left: 2.5em !important;
+				margin-top: -1px !important;
+				width: auto !important;
+				color: black !important;
+				padding-left: 1px !important;
+			}
+			.blame code:before {
+				color: #585a5e !important;
+				width: calc(2.5em + 1px) !important;
+				margin-left: -2.5em !important;
+				padding-left: 0.5em !important;
+			}
+			.b2014, .b2014:before {
+				background: #CB8C1D !important;
+			}
+			.b2015, .b2015:before {
+				background: #F1684E !important;
+			}
+			.b2016, .b2016:before {
+				background: #4EB1BA !important;
+			}
+			.f2014 {
+				color: #CB8C1D;
+			}
+			.f2015 {
+				color: #F1684E;
+			}
+			.f2016 {
+				color: #4EB1BA;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Objective</h2>
+		<div class="vista" id="obj-plot"></div>
+		<style>
+			#obj-plot {
+				width: 100%;
+				height: 400px;
+				background-image: url("pictures/objective_black.svg");
+			}
+			@media not print {
+                #obj-plot {
+                    background-image: url("pictures/objective_white.svg");
+                }
+            }
+		</style>
+	</section>
+
+	<section class="slide">
+        <h2>History</h2>
+		<ul>
+			<li>It all started with <a href="https://erikbern.com/2016/12/05/the-half-life-of-code.html">git-of-theseus</a>
+				by Erik Bernhardsson (e.g., <a href="https://github.com/spotify/luigi">Luigi</a>)</li>
+			<li>source{d} decided to build the similar tool using
+				<a href="https://github.com/src-d/go-git">go-git</a> engine</li>
+			<li>This project was named Hercules and was
+				<a href="https://blog.sourced.tech/post/hercules/">blogged</a></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+        <h2>Problems</h2>
+		<ul>
+			<li>Diff route</li>
+			<li>Performance</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+        <h2>Diff route</h2>
+	</section>
+
+	<section class="slide">
+        <h2>Performance</h2>
+		<p>Complexity matters:</p>
+		<p><code class="inline">git checkout &lt;commit&gt; && git blame &lt;file&gt;</file></code></p>
+		<p>takes O(n) steps where n is the number of commits before
+			<code class="inline">&lt;commit&gt;</code>.</p>
+		<p>Thus the whole procedure takes O(n<sup>2</sup>).</p>
+		<p class="success">We can reduce it to O(n) using the incremental algorithm!</p>
+	</section>
+
+	<section class="slide">
+        <h2>Performance</h2>
+		<p class="important">Incremental blame is not possible using the libgit2 and cgit API.</p>
+		<img src="pictures/deeper.jpg" class="center">
+	</section>
+
+	<section class="slide">
+        <h2>Performance</h2>
+		<p>go-git was designed for blame analytics from scratch.</p>
+		<p>It allows to cache the intermediate results.</p>
+		<p>diff-tree implementation is a
+			<a href="https://blog.sourced.tech/post/difftree/">state-of-the-art</a>.</p>
+	</section>
+
+	<section class="slide">
+        <h2>Performance</h2>
+		<p>How to store the line intervals?</p>
+		<div class="diff-show blame">
+			<pre><code class="b2016">class FooBarBaz:</code>
+<code class="b2014">  def bar(self):</code>
+<code class="b2016">    """..."""</code>
+<code class="b2016">    print("yo")</code>
+<code class="b2015"> </code>
+<code class="b2015">  def baz(self):</code>
+<code class="b2014">    print("!")</code></pre>
+			<div class="vista" id="ll"></div>
+		</div>
+		<style>
+			.diff-show {
+				display: flex;
+				align-items: center;
+			}
+			.diff-show > pre {
+				width: 300px;
+				margin-bottom: 0;
+				margin-right: 50px;
+			}
+			.diff-show > div {
+				flex-grow: 1;
+				flex-basis: 0;
+            }
+			#ll {
+				height: 100px;
+				background-image: url("pictures/linked_list_black.svg");
+			}
+            @media not print {
+                #ll {
+                    background-image: url("pictures/linked_list_white.svg");
+                }
+            }
+		</style>
+	</section>
+
+	<section class="slide">
+        <h2>Performance</h2>
+		<p>How to store the line intervals?</p>
+		<div class="diff-show blame">
+			<pre><code class="b2016">class FooBarBaz:</code>
+<code class="b2014">  def bar(self):</code>
+<code class="b2016">    """..."""</code>
+<code class="b2016">    print("yo")</code>
+<code class="b2015"> </code>
+<code class="b2015">  def baz(self):</code>
+<code class="b2014">    print("!")</code></pre>
+			<div class="vista" id="tree"></div>
+		</div>
+		<style>
+			#tree {
+				height: 250px;
+				background-image: url("pictures/tree_black.svg");
+			}
+            @media not print {
+                #tree {
+                    background-image: url("pictures/tree_white.svg");
+                }
+            }
+		</style>
+	</section>
+
+	<section class="slide">
+        <h2>Performance</h2>
+		<p>How to store the line intervals?</p>
+		<ul>
+			<li>Linked list
+				<ul>
+					<li class="important">O(file size) edit's location</li>
+					<li class="success">O(1) update</li>
+				</ul>
+			</li>
+			<li>Balanced binary tree
+				<ul>
+					<li class="success">O(log (file size)) edit's location</li>
+					<li class="important">O(file size) update</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+        <h2>Performance</h2>
+		<figure>
+			<img src="pictures/spark.png" class="center" id="spark">
+			<figcaption class="white">
+				<a href="https://github.com/apache/spark/commit/7026ee23e0a684e13f9d7dfbb8f85e810106d022#diff-916ca56b663f178f302c265b7ef38499">apache/spark@7026ee23</a>
+			</figcaption>
+		</figure>
+		<style>
+			#spark {
+				height: 400px;
+			}
+			#spark + figcaption {
+				position: absolute;
+				bottom: 50px;
+				right: 180px;
+				font-size: 12px;
+				-webkit-transform-origin: 0 100%;
+				transform-origin: 0 100%;
+				-webkit-transform: translateX(100%) rotate(-90deg);
+				transform: translateX(100%) rotate(-90deg);
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+        <h2>Performance</h2>
+		<p>In such cases the binary tree has O(1) update complexity.</p>
+		<p>We have chosen the binary tree.</p>
+		<p class="important">Anyway, the profile shows that the diff is the bottleneck.</p>
+	</section>
+
+	<section class="slide">
+        <h2>Performance</h2>
+		<p>Git stores commits as <a href="https://stackoverflow.com/a/8198276/69708">snapshots</a>,
+			we need to diff ourselves.</p>
+		<p>Diff algorithms:</p>
+		<ul>
+			<li><a href="http://www.xmailserver.org/diff2.pdf">Myers</a> - most popular</li>
+			<li>Patience - heuristics for better readability</li>
+			<li>Histogram - used in <a href="http://download.eclipse.org/jgit/docs/jgit-2.0.0.201206130900-r/apidocs/org/eclipse/jgit/diff/HistogramDiff.html">jgit</a></li>
+		</ul>
+		<p>Myers algorithm is optimal for analytics.</p>
+		<p>We tried to accelerate it with NVIDIA CUDA but <a href="https://github.com/src-d/diffcuda">failed</a>.</p>
+	</section>
+
+	<section class="slide">
 		<h2>Trying Hercules</h2>
 		<ol>
 			<li>Install <a href="https://golang.org/dl/">Go language</a></li>
@@ -202,6 +475,36 @@
                 }
             }
 		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Trying Hercules</h2>
+		<code class="inline">hercules https://github.com/torvalds/linux</code>
+		<p></p>
+		<p>2 hours, 130GB RSS</p>
+	</section>
+
+	<section class="slide vista" id="linux">
+		<style>
+			#linux {
+				background-image: url("pictures/linux_black.png");
+			}
+			@media not print {
+                #linux {
+                    background-image: url("pictures/linux_white.png");
+                }
+            }
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Future</h2>
+		<ul>
+			<li>Survivability metric calculation</li>
+			<li>Per file and per directory basis</li>
+			<li>Open source implementation of X-Ray engine by
+				<a href="http://www.empear.com/">Empear</a></li>
+		</ul>
 	</section>
 
 	<section class="slide">
