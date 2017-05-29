@@ -110,11 +110,15 @@
         ul.no-bullets > li {
             text-indent: 0;
         }
-		code.inline:before {
+		code.inline:before, code.inline-no-offset:before {
 			display: none;
 		}
-		code.inline {
+		code.inline, code.inline-no-offset {
 			padding: 0;
+		}
+		code.inline-no-offset {
+			margin-left: 0 !important;
+			padding-left: 50px !important;
 		}
     </style>
 
@@ -281,6 +285,70 @@
 
 	<section class="slide">
         <h2>Diff route</h2>
+		<a href="https://drive.google.com/file/d/0B-w8jGUJto0iaWRjcFZUZy15NVU">How to blame</a> by Alberto Cortes.
+		<ol>
+			<li>Trace the commits chain backwards starting from HEAD.
+				<pre><code class="inline-no-offset">&lt;root&gt; D 🠔 E 🠔 F 🠔 G 🠔 H 🠔 I <span class="success">HEAD</span></code></pre>
+			</li>
+			<li>Diff starting from the root along the path from (1).
+				<pre><code class="inline-no-offset"><span class="success">&lt;root&gt;</span> D 🠖 E 🠖 F 🠖 G 🠖 H 🠖 I HEAD</code></pre>
+			</li>
+		</ol>
+	</section>
+
+	<section class="slide">
+        <h2>Diff route</h2>
+		<p>Where are my branches?</p>
+		<pre>
+			<code class="inline">      A---B---C</code>
+<code class="inline">     /         \</code>
+<code class="inline">D---E---F---G---H---I HEAD</code>
+<code class="inline">     ----------> time</code>
+<code class="inline"> way <----------</code>
+		</pre>
+		<p><span class="important">Git branches are pointers, and the history is lost.</span>
+			<span class="success">Merges are ordered.</span></p>
+	</section>
+
+	<section class="slide">
+        <h2>Diff route</h2>
+		<p>Which way to go?</p>
+		<pre>
+			<code class="inline">      A---B---C topic</code>
+<code class="inline">     /         \</code>
+<code class="inline">D---E---F---G---H---I master</code>
+<code class="inline">     ----------> time</code>
+<code class="inline"> way <----------</code>
+		</pre>
+		<p class="important">Blaming using both branches is hard and even impossible sometimes.</p>
+	</section>
+
+	<section class="slide">
+        <h2>Diff route</h2>
+		<p>There can be "octopus" merges.</p>
+		<pre>
+			<code class="inline">      A---B---C topic1</code>
+<code class="inline">     /         \</code>
+<code class="inline">D---E---F---G---H---I master</code>
+<code class="inline">         \     /</code>
+<code class="inline">          J---K topic2</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+        <h2>Diff route</h2>
+		<p>Working solution: treat merges as single commits.</p>
+		<pre id="blame-solution">
+<code class="inline">                C</code>
+<code class="inline">D---E---F---G---H---I master</code>
+<code class="inline">                K</code>
+		</pre>
+		<p class="important">We lose some information.</p>
+		<style>
+			#blame-solution, #blame-solution > code {
+				line-height: 1;
+			}
+		</style>
 	</section>
 
 	<section class="slide">
@@ -433,8 +501,8 @@
 			<li>Patience - heuristics for better readability</li>
 			<li>Histogram - used in <a href="http://download.eclipse.org/jgit/docs/jgit-2.0.0.201206130900-r/apidocs/org/eclipse/jgit/diff/HistogramDiff.html">jgit</a></li>
 		</ul>
-		<p>Myers algorithm is optimal for analytics.</p>
-		<p>We tried to accelerate it with NVIDIA CUDA but <a href="https://github.com/src-d/diffcuda">failed</a>.</p>
+		<p class="success">Myers algorithm is optimal for analytics.</p>
+		<p class="important">We tried to accelerate it with NVIDIA CUDA but <a href="https://github.com/src-d/diffcuda">failed</a>.</p>
 	</section>
 
 	<section class="slide">
