@@ -190,11 +190,11 @@
 			about (1) after lunch.</p>
 		<p>We will address (2) in this presentation.</p>
 		<style>
-			#crossroads {
-				background: url("pictures/crossroads.jpg");
-			}
-
-			#crossroads h2:before {
+			@media not print {
+				#crossroads {
+					background: url("pictures/crossroads.jpg");
+				}
+				#crossroads h2:before {
 				content: "";
 				position: absolute;
 				z-index: -1;
@@ -203,6 +203,7 @@
 				right: 0;
 				bottom: 0;
 				background: rgba(0, 0, 0, 0.5);
+			}
 			}
 		</style>
 	</section>
@@ -322,12 +323,96 @@
 
 	<section class="slide">
 		<h2>What is source code?</h2>
+		<div id="what-is-sc">
+		<pre>
+		<code class="python">def nearest_neighbors(self, origin, k=10, early_stop=0.5, max_time=3600,</code>
+<code class="python">                      skipped_stop=0.99, throw=True):</code>
+<code class="python">    # origin can be either a text query or an id</code>
+<code class="python">    if <span class="hljs-keyword">isinstance</span>(origin, (<span class="hljs-keyword">tuple</span>, <span class="hljs-keyword">list</span>)):</code>
+<code class="python">	     words, weights = origin</code>
+<code class="python">	     weights = numpy.array(weights, dtype=numpy.float32)</code>
+<code class="python">	     index = None</code>
+<code class="python">	     avg = self._get_centroid(words, weights, force=True)</code>
+<code class="python">    else:</code>
+<code class="python">	     index = origin</code>
+<code class="python">	     words, weights = self._get_vocabulary(index)</code>
+<code class="python">	     avg = self._get_centroid_by_index(index)</code>
+<code class="python">    if avg is None:</code>
+<code class="python">	     raise ValueError(</code>
+<code class="python">		     "Too little vocabulary for %s: %d" % (index, len(words)))</code>
+		</pre>
+			<div><pre>
+				<code class="inline-no-offset"><span class="hljs-keyword">⬤</span> keywords</code>
+				<code class="inline-no-offset"><span class="hljs-title">⬤</span> identifiers</code>
+				<code class="inline-no-offset"><span class="hljs-literal">⬤</span> literals</code>
+				<code class="inline-no-offset"><span class="hljs-string">⬤</span> strings</code>
+				<code class="inline-no-offset"><span class="hljs-comment">⬤</span> comments</code>
+			</pre></div>
+			</div>
+		<style>
+			#what-is-sc {
+				display: flex;
+			}
+			#what-is-sc > pre {
+				font-size: 0.5em;
+				margin-right: 100px;
+			}
+			#what-is-sc > div > pre {
+				border: 1px solid white;
+				border-radius: 5px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+			}
+			#what-is-sc > div > pre > code {
+				padding: 0 20px !important;
+			}
+		</style>
+	</section>
 
+	<section class="slide vista" id="ast">
+		<h2>AST</h2>
+		<style>
+			#ast {
+				background: url("pictures/ast_black.svg");
+			}
+			@media not print {
+				#ast {
+					background: black url("pictures/ast_white.svg");
+				}
+			}
+			#ast > h2 {
+				position: absolute;
+				bottom: 50px;
+			}
+		</style>
+	</section>
+
+	<section class="slide vista" id="go-git-blame">
+		<h2>VCS</h2>
+		<style>
+			#go-git-blame {
+				background: url("pictures/blame.png");
+			}
+		</style>
+	</section>
+
+	<section class="slide vista" id="source-ml">
+		<style>
+			#source-ml {
+				background: white url("pictures/source_ml.svg");
+			}
+			@media not print {
+				#source-ml {
+					background: black url("pictures/source_ml.svg");
+				}
+			}
+		</style>
 	</section>
 
 	<section class="slide">
 		<h2>Points of fun</h2>
 		<ul>
+			<li>Development history</li>
 			<li>Project structure</li>
 			<li>Language vector</li>
 			<li>README files</li>
@@ -338,53 +423,141 @@
 	</section>
 
 	<section class="slide">
-		<h2>Project structure</h2>
+		<h2>Development history</h2>
+		<p>Mining artifacts from VCS (git).</p>
+		<p>Finding repositories which have a similar evolution.</p>
+		<p>E.g. projects written by roughly the same team.</p>
+		<p><a href="https://data.world/vmarkovtsev/452-m-commits-on-github">source{d}'s dataset.</a></p>
+	</section>
 
+	<section class="slide">
+		<h2>Project structure</h2>
+		<p>Comparing file system trees.</p>
+		<p>Finding repositories which have a similar structure.</p>
+		<p>E.g. Wordpress web sites.</p>
 	</section>
 
 	<section class="slide">
 		<h2>Language vector</h2>
-
+		<p>Aka GitHub language bars.</p>
+		<img src="pictures/github_stats.png" id="github-stats">
+		<p>Finding projects of the same alignment.</p>
+		<p>E.g. C autotools != C cmake.</p>
+		<p><a href="https://data.world/source-d/github-repositories-languages-distribution">source{d}'s dataset.</a></p>
+		<style>
+			#github-stats {
+				width: 800px;
+			}
+		</style>
 	</section>
 
 	<section class="slide">
 		<h2>README files</h2>
-
+		<p>Pure NLP and entity extraction.</p>
+		<p>Finding projects with similar descriptions / topics.</p>
+		<p>E.g. all projects related to Bitcoin.</p>
+		<img src="pictures/readme.png" id="readme">
+		<p><a href="https://data.world/vmarkovtsev/github-readme-files">source{d}'s dataset.</a></p>
+		<style>
+			#readme {
+				height: 200px;
+				background: white;
+				box-shadow: 0 0 20px 20px #ffffff;
+				margin: 10px 0;
+			}
+		</style>
 	</section>
 
 	<section class="slide">
 		<h2>Source code structure</h2>
-
+		<p>Based on ASTs: source{d}'s <img class="inline" src="pictures/bblfish.png">
+			<a href="https://doc.bblf.sh/">project Babelfish</a>.</p>
+		<p>Finding projects with similar algorithms.</p>
+		<p>E.g. projects which implement quick sort.</p>
+		<style>
+			img.inline {
+				height: 1em;
+				width: 1em;
+				object-fit: contain;
+				display: inline;
+				vertical-align: bottom;
+			}
+		</style>
 	</section>
 
 	<section class="slide">
 		<h2>Comments, literals</h2>
-
+		<p>"short-distance" NLP.</p>
+		<p>Sentiment analysis. Finding projects where developers are happy or sad.</p>
+		<p>Finding projects where developers have similar vocabulary.</p>
+		<p>Native human language detection.</p>
 	</section>
 
 	<section class="slide">
 		<h2>Identifiers</h2>
-
+		<p>One of the richest features.</p>
+		<p>They carry NLP and algorithmic payloads.</p>
+		<p>This talk focuses on them.</p>
+		<p><a href="https://data.world/vmarkovtsev/github-source-code-names">source{d}'s dataset.</a></p>
 	</section>
 
 	<section class="slide">
 		<h2>Parsing at scale</h2>
-
+		<p>In pre-Babelfish era, we have to separately classify and regexp parse sources.</p>
+		<p>Classification: <a href="https://github.com/github/linguist">github/linguist</a>,
+			<a href="https://github.com/src-d/simple-linguist">src-d/simple-linguist</a>.</p>
+		<p>Parsing: <a href="http://pygments.org/">Pygments</a>,
+			<a href="https://highlightjs.org/">highlight.js</a>.</p>
+		<p>Perfectly matches to Spark.</p>
 	</section>
 
 	<section class="slide">
 		<h2>Identifier extraction</h2>
-
+		<p>We are using Pygments:</p>
+		<p><code class="inline-no-offset">Token.Name.*</code></p>
+		<p>Try yourself:</p>
+		<p>
+			<code class="inline-no-offset">pip3 install pygments</code><br>
+			<code class="inline-no-offset">pygmentize -f raw /path/to/file</code>
+		</p>
 	</section>
 
 	<section class="slide">
 		<h2>Weighted nBOW</h2>
-
+		<p>Let's interpret every repository as the weighted bag-of-words.</p>
+		<p>We calculate TF-IDF to weight the occurring identifiers.</p>
+		<div id="tensorflow-nbow"><code class="inline-no-offset">tensorflow/tensorflow:</code>
+		<pre class="pre">    tfreturn	67.780249
+  oprequires	63.968142
+      doblas	63.714424
+    gputools	62.337396
+    tfassign	61.545926
+    opkernel	60.721556
+        sycl	57.064558
+         hlo	55.723587
+     libxsmm	54.820668
+  tfdisallow	53.666890</pre></div>
+		<style>
+			#tensorflow-nbow {
+				display: flex;
+				align-items: center;
+			}
+			#tensorflow-nbow > code {
+				padding-right: 50px;
+			}
+			.pre {
+				white-space: pre !important;
+				font-family: monospace;
+				line-height: 1.2em;
+			}
+		</style>
 	</section>
 
 	<section class="slide">
 		<h2>Topic modeling</h2>
-
+		<p>We can run topic modeling on these features.</p>
+		<p><a href="https://habrahabr.ru/post/312596/">Post on Habrahabr.</a></p>
+		<p><a href="https://arxiv.org/pdf/1704.00135.pdf">Paper on ArXiV</a> - accepted to AI'17 (Sydney).</p>
 	</section>
 
 	<section class="slide">
@@ -632,6 +805,16 @@
 	<div class="progress"></div>
 
 	<script src="node_modules/shower-core/shower.min.js"></script>
+	<link rel="stylesheet" href="styles/darcula.css">
+	<style>
+		@media print {
+			.hljs, .hljs-params {
+				color: black;
+			}
+		}
+	</style>
+    <script src="js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 	<script async src="https://use.fontawesome.com/72adc0539b.js"></script>
 	<script>
     function fullscreen() {
