@@ -769,12 +769,13 @@
 		<p><a ref="https://arxiv.org/pdf/1602.02215.pdf">Paper on ArXiV.</a></p>
 		<p><a href="https://github.com/tensorflow/models/tree/master/swivel">Tensorflow implementation.</a></p>
 		<p><a href="https://github.com/vmarkovtsev/models/tree/master/swivel">Our fork.</a></p>
+		<p><a href="https://github.com/src-d/swivel-spark-prep">Ongoing effort to generate the matrix on Spark.</a></p>
 		<img src="pictures/swivel.png" id="swivel">
 		<style>
 			#swivel {
 				position: absolute;
-				left: 450px;
-				top: 300px;
+				left: 480px;
+				top: 270px;
 				width: 400px;
 				object-fit: contain;
 			}
@@ -783,12 +784,65 @@
 
 	<section class="slide">
 		<h2>Training identifier embeddings</h2>
-		
+		<table>
+		<tr>
+			<th scope="col">Stage</th>
+			<th>Time</th>
+			<th>Resources</th>
+			<th>Size on disk</th>
+		</tr>
+		<tr>
+			<th scope="row">Cloning 143k repos</th>
+			<td>3 days</td>
+			<td>20x2 cores, 256 GB RAM</td>
+			<td>2.6 TB</td>
+		</tr>
+		<tr>
+			<th scope="row">Dataset</th>
+			<td>4 days</td>
+			<td>20x2 cores, 256 GB RAM</td>
+			<td>2TB (31GB in xz)</td>
+		</tr>
+		<tr>
+			<th scope="row">fastprep</th>
+			<td>2 days</td>
+			<td>16x2 cores, 256 GB RAM</td>
+			<td>20 GB</td>
+		</tr>
+		<tr>
+			<th scope="row">Swivel</th>
+			<td>1 day</td>
+			<td>2 Titan X'2016</td>
+			<td>5.6 GB</td>
+		</tr>
+		</table>
+	</section>
+
+	<section class="slide vista" id="projector">
+		<h2>Results</h2>
+		<p><a href="http://projector.tensorflow.org/?config=https://storage.googleapis.com/dataset.srcd.host/projector_config_120k_100k_10k.json">Launch Tensorflow Projector.</a></p>
+		<style>
+			#projector {
+				background-position: right !important;
+				background: white url("pictures/projector_black.png");
+			}
+			@media not print {
+				#projector {
+					background: black url("pictures/projector_white.png");
+				}
+			}
+		</style>
 	</section>
 
 	<section class="slide">
 		<h2>Wrap up</h2>
-
+		<ol>
+			<li>Clone the repositories.</li>
+			<li>Classify and parse source code.</li>
+			<li>Preprocess identifiers: split, normalize, filter, stem.</li>
+			<li>Generate Swivel input dataset.</li>
+			<li>Run Swivel.</li>
+		</ol>
 	</section>
 
 	<section class="slide">
@@ -797,27 +851,84 @@
 
 	<section class="slide">
 		<h2>Word Mover's Distance</h2>
-
+		<p>Based on the <a href="http://jmlr.org/proceedings/papers/v37/kusnerb15.pdf">paper</a>.</p>
+		<p>An application of Earth Mover's Distance to sentences.</p>
+		<p>Works on the nBOW model.</p>
+		<div class="vista" id="wmd"></div>
+		<style>
+			#wmd {
+				width: 320px;
+				height: 250px;
+				background: white url("pictures/wmd_black.png");
+			}
+			@media not print {
+				#wmd {
+					background: black url("pictures/wmd_white.png");
+				}
+			}
+		</style>
 	</section>
 
 	<section class="slide">
-		<h2>Word Mover's Distance</h2>
-
+		<h2>WMD calculation in a nutshell</h2>
+		<p class="important">WMD evaluation is O(N<sup>3</sup>), becomes slow on N≈100.</p>
+		<ol>
+			<li>Sort samples by centroid distance.</li>
+			<li>Evaluate first k WMDs.</li>
+			<li>For every subsequent sample, solve the relaxed LP which gives an upper estimation.</li>
+			<li>If it is greater than the farthest among the k NN, go next.</li>
+			<li>Otherwise, evaluate the WMD.</li>
+		</ol>
+		<p class="success">This allows to avoid 99.9% WMD evaluations (on average).</p>
 	</section>
 
 	<section class="slide">
 		<h2>pyemd</h2>
-
+		<p>The main bottleneck is still WMD evaluation.</p>
+		<p>EMD can be calculated using <a href="https://github.com/wmayner/pyemd">pyemd</a>.</p>
+		<p>Actually, there is <a href="https://github.com/garydoranjr/pyemd">another one</a>.</p>
+		<p>All based on an ancient inefficient C++ code from the academia (sorry, Charles and Georgios).</p>
+		<p class="important">Takes 2 seconds on |bag| = 500.</p>
 	</section>
 
 	<section class="slide">
 		<h2>wmd-relax</h2>
+		<p>source{d}'s approach to WMD. <a href="https://github.com/src-d/wmd-relax">GitHub</a>.</p>
+		<p>We tightened up the relaxed estimation.</p>
+		<p>We used <a href="https://github.com/google/or-tools">google/or-tools</a> for the heavy-lifting.</p>
+		<p class="success">Result: WMD takes 0.1s on |bag| = 500.</p>
+	</section>
 
+	<section class="slide" id="bag-sizes">
+		<h2>Bag sizes</h2>
+		<p style="color: gold;">We are golden.</p>
+		<div class="vista" id="bag-sizes"></div>
+		<style>
+			#bag-sizes p {
+				margin-bottom: 0;
+			}
+			#bag-sizes div {
+				width: 600px;
+				height: 400px;
+				background: url("pictures/bag_sizes_black.png");
+			}
+			@media not print {
+				#bag-sizes div {
+					margin-top: -20px;
+					background: url("pictures/bag_sizes_white.png");
+				}
+			}
+		</style>
 	</section>
 
 	<section class="slide">
 		<h2>Wrap up</h2>
-
+		<ol>
+			<li>WMD scales linearly and has high complexity - bad.</li>
+			<li>We apply 3-level pipeline to minimize the number of WMD evaluations.</li>
+			<li>It works reasonably fast, though not <em>very</em> fast.</li>
+			<li>It provides good results!</li>
+		</ol>
 	</section>
 
 	<section class="slide">
@@ -997,8 +1108,9 @@
 	<section class="slide">
 		<h2>Future</h2>
 		<ul>
-			<li>Training pipeline, models and API to be open sourced soon</li>
-			<li>Explore nBOW embeddings</li>
+			<li>Training pipeline, models and API to be open sourced soon.</li>
+			<li>Use ASTs@<a href="https://doc.bblf.sh/">Babelfish</a> instead of Pygments.</li>
+			<li>Playing the trick with Swivel again to embed nBOW.</li>
 		</ul>
 	</section>
 
