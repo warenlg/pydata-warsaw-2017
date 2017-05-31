@@ -124,6 +124,9 @@
 			vertical-align: middle;
 			line-height: 400px !important;
 		}
+		p.no-margin {
+			margin-bottom: 0px;
+		}
     </style>
 
 	<section class="slide vista" id="cover">
@@ -456,14 +459,17 @@
 		<p>Pure NLP and entity extraction.</p>
 		<p>Finding projects with similar descriptions / topics.</p>
 		<p>E.g. all projects related to Bitcoin.</p>
-		<img src="pictures/readme.png" id="readme">
+		<div class="vista" id="readme"></div>
 		<p><a href="https://data.world/vmarkovtsev/github-readme-files">source{d}'s dataset.</a></p>
 		<style>
 			#readme {
 				height: 200px;
-				background: white;
-				box-shadow: 0 0 20px 20px #ffffff;
-				margin: 10px 0;
+				background: white url("pictures/readme_black.png")
+			}
+			@media not print {
+				#readme {
+					background: black url("pictures/readme_white.png");
+				}
 			}
 		</style>
 	</section>
@@ -513,13 +519,67 @@
 
 	<section class="slide">
 		<h2>Identifier extraction</h2>
-		<p>We are using Pygments:</p>
+		<p>We use Pygments:</p>
 		<p><code class="inline-no-offset">Token.Name.*</code></p>
 		<p>Try yourself:</p>
 		<p>
 			<code class="inline-no-offset">pip3 install pygments</code><br>
 			<code class="inline-no-offset">pygmentize -f raw /path/to/file</code>
 		</p>
+	</section>
+
+	<section class="slide nn">
+		<h2>Identifier extraction</h2>
+		<p>We split identifiers:</p>
+		<ul id="identifier-split">
+			<li><code class="inline-no-offset">UpperCamelCase -> (upper, camel, case)</code></li>
+			<li><code class="inline-no-offset">camelCase -> (camel, case)</code></li>
+			<li><code class="inline-no-offset">FRAPScase -> (fraps, case)</code></li>
+			<li><code class="inline-no-offset">SQLThing -> (sql, thing)</code></li>
+			<li><code class="inline-no-offset">_Astra -> (astra)</code></li>
+			<li><code class="inline-no-offset">CAPS_CONST -> (caps, const)</code></li>
+			<li><code class="inline-no-offset">_something_SILLY_ -> (something, silly)</code></li>
+			<li><code class="inline-no-offset">blink182 -> (blink)</code></li>
+			<li><code class="inline-no-offset">FooBar100500Bingo -> (foo, bar, bingo)</code></li>
+			<li><code class="inline-no-offset">Man45var -> (man, var)</code></li>
+			<li><code class="inline-no-offset">method_name -> (method, name)</code></li>
+			<li><code class="inline-no-offset">Method_Name -> (method, name)</code></li>
+			<li><code class="inline-no-offset">101dalms -> (dalms)</code></li>
+			<li><code class="inline-no-offset">101_dalms -> (dalms)</code></li>
+			<li><code class="inline-no-offset">101_DalmsBug -> (dalms, bug)</code></li>
+			<li><code class="inline-no-offset">101_Dalms45Bug7 -> (dalms, bug)</code></li>
+			<li><code class="inline-no-offset">wdSize -> (size, wdsize)</code></li>
+			<li><code class="inline-no-offset">Glint -> (glint)</code></li>
+			<li><code class="inline-no-offset">foo_BAR -> (foo, bar)</code></li>
+		</ul>
+		<p><a href="https://gist.github.com/vmarkovtsev/6371e34cd6b7e895fbb31376d4eedbfa">Algorithm on GitHub.</a></p>
+		<style>
+			#identifier-split {
+				font-size: 0.6em;
+				padding-left: 1em;
+			}
+			#identifier-split code {
+				padding-left: 0 !important;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Identifier extraction</h2>
+		<p class="no-margin">Finally, we apply Snowball stemmer to words longer than 6 chars.</p>
+		<div class="vista center" id="name-lengths"></div>
+		<style>
+			#name-lengths {
+				height: 400px;
+				width: 600px;
+				background: white url("pictures/name_lengths_black.png");
+			}
+			@media not print {
+				#name-lengths {
+					background: black url("pictures/name_lengths_white.png");
+				}
+			}
+		</style>
 	</section>
 
 	<section class="slide">
@@ -555,24 +615,175 @@
 
 	<section class="slide">
 		<h2>Topic modeling</h2>
-		<p>We can run topic modeling on these features.</p>
-		<p><a href="https://habrahabr.ru/post/312596/">Post on Habrahabr.</a></p>
-		<p><a href="https://arxiv.org/pdf/1704.00135.pdf">Paper on ArXiV</a> - accepted to AI'17 (Sydney).</p>
+		<div id="tm">
+			<div>
+				<p>We can run topic modeling on these features.</p>
+				<p><a href="https://habrahabr.ru/post/312596/">Post on Habrahabr.</a></p>
+				<p><a href="https://arxiv.org/pdf/1704.00135.pdf">Paper on ArXiV</a> - accepted to AI'17 (Sydney).</p>
+				<p id="topic-label">Topic #36 "Movies" →</p>
+			</div>
+			<div class="vista" id="tm-movie"></div>
+		</div>
+		<style>
+			#tm {
+				display: flex;
+				height: 400px;
+			}
+			#tm-movie {
+				flex-grow: 1;
+				flex-basis: 0;
+				background: white url("pictures/movie_topic_black.png");
+			}
+			@media not print {
+				#tm-movie {
+					background: black url("pictures/movie_topic_white.png");
+				}
+			}
+			#topic-label {
+				margin-top: 215px;
+				text-align: right;
+			}
+		</style>
 	</section>
 
+	<section class="slide" id="tf-ids">
+		<h2>Identifier embeddings</h2>
+		    <p>tensorflow float unaligned vector ttypes
+			types const unaligned vec int unaligned vector ttypes types int const
+			unaligned vec example statistics norm normalized squared regularizations
+			regularizations status initialize construction kernel opkernel context
+			error iferror return tfreturn context attr get symmetric error iferror
+			return tfreturn context attr get symmetric shrinkage symmetric symmetric
+			status shrink weight shrinked std max std abs weight shrinkage shrinked
+			std copysign shrinked weight eigen tensor eigen major row eigen shrink
+			eigen tensor eigen major row weights weights sign weights abs weights
+			constant shrinkage cwise max weights
+			constant shrinkage cwise max weights constant symmetric symmetric
+			symmetric symmetric shrinkage and assign copy disallow tfdisallow
+			regularizations model weights example example statistics and compute
+			example norm weighted wxand num partitions model weights model weights
+			regularizations regularization example label example label example
+			weight example weight norm squared norm squared features sparse std
+			ptr unique int unaligned vector indices std ptr unique float unaligned
+			vector values std vector features sparse features sparse
+			dense vector eigen map tensor eigen tensor eigen major row row eigen
+			map tensor eigen tensor eigen major row data matrix data index row
+			data matrix dimension data matrix dimension ttypes types const matrix
+			data matrix int index row std vector std ptr unique dense vector dense
+			vectors example label example weight norm squared examples model weights
+			model weights model weights delta update weights eigen device pool thread
+			device example example bounded delta dual normalized sparse weights size
+			example features sparse features sparse example features sparse feature
+			weights feature weights sparse weights int features sparse indices size
+			feature value features sparse values features sparse values feature
+			weights deltas features sparse indices feature value bounded delta
+			dual normalized dense weights size example dense vector dense vector
+			example dense vectors ttypes types vec deltas dense weights deltas
+			deltas device device deltas dense vector row deltas constant bounded
+			delta dual normalized status initialize context kernel opkernel context
+			input list opinput inputs sparse weights error iferror return tfreturn
+			context input list inputs sparse weights input list opinput dense
+			inputs weights error iferror return tfreturn context input list dense
+			inputs weights list opoutput output outputs sparse weights error iferror
+			return tfreturn context list output outputs sparse weights list opoutput
+			output dense outputs weights error iferror return tfreturn context
+			list output dense outputs weights intialize weights input list opinput
+			inputs weight list opoutput output outputs weight std vector feature
+			weights feature weights inputs weight size tensor delta outputs weight
+			allocate inputs weight shape delta deltas delta flat deltas set zero
+			feature weights back emplace feature weights inputs weight flat deltas
+			intialize weights inputs sparse weights outputs sparse weights sparse
+			weights intialize weights dense inputs weights dense outputs weights
+			dense weights status feature weights ttypes types vec nominals ttypes
+			types vec deltas std vector feature weights sparse weights std vector
+			feature weights dense weights example and assign copy disallow tfdisallow
+			model weights example statistics example and compute example norm weighted
+			wxand num partitions model weights model weights regularizations
+			regularization example statistics result result norm normalized squared
+			norm squared regularization symmetric features sparse size example
+			features sparse features sparse features sparse model weights feature
+			weights sparse weights model weights sparse weights int features sparse
+			indices size int feature index features sparse indices feature value
+			features sparse values features sparse values feature weight sparse weights
+			nominals feature index sparse weights deltas feature index num partitions
+			result feature value regularization shrink feature weight dense vectors
+			size example dense vector dense vector dense vectors model weights
+			feature weights dense weights model weights dense weights eigen tensor
+			eigen major row feature weights dense weights nominals dense weights
+			deltas dense weights deltas constant num partitions eigen tensor eigen
+			major row prediction dense vector row regularization eigen shrink
+			feature weights sum result prediction result examples examples example
+			example example index examples example index examples num examples
+			size features num features num status initialize context kernel
+			opkernel context features num sparse features num sparse values with
+			dense features num features num features num sparse dense features
+			num input list opinput example indices inputs sparse error iferror
+			return tfreturn context input list example indices inputs sparse input
+			list opinput feature indices inputs sparse error iferror return
+			tfreturn context input list feature indices inputs sparse input list
+			opinput feature inputs sparse values features num sparse values with
+			error iferror return tfreturn context input list feature inputs sparse
+			values tensor example weights error iferror return tfreturn context
+			input example weights example weights example weights flat examples
+			num example weights size tensor example labels error iferror return
+			tfreturn context input example labels example labels example labels
+			flat input list opinput dense features inputs error iferror return
+			tfreturn context input list dense features inputs examples clear examples
+			</p>
+		<style>
+			#tf-ids p {
+				display: block;
+				height: 100%;
+				overflow: hidden;
+				color: #808080;
+				font-size: 0.5em;
+				line-height: 1.2;
+				font-family: monospace;
+				margin: 0;
+			}
+			#tf-ids h2 {
+				position: absolute;
+				left: 100px;
+				top: 106px;
+				background-color: rgba(0, 0, 0, 0.5);
+			}
+			#tf-ids {
+				padding: 10px 0px 15px 0px;
+			}
+		</style>
+	</section>
 	<section class="slide">
 		<h2>Identifier embeddings</h2>
-
+		<ul>
+			<li>Treat every file as a sentence.</li>
+			<li>Treat every preprocessed identifier as a word.</li>
+			<li>Preserve the sequential order.</li>
+			<li>Babelfish: switch to ASTs to represent identifier locality.</li>
+		</ul>
 	</section>
 
 	<section class="slide">
 		<h2>Swivel</h2>
-
+		<p>Really good embedding engine which works on the co-occurrence matrix.</p>
+		<p>Like GloVe, but better.</p>
+		<p><a ref="https://arxiv.org/pdf/1602.02215.pdf">Paper on ArXiV.</a></p>
+		<p><a href="https://github.com/tensorflow/models/tree/master/swivel">Tensorflow implementation.</a></p>
+		<p><a href="https://github.com/vmarkovtsev/models/tree/master/swivel">Our fork.</a></p>
+		<img src="pictures/swivel.png" id="swivel">
+		<style>
+			#swivel {
+				position: absolute;
+				left: 450px;
+				top: 300px;
+				width: 400px;
+				object-fit: contain;
+			}
+		</style>
 	</section>
 
 	<section class="slide">
 		<h2>Training identifier embeddings</h2>
-		<!-- train experience -->
+		
 	</section>
 
 	<section class="slide">
