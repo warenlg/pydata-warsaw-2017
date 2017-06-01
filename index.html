@@ -394,7 +394,12 @@
 		<h2>VCS</h2>
 		<style>
 			#go-git-blame {
-				background: url("pictures/blame.png");
+				background: white url("pictures/blame.png");
+			}
+			@media not print {
+				#go-git-blame {
+					background: black url("pictures/blame.png");
+				}
 			}
 		</style>
 	</section>
@@ -784,6 +789,7 @@
 
 	<section class="slide vista" id="swivel-convergence">
 		<h2>Swivel convergence</h2>
+		<p>Embedding size is 300.</p>
 		<style>
 			#swivel-convergence {
 				background: url("pictures/convergence_black.png");
@@ -792,6 +798,10 @@
 				#swivel-convergence {
 					background: black url("pictures/convergence_white.png");
 				}
+			}
+			#swivel-convergence p {
+				position: absolute;
+				bottom: 30px;
 			}
 		</style>
 	</section>
