@@ -198,15 +198,15 @@
 					background: url("pictures/crossroads.jpg");
 				}
 				#crossroads h2:before {
-				content: "";
-				position: absolute;
-				z-index: -1;
-				left: 0;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				background: rgba(0, 0, 0, 0.5);
-			}
+					content: "";
+					position: absolute;
+					z-index: -1;
+					left: 0;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					background: rgba(0, 0, 0, 0.5);
+				}
 			}
 		</style>
 	</section>
@@ -320,8 +320,25 @@
 		</style>
 	</section>
 
-	<section class="slide">
+	<section class="slide vista" id="teaser-features">
 		<h2 class="part-teaser">Features</h2>
+		<style>
+			@media not print {
+				#teaser-features {
+					background: url("pictures/teaser_features.jpg");
+				}
+				#teaser-features h2:before {
+					content: "";
+					position: absolute;
+					z-index: -1;
+					left: 0;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					background: rgba(0, 0, 0, 0.75);
+				}
+			}
+		</style>
 	</section>
 
 	<section class="slide">
@@ -874,8 +891,25 @@
 		</ol>
 	</section>
 
-	<section class="slide">
+	<section class="slide vista" id="teaser-nn">
 		<h2 class="part-teaser">Nearest neighbors</h2>
+		<style>
+			@media not print {
+				#teaser-nn {
+					background: url("pictures/teaser_nn.jpg");
+				}
+				#teaser-nn h2:before {
+					content: "";
+					position: absolute;
+					z-index: -1;
+					left: 0;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					background: rgba(0, 0, 0, 0.75);
+				}
+			}
+		</style>
 	</section>
 
 	<section class="slide">
@@ -908,7 +942,7 @@
 			<li>If it is greater than the farthest among the k NN, go next.</li>
 			<li>Otherwise, evaluate the WMD.</li>
 		</ol>
-		<p class="success">This allows to avoid 99.9% WMD evaluations (on average).</p>
+		<p class="success">This allows to avoid 95% WMD evaluations on average.</p>
 	</section>
 
 	<section class="slide">
@@ -955,13 +989,30 @@
 		<ol>
 			<li>WMD scales linearly and has high complexity - bad.</li>
 			<li>We apply 3-level pipeline to minimize the number of WMD evaluations.</li>
-			<li>It works reasonably fast, though not <em>very</em> fast.</li>
+			<li>It works reasonably fast, though not suitable for online.</li>
 			<li>It provides good results!</li>
 		</ol>
 	</section>
 
-	<section class="slide">
+	<section class="slide vista" id="teaser-examples">
 		<h2 class="part-teaser">Examples</h2>
+		<style>
+			@media not print {
+				#teaser-examples {
+					background: url("pictures/teaser_examples.jpg");
+				}
+				#teaser-examples h2:before {
+					content: "";
+					position: absolute;
+					z-index: -1;
+					left: 0;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					background: rgba(0, 0, 0, 0.75);
+				}
+			}
+		</style>
 	</section>
 
 	<section class="slide nn">
