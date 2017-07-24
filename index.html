@@ -119,6 +119,14 @@
 			vertical-align: middle;
 			line-height: 400px !important;
 		}
+		.nn ul {
+			overflow: hidden;
+		}
+		.nn li {
+			float: left;
+			display: inline;
+			width: 50%;
+		}
     </style>
 
 	<section class="slide vista vista-cover" id="cover">
@@ -148,7 +156,7 @@
 				top: 0;
 				right: 0;
 				bottom: 0;
-				background: rgba(0, 0, 0, 0.7);
+				background: rgba(0, 0, 0, 0.75);
 			}
         </style>
 	</section>
@@ -167,7 +175,7 @@
                 #qrcode {
                     background-image: url("pictures/qrcode_white.svg");
                 }
-            }https://goo.gl/yQqh99
+            }
         </style>
     </section>
 
@@ -187,21 +195,416 @@
 			<li>"AI on code"</li>
 			<li>We started as a hiring middleware.</li>
 			<li>You may have read <a href="https://blog.sourced.tech/post/language_migrations/">"how developers change programming languages"</a>.</li>
+			<li>Open everything! <a href="https://github.com/src-d/landing">web site</a>,
+				<a href="https://github.com/src-d/guide">company rules</a>,
+				<a href="https://github.com/src-d/homebrew">brewery</a>
+			</li>
+			<li>We have the technical <a href="https://blog.sourced.tech">blog</a>.</li>
 		</ul>
 	</section>
 
 	<section class="slide">
-		<h2>Plan - remove me!</h2>
+		<h2>Master plan</h2>
 		<ul>
-			<li>Our projects - overview</li>
-			<li>Peter Thiel - ML augments, relax</li>
-			<li>Our pipeline</li>
-			<li>Babelfish</li>
-			<li>client-python - so easy</li>
-			<li>Embeddings - tech</li>
-			<li>Applications?</li>
-			<li>TM - tech</li>
-			<li>Applications?</li>
+			<li>Clone all software repositories in the world</li>
+			<li>Extract Abstract Syntax Trees</li>
+			<li>Crazy data science shit</li>
+			<li>...</li>
+			<li>PROFIT</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>How do you guys make money?</h2>
+		<p>Currently, we don't.</p>
+		<p>We are swimming in the protobroth.</p>
+		<p>We are convincing everybody to use our technology stack.</p>
+	</section>
+
+	<section class="slide vista vista-cover" id="dragons">
+		<div></div>
+		<h2>Machine learning on source code</h2>
+		<style>
+			@font-face {
+			  font-family: CartaMarinaBold;
+			  src: url("Carta Marina Bold.woff2") format('woff2')
+			}
+			#dragons {
+				background: url("pictures/here_be_dragons.jpg") black;
+			}
+			#dragons h2 {
+				position: absolute;
+				left: 507px;
+				top: 92px;
+				width: 280px;
+				text-align: center;
+				color: #202020;
+				font-family: CartaMarinaBold;
+			}
+			#dragons div {
+				position: absolute;
+				left: 527px;
+				width: 240px;
+				height: 240px;
+				top: 72px;
+				background: radial-gradient(circle at center, #bababa 0, rgba(186, 186, 186, 0) 75%)
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Our projects</h2>
+		<ul>
+			<li><a href="https://github.com/src-d/go-git">go-git</a></li>
+			<li>DR: <a href="https://github.com/src-d/rovers">rovers</a>,
+				<a href="https://github.com/src-d/borges">borges</a>,
+				<a href="https://github.com/src-d/go-siva">siva</a>
+			</li>
+			<li>AST:
+				<a href="https://github.com/src-d/enry">enry</a>
+				<a href="https://doc.bblf.sh">Babelfish</a>
+				<a href="https://github.com/src-d/berserker">berserker</a>
+			</li>
+			<li>DS/ML: <a href="https://github.com/src-d/modelforge">modelforge</a>,
+				<a href="https://github.com/src-d/ast2vec">ast2vec</a>,
+				<a href="https://github.com/src-d/vecino">vecino</a>,
+				neural code completion
+			</li>
+			<li>Tens of side projects - all on GitHub too.</li>
+		</ul>
+	</section>
+
+	<section class="slide vista vista-cover" id="jobs">
+		<h2>Will it take our jobs?</h2>
+		<p>Relax, we are very far from it.</p>
+		<figure>
+			<blockquote>
+				<p>... won’t ask what problems can be solved with computers alone. Instead, ... ask:
+					how can computers help humans solve hard problems? ... They
+won’t just get better at the kinds of things people already do; they’ll help us to do what was
+previously unimaginable.</p>
+			</blockquote>
+			<figcaption>Peter Thiel, <a href="http://zerotoonebook.com/">0 -> 1</a></figcaption>
+		</figure>
+		<style>
+			#jobs {
+				background: url("pictures/jobs.jpg") black;
+			}
+			#jobs h2:before {
+				content: "";
+				position: absolute;
+				z-index: -1;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0, 0, 0, 0.75);
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Four approaches to extract information from the source code.</h2>
+		<ol>
+			<li>Treat it as regular text and feed it to the black box.</li>
+			<li>Tokenize it using regexps (<a href="http://pygments.org/">Pygments</a>,
+				<a href="https://highlightjs.org/">highlight.js</a>)</li>
+			<li><span class="box">Parse ASTs</span></li>
+			<li>Compile</li>
+		</ol>
+		<style>
+			.box {
+				border: 1px solid white;
+				padding: 0 0.2em 0.1em 0.2em;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Babelfish</h2>
+		<img class="center" src="pictures/bblfsh-logo.png">
+		<div class="vista center" id="bblfsh-arch"></div>
+		<style>
+			#bblfsh-arch {
+                width: 600px;
+                height: 100px;
+                background-image: url("pictures/bblfsh-arch-black.png");
+            }
+            @media not print {
+                #bblfsh-arch {
+                    background-image: url("pictures/bblfsh-arch-white.png");
+                }
+            }
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>UAST</h2>
+		<p>Universal Abstract Syntax Tree</p>
+		<p>Shared node roles for every language.</p>
+		<pre>
+			<code>pip3 install bblfsh</code>
+			<code>python3 -m bblfsh -f /path/to/file</code>
+		</pre>
+		We are going to deploy <code class="inline">https://github.com/bblfsh/dashboard</code>
+	</section>
+
+	<section class="slide vista vista-cover" id="powerful">
+		<h2>Powerful</h2>
+		<style>
+			#powerful {
+				background-image: url("pictures/power.jpg");
+			}
+			#powerful h2 {
+				color: #202020;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Opportunities</h2>
+		<ul>
+			<li>Unified code metrics calculation</li>
+			<li>Dependency tree building * <a href="https://libraries.io">libraries.io</a></li>
+			<li>Robust copy-paste detection</li>
+			<li>Pattern mining</li>
+			<li>Advanced diff-ing</li>
+			<li>Code manipulations</li>
+			<li>Many, many more</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<img class="center" id="mltime" src="pictures/mltime.png">
+		<style>
+			#mltime {
+				width: 100%;
+				margin-top: 90px;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Identifiers in source code</h2>
+		<p>One of the richest features.</p>
+		<pre>
+			<code>cat = models.Cat()</code>
+			<code>cat.meow()</code>
+		</pre>
+		<pre>
+			<code>def quick_sort(arr):</code>
+			<code>    ...</code>
+		</pre>
+	</section>
+
+	<section class="slide nn">
+		<h2>Splitting</h2>
+		<ul id="identifier-split">
+			<li><code class="inline-no-offset">UpperCamelCase -> (upper, camel, case)</code></li>
+			<li><code class="inline-no-offset">camelCase -> (camel, case)</code></li>
+			<li><code class="inline-no-offset">FRAPScase -> (fraps, case)</code></li>
+			<li><code class="inline-no-offset">SQLThing -> (sql, thing)</code></li>
+			<li><code class="inline-no-offset">_Astra -> (astra)</code></li>
+			<li><code class="inline-no-offset">CAPS_CONST -> (caps, const)</code></li>
+			<li><code class="inline-no-offset">_something_SILLY_ -> (something, silly)</code></li>
+			<li><code class="inline-no-offset">blink182 -> (blink)</code></li>
+			<li><code class="inline-no-offset">FooBar100500Bingo -> (foo, bar, bingo)</code></li>
+			<li><code class="inline-no-offset">Man45var -> (man, var)</code></li>
+			<li><code class="inline-no-offset">method_name -> (method, name)</code></li>
+			<li><code class="inline-no-offset">Method_Name -> (method, name)</code></li>
+			<li><code class="inline-no-offset">101dalms -> (dalms)</code></li>
+			<li><code class="inline-no-offset">101_dalms -> (dalms)</code></li>
+			<li><code class="inline-no-offset">101_DalmsBug -> (dalms, bug)</code></li>
+			<li><code class="inline-no-offset">101_Dalms45Bug7 -> (dalms, bug)</code></li>
+			<li><code class="inline-no-offset">wdSize -> (size, wdsize)</code></li>
+			<li><code class="inline-no-offset">Glint -> (glint)</code></li>
+			<li><code class="inline-no-offset">foo_BAR -> (foo, bar)</code></li>
+		</ul>
+		<style>
+			#identifier-split {
+				font-size: 0.65em;
+				padding-left: 1em;
+			}
+			#identifier-split code {
+				padding-left: 0 !important;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Identifier extraction</h2>
+		<p class="no-margin">Finally, we apply Snowball stemmer to words longer than 6 chars.</p>
+		<div class="vista center" id="name-lengths"></div>
+		<style>
+			#name-lengths {
+				height: 400px;
+				width: 600px;
+				margin-top: -50px;
+				background: white url("pictures/name_lengths_black.png");
+			}
+			@media not print {
+				#name-lengths {
+					background: black url("pictures/name_lengths_white.png");
+				}
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Weighted nBOW</h2>
+		<p>Let's interpret every repository as the weighted bag-of-words.</p>
+		<p>We calculate TF-IDF to weight the occurring identifiers.</p>
+		<div id="tensorflow-nbow"><code class="inline-no-offset">tensorflow/tensorflow:</code>
+		<pre class="pre">    tfreturn	67.780249
+  oprequires	63.968142
+      doblas	63.714424
+    gputools	62.337396
+    tfassign	61.545926
+    opkernel	60.721556
+        sycl	57.064558
+         hlo	55.723587
+     libxsmm	54.820668
+  tfdisallow	53.666890</pre></div>
+		<style>
+			#tensorflow-nbow {
+				display: flex;
+				align-items: center;
+			}
+			#tensorflow-nbow > code {
+				padding-right: 50px;
+			}
+			.pre {
+				white-space: pre !important;
+				font-family: monospace;
+				line-height: 1.2em;
+			}
+		</style>
+	</section>
+
+
+	<section class="slide">
+		<h2>Topic modeling</h2>
+		<div id="tm">
+			<div>
+				<p>We can run topic modeling on these features.</p>
+				<p><a href="https://arxiv.org/pdf/1704.00135.pdf">Paper on ArXiV</a></p>
+				<p>Run on the whole world -> funny tagging.</p>
+				<p>Run per ecosystem -> useful exploratory search.</p>
+				<p id="topic-label">Topic #36 "Movies" →</p>
+			</div>
+			<div class="vista" id="tm-movie"></div>
+		</div>
+		<style>
+			#tm {
+				display: flex;
+				height: 400px;
+			}
+			#tm-movie {
+				flex-grow: 1;
+				flex-basis: 0;
+				background: white url("pictures/movie_topic_black.png");
+			}
+			@media not print {
+				#tm-movie {
+					background: black url("pictures/movie_topic_white.png");
+				}
+			}
+			#topic-label {
+				margin-top: 150px;
+				text-align: right;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Identifier embeddings</h2>
+		<ul>
+			<li>Treat every scope as a context.</li>
+			<li>Treat every preprocessed identifier as a word.</li>
+			<li>Build the giant co-ocurrence matrix.</li>
+			<li>Factor (embed) it.</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Swivel</h2>
+		<p>Really good embedding engine which works on the co-occurrence matrix.</p>
+		<p>Like GloVe, but better - <a ref="https://arxiv.org/pdf/1602.02215.pdf">Paper on ArXiV.</a></p>
+		<p>We <a href="https://github.com/src-d/tensorflow-swivel">forked</a> the Tensorflow implementation.</p>
+		<img src="pictures/swivel.png" id="swivel">
+		<style>
+			#swivel {
+				height: 200px;
+				object-fit: contain;
+			}
+		</style>
+	</section>
+
+	<section class="slide vista" id="projector">
+		<h2>Linux kernel embeddings</h2>
+		<p><a href="http://projector.tensorflow.org/?config=https://storage.googleapis.com/dataset.srcd.host/linux.json">Launch Tensorflow Projector.</a></p>
+		<style>
+			#projector {
+				background-position: right !important;
+				background: white url("pictures/projector_black.png");
+			}
+			@media not print {
+				#projector {
+					background: black url("pictures/projector_white.png");
+				}
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>nBOW</h2>
+		<p>What if we combine bag-of-words with embeddings for every word?</p>
+	</section>
+
+	<section class="slide">
+		<h2>Word Mover's Distance</h2>
+		<p>Based on the <a href="http://jmlr.org/proceedings/papers/v37/kusnerb15.pdf">paper</a>.</p>
+		<p>An application of Earth Mover's Distance to sentences.</p>
+		<p>Works on the nBOW model.</p>
+		<div class="vista" id="wmd"></div>
+		<style>
+			#wmd {
+				width: 320px;
+				height: 250px;
+				background: white url("pictures/wmd_black.png");
+			}
+			@media not print {
+				#wmd {
+					background: black url("pictures/wmd_white.png");
+				}
+			}
+		</style>
+	</section>
+
+		<section class="slide">
+		<h2>WMD calculation in a nutshell</h2>
+		<p class="important">WMD evaluation is O(N<sup>3</sup>), becomes slow on N≈100.</p>
+		<ol>
+			<li>Sort samples by centroid distance.</li>
+			<li>Evaluate first k WMDs.</li>
+			<li>For every subsequent sample, solve the relaxed LP which gives an upper estimation.</li>
+			<li>If it is greater than the farthest among the k NN, go next.</li>
+			<li>Otherwise, evaluate the WMD.</li>
+		</ol>
+		<p class="success">This allows to avoid 95% WMD evaluations on average.</p>
+	</section>
+
+	<section class="slide">
+		<h2>wmd-relax</h2>
+		<p>source{d}'s approach to WMD. <a href="https://github.com/src-d/wmd-relax">GitHub</a>.</p>
+		<p>We tightened up the relaxed estimation.</p>
+		<p>We used <a href="https://github.com/google/or-tools">google/or-tools</a> for the heavy-lifting.</p>
+		<p class="success">Result: WMD takes 0.1s on |bag| = 500.</p>
+	</section>
+
+	<section class="slide">
+		<h2>Plan - remove me!</h2>
+		<ul
 			<li>modelforge</li>
 			<li>ast2vec</li>
 			<li>vecino</li>
