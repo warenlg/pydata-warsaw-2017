@@ -952,7 +952,7 @@
 		<ol>
 			<li>Sort samples by centroid distance.</li>
 			<li>Evaluate first k WMDs.</li>
-			<li>For every subsequent sample, solve the relaxed LP which gives an upper estimation.</li>
+			<li>For every subsequent sample, solve the relaxed LP which gives a lower estimation.</li>
 			<li>If it is greater than the farthest among the k NN, go next.</li>
 			<li>Otherwise, evaluate the WMD.</li>
 		</ol>
