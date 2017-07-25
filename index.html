@@ -31,7 +31,7 @@
         @media not print {
             .slide {
                 color: white;
-                background: black;
+                background: #000;
             }
             .slide h2 {
                 color: #bababa;
@@ -127,6 +127,12 @@
 			display: inline;
 			width: 50%;
 		}
+		.flex, .flex-center {
+			display: flex;
+		}
+		.flex-center {
+			align-items: center;
+		}
     </style>
 
 	<section class="slide vista vista-cover" id="cover">
@@ -146,7 +152,7 @@
                 font-size:20px;
             }
 			#cover {
-				background: url("pictures/cover.jpg") black;
+				background: url("pictures/cover.jpg") #000;
 			}
 			#cover h2:before {
 				content: "";
@@ -230,7 +236,7 @@
 			  src: url("Carta Marina Bold.woff2") format('woff2')
 			}
 			#dragons {
-				background: url("pictures/here_be_dragons.jpg") black;
+				background: url("pictures/here_be_dragons.jpg") #000;
 			}
 			#dragons h2 {
 				position: absolute;
@@ -238,7 +244,7 @@
 				top: 92px;
 				width: 280px;
 				text-align: center;
-				color: #202020;
+				color: #000;
 				font-family: CartaMarinaBold;
 			}
 			#dragons div {
@@ -288,7 +294,7 @@ previously unimaginable.</p>
 		</figure>
 		<style>
 			#jobs {
-				background: url("pictures/jobs.jpg") black;
+				background: url("pictures/jobs.jpg") #000;
 			}
 			#jobs h2:before {
 				content: "";
@@ -356,7 +362,7 @@ previously unimaginable.</p>
 				background-image: url("pictures/power.jpg");
 			}
 			#powerful h2 {
-				color: #202020;
+				color: #000;
 			}
 		</style>
 	</section>
@@ -395,6 +401,15 @@ previously unimaginable.</p>
 			<code>def quick_sort(arr):</code>
 			<code>    ...</code>
 		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Source code classification</h2>
+		<p>Problem: given millions of repositories, map files to languages in each.</p>
+		<ul>
+			<li><a href="https://github.com/github/linguist">github/linguist</a> - Ruby</li>
+			<li><a href="https://github.com/src-d/enry">src-d/enry</a> - Go</li>
+		</ul>
 	</section>
 
 	<section class="slide nn">
@@ -444,17 +459,17 @@ previously unimaginable.</p>
 			}
 			@media not print {
 				#name-lengths {
-					background: black url("pictures/name_lengths_white.png");
+					background: #000 url("pictures/name_lengths_white.png");
 				}
 			}
 		</style>
 	</section>
 
 	<section class="slide">
-		<h2>Weighted nBOW</h2>
+		<h2>Weighted BOW</h2>
 		<p>Let's interpret every repository as the weighted bag-of-words</p>
 		<p>We calculate TF-IDF to weight the occurring identifiers</p>
-		<div id="tensorflow-nbow"><code class="inline-no-offset">tensorflow/tensorflow:</code>
+		<div class="flex-center"><code class="inline-no-offset">tensorflow/tensorflow:</code>
 		<pre class="pre">    tfreturn	67.780249
   oprequires	63.968142
       doblas	63.714424
@@ -466,10 +481,6 @@ previously unimaginable.</p>
      libxsmm	54.820668
   tfdisallow	53.666890</pre></div>
 		<style>
-			#tensorflow-nbow {
-				display: flex;
-				align-items: center;
-			}
 			#tensorflow-nbow > code {
 				padding-right: 50px;
 			}
@@ -484,7 +495,7 @@ previously unimaginable.</p>
 
 	<section class="slide">
 		<h2>Topic modeling</h2>
-		<div id="tm">
+		<div class="flex" id="tm">
 			<div>
 				<p>We can run topic modeling on these features</p>
 				<p><a href="https://arxiv.org/pdf/1704.00135.pdf">Paper on ArXiV</a></p>
@@ -496,7 +507,6 @@ previously unimaginable.</p>
 		</div>
 		<style>
 			#tm {
-				display: flex;
 				height: 400px;
 			}
 			#tm-movie {
@@ -506,7 +516,7 @@ previously unimaginable.</p>
 			}
 			@media not print {
 				#tm-movie {
-					background: black url("pictures/movie_topic_white.png");
+					background: #000 url("pictures/movie_topic_white.png");
 				}
 			}
 			#topic-label {
@@ -534,7 +544,7 @@ previously unimaginable.</p>
 				height: 300px;
 				left: 600px;
 				top: 280px;
-				background: black url("pictures/profile.png");
+				background: #000 url("pictures/profile.png");
 			}
 			#profile-label {
 				position: absolute;
@@ -545,9 +555,30 @@ previously unimaginable.</p>
 	</section>
 
 	<section class="slide">
+		<h2>word2vec</h2>
+		<ul>
+			<li>Family of algorithms which map words to dense vectors</li>
+			<li>These vectors allow linear algebra operations which make sense.</li>
+		</ul>
+		<div class="vista" id="linrel"></div>
+		<style>
+			#linrel {
+				width: 700px;
+				height: 250px;
+				background: url("pictures/linrel_black.png");
+			}
+			@media not print {
+				#linrel {
+					background: url("pictures/linrel_white.png");
+				}
+			}
+		</style>
+	</section>
+
+	<section class="slide">
 		<h2>Identifier embeddings</h2>
 		<ul>
-			<li>Treat every scope as a context</li>
+			<li>Treat every identifier scope as a context</li>
 			<li>Treat every preprocessed identifier as a word</li>
 			<li>Build the giant co-ocurrence matrix</li>
 			<li>Factor (embed) it</li>
@@ -578,7 +609,7 @@ previously unimaginable.</p>
 			}
 			@media not print {
 				#projector {
-					background: black url("pictures/projector_white.png");
+					background: #000 url("pictures/projector_white.png");
 				}
 			}
 		</style>
@@ -587,23 +618,28 @@ previously unimaginable.</p>
 	<section class="slide">
 		<h2>nBOW</h2>
 		<p>What if we combine bag-of-words with embeddings for every word?</p>
+		<p>We focus on finding related repositories.</p>
 	</section>
 
 	<section class="slide">
 		<h2>Word Mover's Distance</h2>
-		<p>Based on the <a href="http://jmlr.org/proceedings/papers/v37/kusnerb15.pdf">paper</a></p>
-		<p>An application of Earth Mover's Distance to sentences</p>
-		<p>Works on the nBOW model</p>
-		<div class="vista" id="wmd"></div>
+		<div class="flex">
+			<ul>
+				<li>Based on the <a href="http://jmlr.org/proceedings/papers/v37/kusnerb15.pdf">paper</a></li>
+				<li>An application of Earth Mover's Distance to sentences</li>
+				<li>Works on the nBOW model</li>
+			</ul>
+			<div class="vista" id="wmd"></div>
+		</div>
 		<style>
 			#wmd {
-				width: 320px;
-				height: 250px;
+				width: 400px;
+				height: 300px;
 				background: white url("pictures/wmd_black.png");
 			}
 			@media not print {
 				#wmd {
-					background: black url("pictures/wmd_white.png");
+					background: #000 url("pictures/wmd_white.png");
 				}
 			}
 		</style>
@@ -637,12 +673,11 @@ previously unimaginable.</p>
 			<code>pip3 install vecino</code>
 			<code>python3 -m vecino https://github.com/pytorch/pytorch</code>
 		</pre>
-		New models are not released yet, to use the deprecated ones:
+		Models are stored in Google Cloud Storage; not released yet, to use the deprecated ones:
 		<pre>
-			<code>python3 -m vecino --gcs test-ast2vec \</code>
-			<code>    https://github.com/pytorch/pytorch</code>
+			<code>python3 -m vecino --gcs test-ast2vec ...</code>
 		</pre>
-		<p>The models are stored in ASDF in Google Cloud Storage.</p>
+		<a href="http://vmarkovtsev.github.io/techtalks-2017-moscow/#40">Examples</a>
 	</section>
 
 	<section class="slide">
@@ -661,10 +696,10 @@ previously unimaginable.</p>
 		<p>If you wish to train the embeddings:</p>
 		<pre>
 			<code>pip3 install ast2vec</code>
-			<code>python3 -m ast2vec repo2coocc -o tfcoocc.asdf \</code>
-			<code>    https://github.com/tensorflow/tensorflow</code>
-			<code>python3 -m ast2vec preproc -o swivel_dataset -v 10000 \</code>
-			<code>    -s 2500 --df df.asdf</code>
+			<code>python3 -m ast2vec repo2coocc -o tfcoocc.asdf \
+    https://github.com/tensorflow/tensorflow</code>
+			<code>python3 -m ast2vec preproc -o swivel_dataset -v 10000 \
+    -s 2500 --df df.asdf</code>
 			<code>python3 -m ast2vec train --input_base_path swivel_dataset ...</code>
 			<code>python3 -m ast2vec postproc swivel_output id2vec.asdf</code>
 		</pre>
@@ -672,7 +707,7 @@ previously unimaginable.</p>
 
 	<section class="slide">
 		<h2>Neural code completion</h2>
-		<div id="treelstm">
+		<div class="flex" id="treelstm">
 			<ul>
 				<li>Deprecated approach: work on the sequential token stream
 					<ul>
@@ -689,9 +724,6 @@ previously unimaginable.</p>
 			<div class="vista"></div>
 		</div>
 		<style>
-			#treelstm {
-				display: flex;
-			}
 			#treelstm > div {
 				width: 400px;
 				background: url("pictures/treelstm_black.png");
@@ -704,16 +736,49 @@ previously unimaginable.</p>
 		</style>
 	</section>
 
-	<section class="slide">
+	<section class="slide" id="nncomplete-example">
 		<img class="center" src="pictures/channelSelectExample.gif">
+		<style>
+			#nncomplete-example {
+				background-color: #1e1e1c;
+			}
+		</style>
 	</section>
 
 	<section class="slide">
-		<h2>Plan - remove me!</h2>
-		<ul
-			<li>future: role2vec, snippetr</li>
-			<li>Bonus: Hercules</li>
-			<li>Bonus: overview of blog posts</li>
+		<h2>Summary</h2>
+		<ul>
+			<li>There is a funny set of tools and libraries devoted to MLoSC</li>
+			<li>They cover collection, extraction, engineering, training and running</li>
+			<li>We believe that they will allow everybody to solve problems we have not even thought about</li>
+		</ul>
+	</section>
+
+	<section class="slide vista" id="linux">
+		<h2>Bonus: Hercules</h2>
+		<a href="https://github.com/src-d/hercules">GitHub</a>
+		<style>
+			#linux > h2, #linux > a {
+				margin-left: 200px;
+				margin-bottom: 0;
+			}
+			#linux {
+				background-image: url("pictures/linux_black.png");
+			}
+			@media not print {
+                #linux {
+                    background-image: url("pictures/linux_white.png");
+                }
+            }
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Bonus: blog posts</h2>
+		<ul>
+			<li><a href="https://blog.sourced.tech/post/activity_hours/">Daily commit activity on GitHub</a></li>
+			<li><a href="https://blog.sourced.tech/post/handshakes_pagerank/">GitHub Contributions Graph: Analyzing PageRank & Proving The 6 Handshakes Theory</a></li>
+			<li><a href="https://blog.sourced.tech/post/tab_vs_spaces/">397 Languages, 18,000,000 GitHub repositories, 1.2 billion files, 20 terabytes of code: Spaces or Tabs</a></li>
 		</ul>
 	</section>
 
@@ -726,6 +791,7 @@ previously unimaginable.</p>
             <li><i class="fa fa-github"></i> <a href="https://github.com/vmarkovtsev">vmarkovtsev</a></li>
             <li><i class="fa fa-rss"></i> <a href="https://blog.sourced.tech">blog.sourced.tech</a></li>
         </ul>
+		<p>source{d} has the <a href="https://sourced.tech">community channel</a>!</p>
     </section>
 
 	<div class="progress"></div>
