@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>???</title>
+	<title>Fighting with high-dimensional not-so-small data</title>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
@@ -11,8 +11,8 @@
 
 	<header class="caption">
 		<button type="button" id="fullscreen" title="Go fullscreen" onclick="fullscreen()"><i class="fa fa-arrows-alt"></i></button>
-		<h1>???</h1>
-		<p>Vadim Markovtsev, <a href="https://sourced.tech">source{d}</a>.</p>
+		<h1>Fighting with high-dimensional not-so-small data</h1>
+		<p>Vadim Markovtsev, Egor Bulychev - M<sup>3</sup> London, 2017</p>
 	</header>
 
 	<style>
@@ -60,14 +60,15 @@
             font-size: 36px;
             text-align: center;
         }
+		.caption sup {
+			vertical-align: super !important;
+			font-size: smaller !important;
+		}
         .slide p {
             line-height: 1.25;
         }
         .slide::after {
             display: none;
-        }
-        .no-link {
-            background: none !important;
         }
         .center {
             display: table;
@@ -120,11 +121,30 @@
 			vertical-align: middle;
 			line-height: 400px !important;
 		}
+		ul.columns {
+			overflow: hidden;
+		}
+		ul.columns > li {
+			float: left;
+			display: inline;
+			width: 50%;
+		}
+		.bottom-space {
+			margin-bottom: 2em !important;
+		}
+		.slide a {
+			background: none;
+		}
+		.slide a:hover {
+			background: linear-gradient(to top,currentColor .09em,transparent .09em) repeat-x;
+		}
     </style>
 
 	<section class="slide vista vista-cover" id="cover">
-		<h2>???</h2>
-		<p>Vadim Markovtsev, <a class="no-link" href="https://sourced.tech">source{d}</a></p>
+		<h2>Fighting with high-dimensional not-so-small data</h2>
+		<p>Vadim Markovtsev<br>Egor Bulychev<br>
+			<a href="https://sourced.tech">source{d}</a>
+			<br>2017<br><span id="triangle">▼</span></p>
 
 		<style>
             #cover h2 {
@@ -151,6 +171,11 @@
 				bottom: 0;
 				background: rgba(0, 0, 0, 0.7);
 			}
+			#triangle {
+				display: inline-block;
+				transform: scale(1.25, 1);
+				font-style: normal;
+			}
         </style>
 	</section>
 
@@ -173,31 +198,18 @@
     </section>
 
 	<section class="slide">
-        <h2>About me</h2>
-        <ul>
-            <li>Lead Engineer, Machine Learning @ <a href="https://sourced.tech">source{d}</a></li>
-            <li>Education: compiler technologies and applied math</li>
-            <li>Switched to ML/DS in 2013</li>
-            <li>Python, C/C++, Go, HTML5</li>
-        </ul>
-    </section>
-
-	<section class="slide">
-		<h2>About source{d]</h2>
-		<p>"AI on code"</p>
-		<p>We started as a hiring middleware.</p>
-		<p>You may have read <a href="https://blog.sourced.tech/post/language_migrations/">"how developers change programming languages"</a>.</p>
-	</section>
-
-	<section class="slide">
         <h2>Thank you</h2>
-		<p>Our contacts:</p>
-        <ul class="no-bullets">
-            <li><i class="fa fa-envelope"></i> <a href="mailto://vadim@sourced.tech">vadim@sourced.tech</a></li>
-            <li><i class="fa fa-twitter"></i> <a href="https://twitter.com/tmarkhor">tmarkhor</a></li>
+        <ul class="no-bullets columns bottom-space">
+			<li>Vadim</li>
+			<li>Egor</li>
+			<li><i class="fa fa-envelope"></i> <a href="mailto://vadim@sourced.tech">vadim@sourced.tech</a></li>
+			<li><i class="fa fa-envelope"></i> <a href="mailto://egor@sourced.tech">egor@sourced.tech</a></li>
+			<li><i class="fa fa-twitter"></i> <a href="https://twitter.com/tmarkhor">tmarkhor</a></li>
+			<li><i class="fa fa-twitter"></i> <a href="https://twitter.com/egor_bu">egor_bu</a></li>
             <li><i class="fa fa-github"></i> <a href="https://github.com/vmarkovtsev">vmarkovtsev</a></li>
-            <li><i class="fa fa-rss"></i> <a href="https://blog.sourced.tech">blog.sourced.tech</a></li>
-        </ul>
+			<li><i class="fa fa-github"></i> <a href="https://github.com/egorbu">egorbu</a></li>
+		</ul>
+		<p><i class="fa fa-rss"></i> <a href="https://blog.sourced.tech">blog.sourced.tech</a></p>
     </section>
 
 	<div class="progress"></div>
