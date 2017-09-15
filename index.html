@@ -195,7 +195,229 @@
                 }
             }
         </style>
-    </section>
+	</section>
+	
+	<style>
+		.chart-2x2 {
+			margin-top: -10px;
+			margin-left: auto;
+			margin-right: auto;
+			display: flex;
+			flex-direction: column;
+			width: 401px;
+			height: 401px;
+		}
+		.chart-2x2 > div:first-of-type {
+			width: 401px;
+			height: 60px;
+			padding-left: 60px;
+			text-align: center;
+			display: flex;
+			align-items: center;
+		}
+		.chart-2x2 > div:first-of-type > div {
+			flex: 1;
+		}
+		.chart-2x2 > div:last-of-type {
+			display: flex;
+		}
+		.chart-2x2 > div:last-of-type > div:first-of-type {
+			height: 341px;
+			width: 60px;
+			display: flex;
+			flex-direction: column;
+			text-align: center;
+			
+		}
+		.chart-2x2 > div:last-of-type > div:first-of-type > div {
+			flex: 1;
+			writing-mode: tb-rl;
+			transform: rotate(180deg);
+		}
+		.chart-2x2 > div:last-of-type > div:last-of-type {
+			display: flex;
+			flex-direction: row;
+			border: 1px solid white;
+			border-radius: 5px;
+			width: 341px;
+			height: 341px;				
+		}
+		.chart-2x2 > div:last-of-type > div:last-of-type > div {
+			display: flex;
+			flex-direction: column;							
+			height: 100%;
+		}
+		.chart-2x2 > div:last-of-type > div:last-of-type > div:first-of-type {
+			width: 171px;
+			border-right: 1px solid white;
+		}
+		.chart-2x2 > div:last-of-type > div:last-of-type > div:last-of-type {
+			width: 170px;
+		}
+		.chart-2x2 > div:last-of-type > div:last-of-type > div > div:first-of-type {
+			height: 171px;
+			width: 100%;
+			border-bottom: 1px solid white;
+		}
+		.chart-2x2 > div:last-of-type > div:last-of-type > div > div:last-of-type {
+			height: 170px;
+			width: 100%;
+		}
+		.chart-2x2 > div:last-of-type > div:last-of-type > div > div {
+			display: flex;
+			align-items: center;
+			justify-content: center;				
+		}
+	</style>
+
+	<section class="slide">
+		<h2>Complexity vs data size</h2>
+		<div class="chart-2x2">
+			<div>
+				<div>Fits 1 node</div>
+				<div>Not</div>
+			</div>
+			<div>
+				<div>
+					<div>Casual</div>
+					<div>Bleeding edge</div>
+				</div>
+				<div>
+					<div>
+						<div>easy, fast</div>
+						<div>easy, slow</div>
+					</div>
+					<div>
+						<div>easy, slow</div>
+						<div>hard, slow</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2>How to determine what's your size?</h2>
+		<ul>
+			<li>You do know what's a sparse matrix, don't you?</li>
+			<li>Does the processing fit into 256/512GB?</li>
+			<li>Does it take less than 1 hour/day/week?</li>
+			<li>Do you expect that it will not in the future?</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>How to determine what's your complexity?</h2>
+		<ul>
+			<li></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>The case of Netflix</h2>
+		<div id="vectorflow">
+			<img src="pictures/vectorflow.png">
+			<ul>
+				<li>Sparse-aware</li>
+				<li>IO agnostic</li>
+				<li>Single-machine</li>
+			</ul>
+		</div>
+		<style>
+			#vectorflow {
+				display: flex;
+				height: 400px;;
+				align-items: center;
+			}
+			#vectorflow > img {
+				width: 400px;
+			}
+			#vectorflow > ul {
+				margin-left: 100px;
+				margin-bottom: 0;
+			}
+		</style>
+	</section>	
+
+	<section class="slide">
+		<h2>Complexity vs scaling</h2>
+		<div class="chart-2x2">
+			<div>
+				<div>Vertical</div>
+				<div>Horizontal</div>
+			</div>
+			<div>
+				<div>
+					<div>Casual</div>
+					<div>Bleeding edge</div>
+				</div>
+				<div>
+					<div>
+						<div>useless</div>
+						<div>required</div>
+					</div>
+					<div>
+						<div>easy</div>
+						<div>hard</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h2>Approaches</h2>
+		<ul>
+			<li>PCA</li>
+			<li>Topic Modeling</li>
+			<li>word2vec</li>
+			<li>node2vec</li>
+			<li>t-SNE</li>
+			<li>LargeVis</li>
+			<li>Autoencoders</li>
+			<li>Life after DR</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>PCA</h2>
+		
+	</section>
+
+	<section class="slide">
+		<h2>Topic Modeling</h2>
+
+	</section>
+
+	<section class="slide">
+		<h2>word2vec</h2>
+
+	</section>
+
+	<section class="slide">
+		<h2>node2vec</h2>
+
+	</section>
+
+	<section class="slide">
+		<h2>t-SNE</h2>
+
+	</section>
+
+	<section class="slide">
+		<h2>LargeVis</h2>
+
+	</section>
+
+	<section class="slide">
+		<h2>Autoencoders</h2>
+
+	</section>
+
+	<section class="slide">
+		<h2>Life after DR</h2>
+		K-means
+	</section>
 
 	<section class="slide">
         <h2>Thank you</h2>
