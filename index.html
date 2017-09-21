@@ -369,19 +369,41 @@
 		<h2>Approaches</h2>
 		<ul>
 			<li>PCA</li>
+			<li>SVD</li>
+			<li>CUR</li>
 			<li>Topic Modeling</li>
 			<li>word2vec</li>
 			<li>node2vec</li>
 			<li>t-SNE</li>
 			<li>LargeVis</li>
+			<li>BigCLAM</li>
 			<li>Autoencoders</li>
-			<li>Life after DR</li>
 		</ul>
 	</section>
 
 	<section class="slide">
 		<h2>PCA</h2>
-		
+		http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html
+		Maximizes the retained variance.
+		Does not work on sparse inputs.
+		<a href="https://github.com/facebook/fbpca">fbpca</a>
+	</section>
+	
+	<section class="slide">
+		<h2>SVD</h2>
+		<a href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html">sklearn.decomposition.TruncatedSVD</a>
+		<a href="https://github.com/facebook/fbpca">fbpca</a>
+		Minimizes the sum of squares of pairwise differences between M and M'.
+		Thus unstable to outliers. Possible solution: log or any other damping function.
+		Can take sparse input.
+		Resulting sparsity catastrophe.
+	</section>
+	
+	<section class="slide">
+		<h2>CUR</h2>
+		CUR preserves the sparsity and thus is usable for large sparse matrices.
+		It is sill vulnerable to outliers.
+		<a href="https://github.com/cthurau/pymf">PyMF</a>
 	</section>
 
 	<section class="slide">
@@ -412,6 +434,14 @@
 	<section class="slide">
 		<h2>Autoencoders</h2>
 
+	</section>
+	
+	<section class="slide">
+		<h2>BigCLAM</h2>
+		Works when your matrix is a square adjacency matrix of a graph.
+        Dimensionality reduction by fuzzy graph clustering aka "community detection".
+        <a href="http://140.123.102.14:8080/reportSys/file/paper/ccy2013/ccy2013_16_paper.pdf">paper</a>
+        <a href="https://github.com/snap-stanford/snap">Stanford Network Analysis Platform</a>
 	</section>
 
 	<section class="slide">
