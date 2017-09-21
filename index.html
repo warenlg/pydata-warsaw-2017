@@ -369,7 +369,7 @@
 		<h2>Approaches</h2>
 		<ul>
 			<li>PCA</li>
-			<li>SVD</li>
+			<li>Truncated SVD</li>
 			<li>CUR</li>
 			<li>Topic Modeling</li>
 			<li>word2vec</li>
@@ -383,27 +383,60 @@
 
 	<section class="slide">
 		<h2>PCA</h2>
-		http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html
-		Maximizes the retained variance.
-		Does not work on sparse inputs.
-		<a href="https://github.com/facebook/fbpca">fbpca</a>
+		<ul>
+			<li>The lowered number of dimensions depends on the explained variance ratio (EVR).</li>
+			<li>EVR = Σλ / trace(X<sup>T</sup>X)</li>
+		</ul>
+		image - plot the dependency
+	</section>
+
+	<section class="slide">
+		<h2>PCA</h2>
+		<ul>
+			<li>Centers the columns.</li>
+			<li>Does not work with sparse matrices.</li>
+			<li>Output is never sparse.</li>
+		</ul>
+		image - https://stats.stackexchange.com/questions/22329/how-does-centering-the-data-get-rid-of-the-intercept-in-regression-and-pca
+	</section>
+
+	<section class="slide">
+		<h2>PCA</h2>
+		<ul>
+			<li>Unstable to outliers.</li>
+			<li>Possible solutions: filtering; log or any other damping function.</li>
+		</ul>
+		image - outlier
 	</section>
 	
 	<section class="slide">
-		<h2>SVD</h2>
-		<a href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html">sklearn.decomposition.TruncatedSVD</a>
-		<a href="https://github.com/facebook/fbpca">fbpca</a>
-		Minimizes the sum of squares of pairwise differences between M and M'.
-		Thus unstable to outliers. Possible solution: log or any other damping function.
-		Can take sparse input.
-		Resulting sparsity catastrophe.
+		<h2>Truncated SVD</h2>		
+		<ul>
+			<li>The efficient method to calculate PCA.</li>
+			<li>PCA(X, N) = TSVD(centered(X), N).</li>
+			<li>Supports sparse input.</li>
+			<li>Output is never sparse.</li>
+		</ul>
+		image - matrix decomposition
+	</section>
+
+	<section class="slide">
+		<h2>Implementations</h2>
+		<ul>
+			<li><a href="https://github.com/facebook/fbpca">fbpca</a> - approximate, large scale</li>
+			<li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html">sklearn</a> - exact, small scale</li>
+		</ul>
 	</section>
 	
 	<section class="slide">
 		<h2>CUR</h2>
-		CUR preserves the sparsity and thus is usable for large sparse matrices.
-		It is sill vulnerable to outliers.
-		<a href="https://github.com/cthurau/pymf">PyMF</a>
+		<ul>
+			<li>Randomized, approximate TSVD.</li>			
+			<li>Supports sparse input.</li>
+			<li>Output is sparse.</li>
+			<li>Vulnerable to outliers.</li>
+			<li>Implementation: <a href="https://github.com/cthurau/pymf">PyMF</a>.</li>	
+		</ul>
 	</section>
 
 	<section class="slide">
@@ -447,6 +480,13 @@
 	<section class="slide">
 		<h2>Life after DR</h2>
 		K-means
+	</section>
+
+	<section class="slide">
+		<h2>The case of Facebook</h2>
+		<ul>Starspace - dense embeddings</ul>
+		<ul>Faiss - k-means and k-nn on dense data</ul>
+		<ul>pysparnn - k-nn on sparse data</ul>
 	</section>
 
 	<section class="slide">
