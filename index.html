@@ -312,7 +312,7 @@
 		<div class="chart-2x2">
 			<div>
 				<div>System complexity <span class="text-middle">→</span></div>
-	
+
 			</div>
 			<div>
 				<div>
@@ -636,20 +636,8 @@
 				<li>Classification of texts</li>
 				<li>Compression of models</li>
 			</ul>
-			<div id="fasttext-img" class="vista"></div>
-			<style>
-				#fasttext-img {
-					margin-left: 50px;
-					width: 350px;
-					height: 350px;
-					background-image: url("pictures/fasttext_size_vs_dur_black.png");
-				}
-				@media not print {
-					#fasttext-img {
-						background-image: url("pictures/fasttext_size_vs_dur_white.png");
-					}
-				}
-			</style>
+			<img src="pictures/fasttext_size_vs_dur.png">
+
 		</div>
 		<style>
 			#fastText {
@@ -679,19 +667,37 @@
 				</ul>
 
 			</ul>
-			<div id="explicit-mat-fact-img" class="vista"></div>
-			<style>
-				#explicit-mat-fact-img {
-					width: 600px;
-					height: 300px;
-					background-image: url("pictures/explicit_mat_fact_black.png");
-				}
-				@media not print {
-					#explicit-mat-fact-img {
-						background-image: url("pictures/explicit_mat_fact_white.png");
-					}
-				}
-			</style>
+			<img src="pictures/explicit_mat_fact_white.png">
+		</div>
+		<style>
+			#emb_explicit {
+				display: flex;
+				height: 400px;;
+				align-items: top;
+			}
+			#emb_explicit > img {
+				width: 400px;
+				object-fit: contain;
+			}
+			#emb_explicit > ul {
+				margin-left: 0px;
+				margin-bottom: 0;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Embeddings - global vectors</h2>
+		<div id="emb_explicit">
+			<ul>
+				<li>Example:</li>
+				<ul>
+					<li>"Text with 5 unique words."</li>
+				</ul>
+
+			</ul>
+			<img src="pictures/coocc_ex.png">
+
 		</div>
 		<style>
 			#emb_explicit {
@@ -767,12 +773,179 @@
 	</section>
 
 	<section class="slide">
-		<h2>node2vec</h2>
+		<h2>Conclusion</h2>
+		<div class="chart-2x2">
+			<div>
+				<div>10s~100s GBs</div>
+				<div>100s~ GBs</div>
+			</div>
+			<div>
+				<div>
+					<div>~1M uniq</div>
+					<div> many M uniq </div>
+				</div>
+				<div>
+					<div>
+						<div>CBOW</div>
+						<div>skip-gram</div>
+					</div>
+					<div>
+						<div>Swivel</div>
+						<div>bad luck</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div id="graph_emb">
+			<h2>Graph embeddings</h2>
+			<img src="pictures/graph_ex.png">
+		</div>
+		<style>
+			#graph_emb img {
+			position: absolute;
+			bottom: 0px;
+			right: 0px;
+			width: 100%;
+			height: 100%;
+			background: #33526c;
+			opacity: 0.6;
+			z-index: -10;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			filter:blur(1px);
+			}
+			#graph_emb h2 {
+				opacity: 1;
+				color: #ffffff;
+			}
+		</style>
+
 
 	</section>
 
 	<section class="slide">
+		<h2>Graph embeddings</h2>
+		<p>Tasks</p>
+		<ul>
+			<li>Social graphs, dependencies graphs, etc.</li>
+		</ul>
+		<p>Properties</p>
+		<ul>
+			<li>Continuous feature representations for nodes in networks</li>
+			<li>Maximizes the likelihood of of preserving network neighborhoods of nodes</li>
+		</ul>
+
+	</section>
+
+	<section class="slide">
+		<h2>node2vec</h2>
+		<p>Approach</p>
+		<ul>
+			<li>Random walks over a graph - gives sequences of nodes</li>
+			<li>Sequences of nodes - stochastic approximation of graph</li>
+			<li>Use these sequences as input to word2vec / Swivel / etc. -> embeddings</li>
+			<li>As result: embeddings for nodes</li>
+		</ul>
+
+	</section>
+
+	<section class="slide">
+		<h2>node2vec</h2>
+		<div id="node2vec">
+			<img src="pictures/random_graph.png">
+			<ul>
+				<li>n1 -> n1025 -> n37 ...</li>
+				<li>n2 -> n53 -> n209 ...</li>
+				<li>n3 -> n129 -> n548 ...</li>
+				<li>n4 -> n78 -> n789 ...</li>
+				<li>...</li>
+			</ul>
+		</div>
+		<style>
+			#node2vec {
+				display: flex;
+				height: 400px;;
+				align-items: top;
+			}
+			#node2vec > img {
+				width: 400px;
+				object-fit: contain;
+			}
+			#node2vec > ul {
+				margin-left: 0px;
+				margin-bottom: 0;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Data visualization</h2>
+		<p>Task definition:</p>
+		<ul>
+			<li>We are given a collection of high-dim data</li>
+			<li>How can we get a feel for how these objects are arranged in space?</li>
+		</ul>
+	</section>
+
+	<section class="slide">
 		<h2>t-SNE</h2>
+		<p>Why was it introduced?</p>
+		<div id="t-sne">
+				<img src="pictures/PCA_bad.png">
+			<ul>
+				<li>Distance preservation is not enough</li>
+			</ul>
+		</div>
+		<style>
+			#t-sne {
+				display: flex;
+				height: 400px;;
+				align-items: top;
+			}
+			#t-sne > img {
+				width: 400px;
+				object-fit: contain;
+			}
+			#t-sne > ul {
+				margin-left: 0px;
+				margin-bottom: 0;
+			}
+		</style>
+
+	</section>
+
+
+	<section class="slide">
+		<h2>t-SNE</h2>
+		<div id="t-sne-idea">
+			<ul>
+				<li>Neighbor preservation</li>
+				<li>Distance preservation</li>
+				<li>Balance local and global aspects</li>
+				<li>Excellent <a href="https://distill.pub/2016/misread-tsne/">blog post</a></li>
+				<li>Complexity: O(d*N<sup>2</sup>)</li>
+			</ul>
+			<img src="pictures/t_sne_idea.png">
+		</div>
+		<style>
+			#t-sne-idea {
+				display: flex;
+				height: 300px;
+				align-items: top;
+			}
+			#t-sne-idea > img {
+				width: 500px;
+				object-fit: contain;
+			}
+			#t-sne-idea > ul {
+				margin-left: 0px;
+				margin-bottom: 0;
+			}
+		</style>
 
 	</section>
 
