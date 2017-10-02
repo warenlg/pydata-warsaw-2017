@@ -105,6 +105,7 @@
         }
         ul.no-bullets > li {
             text-indent: 0;
+			padding-left: 0 !important;
         }
 		code.inline:before, code.inline-no-offset:before {
 			display: none;
@@ -128,6 +129,7 @@
 			float: left;
 			display: inline;
 			width: 50%;
+			padding-left: 24px;
 		}
 		.bottom-space {
 			margin-bottom: 2em !important;
@@ -137,6 +139,9 @@
 		}
 		.slide a:hover {
 			background: linear-gradient(to top,currentColor .09em,transparent .09em) repeat-x;
+		}
+		.source {
+			font-size: small;
 		}
     </style>
 
@@ -308,11 +313,10 @@
 
 	<section class="slide">
 		<h2>How to determine what's your complexity?</h2>
-		<a id="complexity-source" href="https://medium.com/@anandr42/the-data-science-delusion-7759f4eaac8e">Source</a>
+		<a class="source" id="complexity-source" href="https://medium.com/@anandr42/the-data-science-delusion-7759f4eaac8e">Source</a>
 		<div class="chart-2x2">
 			<div>
 				<div>System complexity <span class="text-middle">→</span></div>
-
 			</div>
 			<div>
 				<div>
@@ -333,7 +337,7 @@
 		<style>
 			#complexity-source {
 				position: absolute;
-				right: 0;
+				right: 100px;
 				bottom: 40px;
 			}
 			#complexity-text {
@@ -400,7 +404,7 @@
 
 	<section class="slide">
 		<h2>Approaches</h2>
-		<ul>
+		<ul class="columns">
 			<li>PCA</li>
 			<li>Truncated SVD</li>
 			<li>CUR</li>
@@ -474,7 +478,58 @@
 
 	<section class="slide">
 		<h2>Topic Modeling</h2>
+		<ul>
+			<li>Family of unsupervised models to mine sets of probabilistically common subsets from a series of sets.</li>
+			<li>Example: topics in text documents.</li>
+			<li>Those sets must be labeled by humans.</li>
+			<li>Implementations:
+				<ul>
+					<li><a href="https://radimrehurek.com/gensim/">Gensim</a></li>
+					<li><a href="https://github.com/bigartm/bigartm">BigARTM</a></li>
+				</ul>
+			</li>
+		</ul>
+		<img src="pictures/tm.png" id="tm">
+		<a class="source" id="tm-src" href="http://dig-eh.org/dig-eh/TopicModelling/RectangularNodes/">Source</a>
+		<style>
+			#tm {
+				position: absolute;
+				top: 250px;
+				right: 100px;
+				width: 350px;
+				height: 350px;
+				object-fit: contain;
+			}
+			#tm-src {
+				position: absolute;
+				right: 100px;
+				bottom: 30px;
+			}
+		</style>
+	</section>
 
+	<section class="slide">
+		<h2>Topic Modeling</h2>
+		<ul>
+			<li>Topics are not clusters!</li>
+			<li>Good for explaining, bad for decisions.</li>
+		</ul>
+		<div id="pie-inequality">
+			<img src="pictures/pie.svg">
+			<div>≠</div>
+			<img src="pictures/pie.svg">
+		</div>
+		<style>
+			#pie-inequality {
+				display: flex;
+				align-items: center;
+			}
+			#pie-inequality > div {
+				margin-left: 50px;
+				margin-right: 50px;
+				font-size: 5em;
+			}
+		</style>
 	</section>
 
 	<section class="slide">
