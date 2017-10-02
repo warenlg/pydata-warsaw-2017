@@ -196,7 +196,7 @@
             }
         </style>
 	</section>
-	
+
 	<style>
 		.chart-2x2 {
 			margin-top: -10px;
@@ -227,7 +227,7 @@
 			display: flex;
 			flex-direction: column;
 			text-align: center;
-			
+
 		}
 		.chart-2x2 > div:last-of-type > div:first-of-type > div {
 			flex: 1;
@@ -240,11 +240,11 @@
 			border: 1px solid white;
 			border-radius: 5px;
 			width: 341px;
-			height: 341px;				
+			height: 341px;
 		}
 		.chart-2x2 > div:last-of-type > div:last-of-type > div {
 			display: flex;
-			flex-direction: column;							
+			flex-direction: column;
 			height: 100%;
 		}
 		.chart-2x2 > div:last-of-type > div:last-of-type > div:first-of-type {
@@ -266,7 +266,7 @@
 		.chart-2x2 > div:last-of-type > div:last-of-type > div > div {
 			display: flex;
 			align-items: center;
-			justify-content: center;				
+			justify-content: center;
 		}
 	</style>
 
@@ -337,7 +337,7 @@
 				margin-bottom: 0;
 			}
 		</style>
-	</section>	
+	</section>
 
 	<section class="slide">
 		<h2>Complexity vs scaling</h2>
@@ -364,7 +364,7 @@
 			</div>
 		</div>
 	</section>
-	
+
 	<section class="slide">
 		<h2>Approaches</h2>
 		<ul>
@@ -408,9 +408,9 @@
 		</ul>
 		image - outlier
 	</section>
-	
+
 	<section class="slide">
-		<h2>Truncated SVD</h2>		
+		<h2>Truncated SVD</h2>
 		<ul>
 			<li>The efficient method to calculate PCA.</li>
 			<li>PCA(X, N) = TSVD(centered(X), N).</li>
@@ -427,15 +427,15 @@
 			<li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html">sklearn</a> - exact, small scale</li>
 		</ul>
 	</section>
-	
+
 	<section class="slide">
 		<h2>CUR</h2>
 		<ul>
-			<li>Randomized, approximate TSVD.</li>			
+			<li>Randomized, approximate TSVD.</li>
 			<li>Supports sparse input.</li>
 			<li>Output is sparse.</li>
 			<li>Vulnerable to outliers.</li>
-			<li>Implementation: <a href="https://github.com/cthurau/pymf">PyMF</a>.</li>	
+			<li>Implementation: <a href="https://github.com/cthurau/pymf">PyMF</a>.</li>
 		</ul>
 	</section>
 
@@ -445,8 +445,264 @@
 	</section>
 
 	<section class="slide">
-		<h2>word2vec</h2>
+		<h2>Sequential data</h2>
+		<div id="seq_data">
+			<ul>
+				<li>We are surrounded by sequential data</li>
+				<ul>
+					<li>Texts, system logs, etc.</li>
+				</ul>
 
+				<li>Problems</li>
+				<ul>
+					<li>Huge size: ~7B words ~37GB.</li>
+					<li>A lot of unique entities.</li>
+				</ul>
+			</ul>
+			<img src="pictures/size_vs_uniq.png">
+
+		</div>
+		<style>
+			#seq_data {
+				display: flex;
+				height: 400px;;
+				align-items: top;
+			}
+			#seq_data > img {
+				width: 400px;
+				object-fit: contain;
+			}
+			#seq_data > ul {
+				margin-left: 0px;
+				margin-bottom: 0;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Embeddings</h2>
+		<h3>Approaches</h3>
+		<ul>
+			<li>Explicit co-occurrence matrix factorization</li>
+			<li>Implicit co-occurrence matrix factorization</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Embeddings</h2>
+		<h3>Properties</h3>
+		<ul>
+			<li>Low-dimensional representation</li>
+			<li>Similar contexts -> similar embeddings</li>
+			<li>Analogies search (hi to <a href="https://github.com/facebookresearch/faiss">fb/faiss</a>)</li>
+			<li>Reasoning: W("woman") − W("man") ≃ W("queen") − W("king")</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>word2vec - skip-gram</h2>
+		<div id="skip-gram">
+			<ul>
+				<li>Predicting the context given the word</li>
+				<ul>
+					<li>Input: "mcube"</li>
+					<li>Output: "is", "a", "great", "conference"</li>
+				</ul>
+				<li>Works well even with small data</li>
+				<li>Represents well rare words</li>
+			</ul>
+			<img src="pictures/skip-gram_white.png">
+
+		</div>
+		<style>
+			#skip-gram {
+				display: flex;
+				height: 400px;;
+				align-items: top;
+			}
+			#skip-gram > img {
+				width: 400px;
+				object-fit: contain
+			}
+			#skip-gram > ul {
+				margin-left: 0px;
+				margin-bottom: 0;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>word2vec - CBOW</h2>
+		<div id="cbow">
+			<ul>
+				<li>Predicting the word given its context</li>
+				<ul>
+					<li>Input: "is", "a", "great", "conference"</li>
+					<li>Output: "mcube"</li>
+				</ul>
+				<li>Faster training than the skip-gram</li>
+				<li>Better accuracy for the frequent words</li>
+			</ul>
+			<img src="pictures/cbow_white.png">
+
+		</div>
+		<style>
+			#cbow {
+				display: flex;
+				height: 400px;;
+				align-items: top;
+			}
+			#cbow > img {
+				width: 400px;
+				object-fit: contain;
+			}
+			#cbow > ul {
+				margin-left: 0px;
+				margin-bottom: 0;
+			}
+		</style>
+	</section>
+
+
+
+	<section class="slide">
+		<h2>word2vec - <a href="https://github.com/facebookresearch/fastText">fastText</a></h2>
+		<div id="fastText">
+			<ul>
+				<li>Embeddings for char n-grams</li>
+				<li>Emb(word)= Σ Emb(char n-gram)</li>
+				<ul>
+					<li>-> embeddings for unseen words</li>
+				</ul>
+				<li>Classification of texts</li>
+				<li>Compression of models</li>
+			</ul>
+			<img src="pictures/fasttext_size_vs_dur.png">
+
+		</div>
+		<style>
+			#fastText {
+				display: flex;
+				height: 400px;;
+				align-items: top;
+			}
+			#fastText > img {
+				display: flex;
+				object-fit: contain;
+			}
+			#fastText > ul {
+				margin-left: 0px;
+				margin-bottom: 0;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>word2vec - <a href="https://github.com/facebookresearch/fastText">fastText</a></h2>
+		<div id="fastText">
+			<ul>
+				<li>Embeddings for char n-grams</li>
+				<li>Emb(word)= Σ Emb(char n-gram)</li>
+				<ul>
+					<li>-> embeddings for unseen words</li>
+				</ul>
+				<li>Classification of texts</li>
+				<li>Compression of models</li>
+			</ul>
+			<img src="pictures/fasttext_size_vs_dur.png">
+
+		</div>
+		<style>
+			#fastText {
+				display: flex;
+				height: 400px;;
+				align-items: top;
+			}
+			#fastText > img {
+				display: flex;
+				object-fit: contain;
+			}
+			#fastText > ul {
+				margin-left: 0px;
+				margin-bottom: 0;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Embeddings - global vectors</h2>
+		<div id="emb_explicit">
+			<ul>
+				<li>Approach combines the advantages of the two major model families:</li>
+				<ul>
+					<li>Global matrix factorization</li>
+					<li>Local context window</li>
+				</ul>
+
+			</ul>
+			<img src="pictures/explicit_mat_fact_white.png">
+
+		</div>
+		<style>
+			#emb_explicit {
+				display: flex;
+				height: 400px;;
+				align-items: top;
+			}
+			#emb_explicit > img {
+				width: 400px;
+				object-fit: contain;
+			}
+			#emb_explicit > ul {
+				margin-left: 0px;
+				margin-bottom: 0;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Swivel</h2>
+		<p>Embedding engine which works on co-occurrence matrices</p>
+		<p>Like GloVe, but better - <a href="https://arxiv.org/abs/1602.02215">Paper on ArXiV</a></p>
+		<p>We <a href="https://github.com/src-d/tensorflow-swivel">forked</a> the Tensorflow implementation</p>
+		<img src="pictures/swivel.png" id="swivel">
+		<style>
+			#swivel {
+				height: 200px;
+				object-fit: contain;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Swivel</h2>
+		<div id="swiven_vocab">
+			<ul>
+				<li>Features</li>
+				<ul>
+					<li>Multi-GPU support</li>
+					<li>Scales with vocabulary size</li>
+					<li>Efficient sharding algorithm to distribute workload</li>
+				</ul>
+			</ul>
+			<img src="pictures/swiven_vocab_sz_vs_n_shards.png">
+
+		</div>
+		<style>
+			#swiven_vocab {
+				display: flex;
+				height: 400px;;
+				align-items: top;
+			}
+			#swiven_vocab > img {
+				width: 400px;
+				object-fit: contain;
+			}
+			#swiven_vocab > ul {
+				margin-left: 0px;
+				margin-bottom: 0;
+			}
+		</style>
 	</section>
 
 	<section class="slide">
@@ -468,7 +724,7 @@
 		<h2>Autoencoders</h2>
 
 	</section>
-	
+
 	<section class="slide">
 		<h2>BigCLAM</h2>
 		Works when your matrix is a square adjacency matrix of a graph.
