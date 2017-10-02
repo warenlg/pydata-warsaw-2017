@@ -308,9 +308,42 @@
 
 	<section class="slide">
 		<h2>How to determine what's your complexity?</h2>
-		<ul>
-			<li></li>
-		</ul>
+		<a id="complexity-source" href="https://medium.com/@anandr42/the-data-science-delusion-7759f4eaac8e">Source</a>
+		<div class="chart-2x2">
+			<div>
+				<div>System complexity <span class="text-middle">→</span></div>
+	
+			</div>
+			<div>
+				<div>
+					<div>← Modeling difficulty</div>
+				</div>
+				<div id="complexity-text">
+					<div>
+						<div>Easy to model<br>Simple domain</div>
+						<div>Difficult to model<br>Simple domain</div>
+					</div>
+					<div>
+						<div>Easy to model<br>Complex domain</div>
+						<div>Difficult to model<br>Complex domain</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<style>
+			#complexity-source {
+				position: absolute;
+				right: 0;
+				bottom: 40px;
+			}
+			#complexity-text {
+				font-size: 0.75em;
+				text-align: center;
+			}
+			.text-middle {
+				vertical-align: middle;
+			}
+		</style>
 	</section>
 
 	<section class="slide">
@@ -459,8 +492,20 @@
 					<li>A lot of unique entities.</li>
 				</ul>
 			</ul>
-			<img src="pictures/size_vs_uniq.png">
-
+			<div id="sequential-data" class="vista"></div>
+			<style>
+				#sequential-data {
+					margin-left: 50px;
+					width: 350px;
+					height: 350px;
+					background-image: url("pictures/size_vs_uniq_black.png");
+				}
+				@media not print {
+					#sequential-data {
+						background-image: url("pictures/size_vs_uniq_white.png");
+					}
+				}
+			</style>
 		</div>
 		<style>
 			#seq_data {
@@ -477,15 +522,6 @@
 				margin-bottom: 0;
 			}
 		</style>
-	</section>
-
-	<section class="slide">
-		<h2>Embeddings</h2>
-		<h3>Approaches</h3>
-		<ul>
-			<li>Explicit co-occurrence matrix factorization</li>
-			<li>Implicit co-occurrence matrix factorization</li>
-		</ul>
 	</section>
 
 	<section class="slide">
@@ -511,8 +547,19 @@
 				<li>Works well even with small data</li>
 				<li>Represents well rare words</li>
 			</ul>
-			<img src="pictures/skip-gram_white.png">
-
+			<div id="skip-gram-img" class="vista"></div>
+			<style>
+				#skip-gram-img {
+					width: 350px;
+					height: 350px;
+					background-image: url("pictures/skip-gram_black.png");
+				}
+				@media not print {
+					#skip-gram-img {
+						background-image: url("pictures/skip-gram_white.png");
+					}
+				}
+			</style>
 		</div>
 		<style>
 			#skip-gram {
@@ -543,8 +590,20 @@
 				<li>Faster training than the skip-gram</li>
 				<li>Better accuracy for the frequent words</li>
 			</ul>
-			<img src="pictures/cbow_white.png">
-
+			<div id="cbow-img" class="vista"></div>
+			<style>
+				#cbow-img {
+					margin-left: 50px;
+					width: 350px;
+					height: 350px;
+					background-image: url("pictures/cbow_black.png");
+				}
+				@media not print {
+					#cbow-img {
+						background-image: url("pictures/cbow_white.png");
+					}
+				}
+			</style>
 		</div>
 		<style>
 			#cbow {
@@ -577,40 +636,20 @@
 				<li>Classification of texts</li>
 				<li>Compression of models</li>
 			</ul>
-			<img src="pictures/fasttext_size_vs_dur.png">
-
-		</div>
-		<style>
-			#fastText {
-				display: flex;
-				height: 400px;;
-				align-items: top;
-			}
-			#fastText > img {
-				display: flex;
-				object-fit: contain;
-			}
-			#fastText > ul {
-				margin-left: 0px;
-				margin-bottom: 0;
-			}
-		</style>
-	</section>
-
-	<section class="slide">
-		<h2>word2vec - <a href="https://github.com/facebookresearch/fastText">fastText</a></h2>
-		<div id="fastText">
-			<ul>
-				<li>Embeddings for char n-grams</li>
-				<li>Emb(word)= Σ Emb(char n-gram)</li>
-				<ul>
-					<li>-> embeddings for unseen words</li>
-				</ul>
-				<li>Classification of texts</li>
-				<li>Compression of models</li>
-			</ul>
-			<img src="pictures/fasttext_size_vs_dur.png">
-
+			<div id="fasttext-img" class="vista"></div>
+			<style>
+				#fasttext-img {
+					margin-left: 50px;
+					width: 350px;
+					height: 350px;
+					background-image: url("pictures/fasttext_size_vs_dur_black.png");
+				}
+				@media not print {
+					#fasttext-img {
+						background-image: url("pictures/fasttext_size_vs_dur_white.png");
+					}
+				}
+			</style>
 		</div>
 		<style>
 			#fastText {
@@ -640,8 +679,19 @@
 				</ul>
 
 			</ul>
-			<img src="pictures/explicit_mat_fact_white.png">
-
+			<div id="explicit-mat-fact-img" class="vista"></div>
+			<style>
+				#explicit-mat-fact-img {
+					width: 600px;
+					height: 300px;
+					background-image: url("pictures/explicit_mat_fact_black.png");
+				}
+				@media not print {
+					#explicit-mat-fact-img {
+						background-image: url("pictures/explicit_mat_fact_white.png");
+					}
+				}
+			</style>
 		</div>
 		<style>
 			#emb_explicit {
@@ -676,7 +726,7 @@
 
 	<section class="slide">
 		<h2>Swivel</h2>
-		<div id="swiven_vocab">
+		<div id="swivel_vocab">
 			<ul>
 				<li>Features</li>
 				<ul>
@@ -685,20 +735,31 @@
 					<li>Efficient sharding algorithm to distribute workload</li>
 				</ul>
 			</ul>
-			<img src="pictures/swiven_vocab_sz_vs_n_shards.png">
-
+			<div id="swivel-vocab-img" class="vista"></div>
+			<style>
+				#swivel-vocab-img {
+					width: 350px;
+					height: 350px;
+					background-image: url("pictures/swivel_vocab_sz_vs_n_shards_black.png");
+				}
+				@media not print {
+					#swivel-vocab-img {
+						background-image: url("pictures/swivel_vocab_sz_vs_n_shards_white.png");
+					}
+				}
+			</style>
 		</div>
 		<style>
-			#swiven_vocab {
+			#swivel_vocab {
 				display: flex;
 				height: 400px;;
 				align-items: top;
 			}
-			#swiven_vocab > img {
+			#swivel_vocab > img {
 				width: 400px;
 				object-fit: contain;
 			}
-			#swiven_vocab > ul {
+			#swivel_vocab > ul {
 				margin-left: 0px;
 				margin-bottom: 0;
 			}
