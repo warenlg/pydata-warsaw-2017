@@ -395,7 +395,7 @@
 
 	<section class="slide">
 		<h2>The case of Netflix</h2>
-		<div id="vectorflow">
+		<div class="case">
 			<img src="pictures/vectorflow.png">
 			<ul>
 				<li>Sparse-aware</li>
@@ -404,15 +404,15 @@
 			</ul>
 		</div>
 		<style>
-			#vectorflow {
+			.case {
 				display: flex;
-				height: 400px;;
+				height: 400px;
 				align-items: center;
 			}
-			#vectorflow > img {
+			.case > img {
 				width: 400px;
 			}
-			#vectorflow > ul {
+			.case > ul {
 				margin-left: 100px;
 				margin-bottom: 0;
 			}
@@ -421,6 +421,11 @@
 
 	<section class="slide">
 		<h2 class="shout shrink">Fighting</h2>
+	</section>
+
+	<section class="slide">
+		<h2></h2>
+		<li>Fast search for similar items on sparse data: <a href="https://github.com/facebookresearch/pysparnn">fb/pysparnn</a></li>
 	</section>
 
 	<section class="slide">
@@ -648,7 +653,7 @@
 		<style>
 			#seq_data {
 				display: flex;
-				height: 400px;;
+				height: 400px;
 				align-items: top;
 			}
 			#seq_data > img {
@@ -718,7 +723,7 @@
 		<style>
 			#skip-gram {
 				display: flex;
-				height: 400px;;
+				height: 400px;
 				align-items: top;
 			}
 			#skip-gram > img {
@@ -762,7 +767,7 @@
 		<style>
 			#cbow {
 				display: flex;
-				height: 400px;;
+				height: 400px;
 				align-items: top;
 			}
 			#cbow > img {
@@ -796,7 +801,7 @@
 		<style>
 			#fastText {
 				display: flex;
-				height: 400px;;
+				height: 400px;
 				align-items: top;
 			}
 			#fastText > img {
@@ -914,7 +919,7 @@
 		<style>
 			#swivel_vocab {
 				display: flex;
-				height: 400px;;
+				height: 400px;
 				align-items: top;
 			}
 			#swivel_vocab > img {
@@ -1119,26 +1124,25 @@
 	</section>
 
 	<section class="slide">
-		<h2>Worth to mention: <a href="https://arxiv.org/abs/1709.03856">fb/Starspace</a></h2>
-		<p>word2vec approach for everything:</p>
-		<ul>
-			<li>Text classification.</li>
-			<li>Ranking of sets of entities.</li>
-			<li>Collaborative filtering-based recommendation.</li>
-			<li>Content-based recommendation.</li>
-			<li>Embedding graphs.</li>
-			<li>Learning word, sentence or document embeddings.</li>
-		</ul>
-	</section>
-
-	<section class="slide">
-		<h2>Life after DR</h2>
-		<ul>
-			<li>Fast search for similar items: <a href="https://github.com/facebookresearch/faiss">fb/faiss</a>.</li>
-			<li>Clustering: <a href="https://github.com/facebookresearch/faiss">fb/faiss</a> & <a href="https://github.com/src-d/kmcuda">src-d/kmcuda</a>.</li>
-			<li>Fast search for similar items on sparse data: <a href="https://github.com/facebookresearch/pysparnn">fb/pysparnn</a>.</li>
-			<li>Visualization - next slides.</li>
-		</ul>
+		<h2>The case of Facebook</h2>
+		<div class="case">
+			<img src="pictures/starspace.png">
+			<ul>
+				<li><a href="https://github.com/facebookresearch/Starspace">Starspace</a>
+					<ul>
+						<li>Word, sentence, document, graph embeddings.</li>
+						<li>Text classification, ranking.</li>
+						<li>CF and Content recommendation.</li>
+					</ul>
+				</li>
+				<li><a href="https://github.com/facebookresearch/faiss">Faiss</a>
+					<ul>
+						<li>Dense k-NN.</li>
+						<li>Devilish GPU implementation.</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
 	</section>
 
 	<section class="slide">
@@ -1217,20 +1221,12 @@
 	</section>
 
 	<!--<section class="slide">-->
-		<!--<h2>Autoencoders</h2>-->
-
-	<!--</section>-->
-
-	<!--<section class="slide">-->
 		<!--<h2>BigCLAM</h2>-->
 		<!--Works when your matrix is a square adjacency matrix of a graph.-->
         <!--Dimensionality reduction by fuzzy graph clustering aka "community detection".-->
         <!--<a href="http://140.123.102.14:8080/reportSys/file/paper/ccy2013/ccy2013_16_paper.pdf">paper</a>-->
         <!--<a href="https://github.com/snap-stanford/snap">Stanford Network Analysis Platform</a>-->
 	<!--</section>-->
-
-
-
 
 	<section class="slide">
         <h2>Thank you</h2>
