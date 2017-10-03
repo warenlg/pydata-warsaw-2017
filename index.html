@@ -541,9 +541,9 @@
 					<li>Texts, system logs, etc.</li>
 				</ul>
 
-				<li>Problems</li>
+				<li>Example: Usenet dataset</li>
 				<ul>
-					<li>Huge size: ~7B words ~37GB.</li>
+					<li>Moderate size: ~7B words ~37GB.</li>
 					<li>A lot of unique entities.</li>
 				</ul>
 			</ul>
@@ -577,6 +577,22 @@
 				margin-bottom: 0;
 			}
 		</style>
+	</section>
+
+	<section class="slide">
+		<h2>MinHash</h2>
+		<h3>How to reduce complexity of task without ML</h3>
+		<ul>
+			<li>Efficient search for near-duplicates</li>
+			<li>Example: hard forks pf repositories</li>
+			<ul>
+				<li>Initially: 13.6 M</li>
+				<li>After MinHash: 9.6 M</li>
+				<li>~30% dataset reduction</li>
+			</ul>
+			<li><a href="https://github.com/src-d/minhashcuda">MinHash at GPU</a></li>
+			<li><a href="https://blog.sourced.tech/post/minhashcuda/">Blog post</a></li>
+		</ul>
 	</section>
 
 	<section class="slide">
