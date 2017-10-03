@@ -166,6 +166,11 @@
 			#cover {
 				background: url("pictures/cover.jpg") black;
 			}
+			@media print {
+				#cover, #cover h2:before {
+					background: white !important;
+				}
+			}
 			#cover h2:before {
 				content: "";
 				position: absolute;
@@ -272,6 +277,14 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+		}
+		@media print {
+			.chart-2x2 > div:last-of-type > div:last-of-type,
+			.chart-2x2 > div:last-of-type > div:last-of-type > div:first-of-type,
+			.chart-2x2 > div:last-of-type > div:last-of-type > div > div:first-of-type {
+				border-color: black;
+			}
+
 		}
 	</style>
 
@@ -421,7 +434,6 @@
 			<li>node2vec</li>
 			<li>t-SNE</li>
 			<li>LargeVis</li>
-			<li>Community Detection</li>
 			<li>DSSM</li>
 		</ul>
 	</section>
@@ -449,6 +461,11 @@
 			}
 			.frac > *:first-child {
 				border-bottom: 1px solid white;
+			}
+			@media print {
+				.frac > *:first-child {
+					border-bottom-color: black;
+				}
 			}
 			#pca-var {
                 width: 350px;
@@ -795,60 +812,62 @@
 
 	<section class="slide">
 		<h2>Embeddings - global vectors</h2>
+		<p>Approach combines the advantages of the two major model families:</p>
+
 		<div id="emb_explicit">
 			<ul>
-				<li>Approach combines the advantages of the two major model families:</li>
-				<ul>
-					<li>Global matrix factorization</li>
-					<li>Local context window</li>
-				</ul>
-
+				<li>Global matrix factorization</li>
+				<li>Local context window</li>
 			</ul>
-			<img src="pictures/explicit_mat_fact_white.png">
+			<div class="vista"></div>
 		</div>
 		<style>
 			#emb_explicit {
 				display: flex;
-				height: 400px;;
+				height: 400px;
 				align-items: top;
 			}
-			#emb_explicit > img {
-				width: 400px;
-				object-fit: contain;
+			#emb_explicit > div:last-child {
+				width: 450px;
+				height: 300px;
+				margin-left: 50px;
+				background-image: url("pictures/explicit_mat_fact_black.png");
 			}
-			#emb_explicit > ul {
-				margin-left: 0px;
-				margin-bottom: 0;
+			@media not print {
+				#emb_explicit > div:last-child {
+					background-image: url("pictures/explicit_mat_fact_white.png");
+				}
 			}
 		</style>
 	</section>
 
 	<section class="slide">
 		<h2>Embeddings - global vectors</h2>
-		<div id="emb_explicit">
-			<ul>
-				<li>Example:</li>
+		<div id="emb_explicit_example">
+			<div>
+				<p>Example:</p>
 				<ul>
 					<li>"Text with 5 unique words."</li>
 				</ul>
-
-			</ul>
-			<img src="pictures/coocc_ex.png">
-
+			</div>
+			<div class="vista"></div>
 		</div>
 		<style>
-			#emb_explicit {
+			#emb_explicit_example {
 				display: flex;
-				height: 400px;;
+				height: 400px;
 				align-items: top;
 			}
-			#emb_explicit > img {
+			#emb_explicit_example > div:last-child {
 				width: 400px;
-				object-fit: contain;
+				height: 400px;
+				margin-left: 100px;
+				background-image: url("pictures/coocc_ex_black.png");
 			}
-			#emb_explicit > ul {
-				margin-left: 0px;
-				margin-bottom: 0;
+			@media not print {
+				#emb_explicit_example > div:last-child {
+					background-image: url("pictures/coocc_ex_white.png");
+				}
 			}
 		</style>
 	</section>
@@ -936,28 +955,27 @@
 	</section>
 
 	<section class="slide">
+		<h2 class="shout shrink">Graph embeddings</h2>
 		<div id="graph_emb">
-			<h2>Graph embeddings</h2>
 			<img src="pictures/graph_ex.png">
 		</div>
 		<style>
 			#graph_emb img {
-			position: absolute;
-			bottom: 0px;
-			right: 0px;
-			width: 100%;
-			height: 100%;
-			background: #33526c;
-			opacity: 0.6;
-			z-index: -10;
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			filter:blur(1px);
+				position: absolute;
+				bottom: 0px;
+				right: 0px;
+				width: 100%;
+				height: 100%;
+				background: #33526c;
+				opacity: 0.5;
+				z-index: -10;
+				object-fit: cover;
+				filter: blur(1px);
 			}
-			#graph_emb h2 {
-				opacity: 1;
-				color: #ffffff;
+			@media print {
+				#graph_emb img {
+					display: none;
+				}
 			}
 		</style>
 
@@ -987,13 +1005,12 @@
 			<li>Use these sequences as input to word2vec / Swivel / etc. -> embeddings</li>
 			<li>As result: embeddings for nodes</li>
 		</ul>
-
 	</section>
 
 	<section class="slide">
 		<h2>node2vec</h2>
 		<div id="node2vec">
-			<img src="pictures/random_graph.png">
+			<div class="vista"></div>
 			<ul>
 				<li>n1 -> n1025 -> n37 ...</li>
 				<li>n2 -> n53 -> n209 ...</li>
@@ -1005,15 +1022,20 @@
 		<style>
 			#node2vec {
 				display: flex;
-				height: 400px;;
 				align-items: top;
 			}
-			#node2vec > img {
+			#node2vec > div {
 				width: 400px;
-				object-fit: contain;
+				height: 400px;
+				background-image: url("pictures/random_graph_black.png");
+			}
+			@media not print {
+				#node2vec > div {
+					background-image: url("pictures/random_graph_white.png");
+				}
 			}
 			#node2vec > ul {
-				margin-left: 0px;
+				margin-left: 100px;
 				margin-bottom: 0;
 			}
 		</style>
@@ -1071,7 +1093,7 @@
 				<li>Deep representation</li>
 				<li>Cosine sim</li>
 			</ul>
-			<img src="pictures/DSSM_architecture.png">
+			<div class="vista"></div>
 		</div>
 		<style>
 			#DSSM{
@@ -1079,13 +1101,19 @@
 				height: 300px;
 				align-items: top;
 			}
-			#DSSM > img {
-				width: 500px;
-				object-fit: contain;
-			}
 			#DSSM > ul {
 				margin-left: 0px;
 				margin-bottom: 0;
+			}
+			#DSSM > div {
+				width: 500px;
+				height: 400px;
+				background-image: url("pictures/DSSM_architecture_black.png");
+			}
+			@media not print {
+				#DSSM > div {
+					background-image: url("pictures/DSSM_architecture_white.png");
+				}
 			}
 		</style>
 	</section>
@@ -1125,25 +1153,17 @@
 	<section class="slide">
 		<h2>t-SNE</h2>
 		<p>Why was it introduced?</p>
-		<div id="t-sne">
-				<img src="pictures/PCA_bad.png">
-			<ul>
-				<li>Distance preservation is not enough</li>
-			</ul>
-		</div>
+		<ul>
+			<li>Distance preservation is not enough.</li>
+		</ul>
+		<img id="t-sne" src="pictures/PCA_bad.png">
 		<style>
 			#t-sne {
-				display: flex;
-				height: 400px;;
-				align-items: top;
-			}
-			#t-sne > img {
-				width: 400px;
+				width: 500px;
+				height: 420px;
+				margin-top: -100px;
+				margin-left: 350px;
 				object-fit: contain;
-			}
-			#t-sne > ul {
-				margin-left: 0px;
-				margin-bottom: 0;
 			}
 		</style>
 
