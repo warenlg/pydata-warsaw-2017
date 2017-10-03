@@ -302,6 +302,14 @@
             	background-repeat: no-repeat !important;
             	background-position: center !important;
 			}
+			@media print {
+				.shout-background {
+					background: white !important;
+				}
+				.shout-background:after {
+					display: none;
+				}
+			}
 			.shout-background:after {
 				content: "";
 				position: absolute;
@@ -460,13 +468,13 @@
 			<li>Fuzzy duplicates of sets: <a href="https://github.com/leonsim/simhash">SimHash</a>,
 				(Weighted) MinHash: <a href="https://github.com/src-d/minhashcuda">minhashcuda</a> +
 				<a href="https://github.com/ekzhu/datasketch">datasketch</a>.</li>
-			<li>Sparse k-NN: <a href="https://github.com/facebookresearch/pysparnn">pysparnn</a></li>
-			<li>SVM is sparse-friendly: <a href="https://github.com/cjlin1/libsvm">libsvm</a></li>
-			<li>Decision Trees are sparse-friendly: <a href="https://github.com/dmlc/xgboost">xgboost</a></li>
+			<li>Sparse k-NN: <a href="https://github.com/facebookresearch/pysparnn">pysparnn</a>.</li>
+			<li>SVM is sparse-friendly: <a href="https://github.com/cjlin1/libsvm">libsvm</a>.</li>
+			<li>Decision Trees are sparse-friendly: <a href="https://github.com/dmlc/xgboost">xgboost</a>.</li>
 		</ul>
 	</section>
 
-	<section class="slide">
+	<!--<section class="slide">
 		<h2>MinHash</h2>
 		<h3>How to reduce complexity of task without ML.</h3>
 		<ul>
@@ -480,20 +488,18 @@
 			<li><a href="https://github.com/src-d/minhashcuda">MinHash + GPU</a>.</li>
 			<li><a href="https://blog.sourced.tech/post/minhashcuda/">Blog post</a>.</li>
 		</ul>
-	</section>
+	</section>-->
 
 	<section class="slide">
 		<h2>Approaches</h2>
 		<ul class="columns">
-			<li>Duplicates Elimination</li>
 			<li>PCA</li>
-			<li>CUR</li>
-			<li>Topic Modeling</li>
-			<li>word2vec</li>
-			<li>node2vec</li>
-			<li>t-SNE</li>
-			<li>LargeVis</li>
 			<li>DSSM</li>
+			<li>CUR</li>
+			<li>t-SNE</li>
+			<li>Topic Modeling</li>
+			<li>LargeVis</li>
+			<li>*2vec</li>
 		</ul>
 	</section>
 
@@ -897,7 +903,7 @@
 			<div>
 				<p>Example:</p>
 				<ul>
-					<li>"Text with 5 unique words."</li>
+					<li>"Text with 5 unique words".</li>
 				</ul>
 			</div>
 			<div class="vista"></div>
@@ -924,9 +930,9 @@
 
 	<section class="slide">
 		<h2>Swivel</h2>
-		<p>Embedding engine which works on co-occurrence matrices</p>
-		<p>Like GloVe, but better - <a href="https://arxiv.org/abs/1602.02215">Paper on ArXiV</a></p>
-		<p>We <a href="https://github.com/src-d/tensorflow-swivel">forked</a> the Tensorflow implementation</p>
+		<p>Embedding engine which works on co-occurrence matrices.</p>
+		<p>Like GloVe, but better - <a href="https://arxiv.org/abs/1602.02215">Paper on ArXiV</a>.</p>
+		<p>We <a href="https://github.com/src-d/tensorflow-swivel">forked</a> the Tensorflow implementation.</p>
 		<img src="pictures/swivel.png" id="swivel">
 		<style>
 			#swivel {
@@ -1185,14 +1191,19 @@
 		<ul>
 			<li>Distance preservation is not enough.</li>
 		</ul>
-		<img id="t-sne" src="pictures/PCA_bad.png">
+		<div class="vista" id="t-sne"></div>
 		<style>
 			#t-sne {
 				width: 500px;
 				height: 420px;
 				margin-top: -100px;
 				margin-left: 350px;
-				object-fit: contain;
+				background-image: url("pictures/PCA_bad_black.png");
+			}
+			@media not print {
+				#t-sne {
+					background-image: url("pictures/PCA_bad_white.png");
+				}
 			}
 		</style>
 	</section>
@@ -1229,7 +1240,7 @@
 
 	<section class="slide">
 		<h2>LargeVis</h2>
-		<p>Large scale t-SNE replacement</p>
+		<p>Large scale t-SNE replacement.</p>
 		<ul>
 			<li>Complexity: O(s*M*N).</li>
 		</ul>
