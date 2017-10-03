@@ -541,9 +541,9 @@
 					<li>Texts, system logs, etc.</li>
 				</ul>
 
-				<li>Problems</li>
+				<li>Example: Usenet dataset</li>
 				<ul>
-					<li>Huge size: ~7B words ~37GB.</li>
+					<li>Moderate size: ~7B words ~37GB.</li>
 					<li>A lot of unique entities.</li>
 				</ul>
 			</ul>
@@ -577,6 +577,22 @@
 				margin-bottom: 0;
 			}
 		</style>
+	</section>
+
+	<section class="slide">
+		<h2>MinHash</h2>
+		<h3>How to reduce complexity of task without ML</h3>
+		<ul>
+			<li>Efficient search for near-duplicates</li>
+			<li>Example: hard forks pf repositories</li>
+			<ul>
+				<li>Initially: 13.6 M</li>
+				<li>After MinHash: 9.6 M</li>
+				<li>~30% dataset reduction</li>
+			</ul>
+			<li><a href="https://github.com/src-d/minhashcuda">MinHash at GPU</a></li>
+			<li><a href="https://blog.sourced.tech/post/minhashcuda/">Blog post</a></li>
+		</ul>
 	</section>
 
 	<section class="slide">
@@ -938,6 +954,100 @@
 	</section>
 
 	<section class="slide">
+		<h2>Recommendation system: content based</h2>
+		<style type="text/css">
+		#wrap {
+		   width:600px;
+		   margin:0 auto;
+		}
+		#left_col {
+		   float:left;
+		   width:300px;
+		}
+		#right_col {
+		   float:right;
+		   width:300px;
+		}
+		</style>
+
+		<div id="wrap">
+			<div id="left_col">
+				<p>Domains</p>
+				<ul>
+					<li>Personalization</li>
+					<li>Advertisements</li>
+					<li>Item recommendation</li>
+					<li>Search queries</li>
+					<li>Etc.</li>
+				</ul>
+			</div>
+			<div id="right_col">
+				<p>Why not collaborative filtering?</p>
+				<ul>
+					<li>Cold start problem</li>
+					<li>New items</li>
+					<li>Long tail distribution</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2>Deep semantic similarity model</h2>
+		<div id="DSSM">
+			<ul>
+				<li><a href="https://www.microsoft.com/en-us/research/project/dssm/">Article</a></li>
+				<li>Term vector - 500k unique words</li>
+				<li>3-grams of characters (30k):</li>
+				<ul>
+					<li>#bad# -> #ba, bad, ad#</li>
+				</ul>
+				<li>Deep representation</li>
+				<li>Cosine sim</li>
+			</ul>
+			<img src="pictures/DSSM_architecture.png">
+		</div>
+		<style>
+			#DSSM{
+				display: flex;
+				height: 300px;
+				align-items: top;
+			}
+			#DSSM > img {
+				width: 500px;
+				object-fit: contain;
+			}
+			#DSSM > ul {
+				margin-left: 0px;
+				margin-bottom: 0;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Worth to mention: <a href="https://arxiv.org/abs/1709.03856">fb/Starspace</a></h2>
+		<p>word2vec approach for everything:</p>
+		<ul>
+			<li>Text classification</li>
+			<li>Ranking of sets of entities</li>
+			<li>Collaborative filtering-based recommendation</li>
+			<li>Content-based recommendation</li>
+			<li>Embedding graphs</li>
+			<li>Learning word, sentence or document embeddings</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Life after DR</h2>
+		<ul>
+			<li>Fast search for similar items: <a href="https://github.com/facebookresearch/faiss">fb/faiss</a></li>
+			<li>Clustering: <a href="https://github.com/facebookresearch/faiss">fb/faiss</a> & <a href="https://github.com/src-d/kmcuda">src-d/kmcuda</a></li>
+			<li>Fast search for similar items on sparse data: <a href="https://github.com/facebookresearch/pysparnn">fb/pysparnn</a></li>
+			<li>Visualization - next slides</li>
+		</ul>
+	</section>
+
+	<section class="slide">
 		<h2>Data visualization</h2>
 		<p>Task definition:</p>
 		<ul>
@@ -983,6 +1093,7 @@
 				<li>Balance local and global aspects</li>
 				<li>Excellent <a href="https://distill.pub/2016/misread-tsne/">blog post</a></li>
 				<li>Complexity: O(d*N<sup>2</sup>)</li>
+				<li>d ~ 10<sup>~2</sup> -> max(N) ~ 10<sup>3~4</sup></li>
 			</ul>
 			<img src="pictures/t_sne_idea.png">
 		</div>
@@ -1006,33 +1117,36 @@
 
 	<section class="slide">
 		<h2>LargeVis</h2>
+		<p>t-SNE on steroids</p>
+		<ul>
+			<li>Complexity: O(s*M*N)</li>
+			<li>s ~ 2, M ~ 10s -> N ~ 10<sup>8~</sup></li>
+		</ul>
+		<img src="pictures/largevis.png" id="largevis">
+		<style>
+			#largevis {
+				height: 200px;
+				object-fit: contain;
+			}
+		</style>
 
 	</section>
 
-	<section class="slide">
-		<h2>Autoencoders</h2>
+	<!--<section class="slide">-->
+		<!--<h2>Autoencoders</h2>-->
 
-	</section>
+	<!--</section>-->
 
-	<section class="slide">
-		<h2>BigCLAM</h2>
-		Works when your matrix is a square adjacency matrix of a graph.
-        Dimensionality reduction by fuzzy graph clustering aka "community detection".
-        <a href="http://140.123.102.14:8080/reportSys/file/paper/ccy2013/ccy2013_16_paper.pdf">paper</a>
-        <a href="https://github.com/snap-stanford/snap">Stanford Network Analysis Platform</a>
-	</section>
+	<!--<section class="slide">-->
+		<!--<h2>BigCLAM</h2>-->
+		<!--Works when your matrix is a square adjacency matrix of a graph.-->
+        <!--Dimensionality reduction by fuzzy graph clustering aka "community detection".-->
+        <!--<a href="http://140.123.102.14:8080/reportSys/file/paper/ccy2013/ccy2013_16_paper.pdf">paper</a>-->
+        <!--<a href="https://github.com/snap-stanford/snap">Stanford Network Analysis Platform</a>-->
+	<!--</section>-->
 
-	<section class="slide">
-		<h2>Life after DR</h2>
-		K-means
-	</section>
 
-	<section class="slide">
-		<h2>The case of Facebook</h2>
-		<ul>Starspace - dense embeddings</ul>
-		<ul>Faiss - k-means and k-nn on dense data</ul>
-		<ul>pysparnn - k-nn on sparse data</ul>
-	</section>
+
 
 	<section class="slide">
         <h2>Thank you</h2>
