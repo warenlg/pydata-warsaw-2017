@@ -289,7 +289,32 @@
 	</style>
 
 	<section class="slide">
+		<div class="shout-background" id="not-so-small"></div>
 		<h2 class="shout shrink">Not-so-small</h2>
+		<style>
+			.shout-background {
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				background-size: cover !important;
+            	background-repeat: no-repeat !important;
+            	background-position: center !important;
+			}
+			.shout-background:after {
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				background-color: rgba(0, 0, 0, 0.7);
+			}
+			#not-so-small {
+				background-image: url("pictures/shout_not-so-small.jpg");
+			}
+		</style>
 	</section>
 
 	<section class="slide">
@@ -420,7 +445,13 @@
 	</section>
 
 	<section class="slide">
+		<div class="shout-background" id="fighting"></div>
 		<h2 class="shout shrink">Fighting</h2>
+		<style>
+			#fighting {
+				background-image: url("pictures/shout_fighting.jpg");
+			}
+		</style>
 	</section>
 
 	<section class="slide">
@@ -948,7 +979,7 @@
 	</section>
 
 	<section class="slide">
-		<h2>Conclusion</h2>
+		<h2>What to choose?</h2>
 		<div class="chart-2x2">
 			<div>
 				<div>10s~100s GBs</div>
@@ -971,10 +1002,6 @@
 				</div>
 			</div>
 		</div>
-	</section>
-
-	<section class="slide">
-		<h2 class="shout shrink">Graph embeddings</h2>
 	</section>
 
 	<section class="slide">
@@ -1035,6 +1062,14 @@
 			}
 		</style>
 	</section>
+
+	<!--<section class="slide">-->
+		<!--<h2>BigCLAM</h2>-->
+		<!--Works when your matrix is a square adjacency matrix of a graph.-->
+        <!--Dimensionality reduction by fuzzy graph clustering aka "community detection".-->
+        <!--<a href="http://140.123.102.14:8080/reportSys/file/paper/ccy2013/ccy2013_16_paper.pdf">paper</a>-->
+        <!--<a href="https://github.com/snap-stanford/snap">Stanford Network Analysis Platform</a>-->
+	<!--</section>-->
 
 	<section class="slide">
 		<h2>Recommendation system: content based</h2>
@@ -1160,9 +1195,7 @@
 				object-fit: contain;
 			}
 		</style>
-
 	</section>
-
 
 	<section class="slide">
 		<h2>t-SNE</h2>
@@ -1200,23 +1233,44 @@
 		<ul>
 			<li>Complexity: O(s*M*N).</li>
 		</ul>
-		<img src="pictures/largevis.png" id="largevis">
+		<div id="largevis" class="vista"></div>
 		<style>
 			#largevis {
-				height: 200px;
-				object-fit: contain;
+				width: 800px;
+				height: 300px;
+				margin-top: -20px;
+				background-image: url("pictures/largevis_black.png");
+			}
+			@media not print {
+				#largevis {
+					background-image: url("pictures/largevis_white.png");
+				}
 			}
 		</style>
 
 	</section>
 
-	<!--<section class="slide">-->
-		<!--<h2>BigCLAM</h2>-->
-		<!--Works when your matrix is a square adjacency matrix of a graph.-->
-        <!--Dimensionality reduction by fuzzy graph clustering aka "community detection".-->
-        <!--<a href="http://140.123.102.14:8080/reportSys/file/paper/ccy2013/ccy2013_16_paper.pdf">paper</a>-->
-        <!--<a href="https://github.com/snap-stanford/snap">Stanford Network Analysis Platform</a>-->
-	<!--</section>-->
+	<section class="slide">
+		<div class="shout-background" id="conclusion"></div>
+		<h2 class="shout shrink">Conclusion</h2>
+		<style>
+			#conclusion {
+				background-image: url("pictures/shout_conclusion.jpg");
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<ul>
+			<li>Fit data into single node.</li>
+			<li>Reduce the amount of data.</li>
+			<li>Try a sparse-friendly model.</li>
+			<li>Eliminate outliers.</li>
+			<li>PCA can be good for pre-processing.</li>
+			<li>Embed and conquer.</li>
+			<li>Visualize early.</li>
+		</ul>
+	</section>
 
 	<section class="slide">
         <h2>Thank you</h2>
