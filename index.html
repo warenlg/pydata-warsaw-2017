@@ -276,11 +276,15 @@
 	</style>
 
 	<section class="slide">
+		<h2 class="shout shrink">Not-so-small</h2>
+	</section>
+
+	<section class="slide">
 		<h2>Complexity vs data size</h2>
 		<div class="chart-2x2">
 			<div>
 				<div>Fits 1 node</div>
-				<div>Not</div>
+				<div>≥ 2 nodes</div>
 			</div>
 			<div>
 				<div>
@@ -304,7 +308,7 @@
 	<section class="slide">
 		<h2>How to determine what's your size?</h2>
 		<ul>
-			<li>You do know what's a sparse matrix, don't you?</li>
+			<li>Is your data sparse or can be made sparse?</li>
 			<li>Does the processing fit into 256/512GB?</li>
 			<li>Does it take less than 1 hour/day/week?</li>
 			<li>Do you expect that it will not in the future?</li>
@@ -351,32 +355,6 @@
 	</section>
 
 	<section class="slide">
-		<h2>The case of Netflix</h2>
-		<div id="vectorflow">
-			<img src="pictures/vectorflow.png">
-			<ul>
-				<li>Sparse-aware</li>
-				<li>IO agnostic</li>
-				<li>Single-machine</li>
-			</ul>
-		</div>
-		<style>
-			#vectorflow {
-				display: flex;
-				height: 400px;;
-				align-items: center;
-			}
-			#vectorflow > img {
-				width: 400px;
-			}
-			#vectorflow > ul {
-				margin-left: 100px;
-				margin-bottom: 0;
-			}
-		</style>
-	</section>
-
-	<section class="slide">
 		<h2>Complexity vs scaling</h2>
 		<div class="chart-2x2">
 			<div>
@@ -403,18 +381,48 @@
 	</section>
 
 	<section class="slide">
+		<h2>The case of Netflix</h2>
+		<div id="vectorflow">
+			<img src="pictures/vectorflow.png">
+			<ul>
+				<li>Sparse-aware</li>
+				<li>IO agnostic</li>
+				<li>Single-machine</li>
+			</ul>
+		</div>
+		<style>
+			#vectorflow {
+				display: flex;
+				height: 400px;;
+				align-items: center;
+			}
+			#vectorflow > img {
+				width: 400px;
+			}
+			#vectorflow > ul {
+				margin-left: 100px;
+				margin-bottom: 0;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2 class="shout shrink">Fighting</h2>
+	</section>
+
+	<section class="slide">
 		<h2>Approaches</h2>
 		<ul class="columns">
+			<li>Duplicates Elimination</li>
 			<li>PCA</li>
-			<li>Truncated SVD</li>
 			<li>CUR</li>
 			<li>Topic Modeling</li>
 			<li>word2vec</li>
 			<li>node2vec</li>
 			<li>t-SNE</li>
 			<li>LargeVis</li>
-			<li>BigCLAM</li>
-			<li>Autoencoders</li>
+			<li>Community Detection</li>
+			<li>DSSM</li>
 		</ul>
 	</section>
 
@@ -422,9 +430,42 @@
 		<h2>PCA</h2>
 		<ul>
 			<li>The lowered number of dimensions depends on the explained variance ratio (EVR).</li>
-			<li>EVR = Σλ / trace(X<sup>T</sup>X)</li>
+			<li>EVR = <div class="frac"><span>Σλ<sup>2</sup></span><span>trace(X<sup>T</sup>X)</span></div></li>
 		</ul>
-		image - plot the dependency
+		<div class="vista" id="pca-var"></div>
+		<a class="source" id="pca-src" href="pca.ipynb">Source</a>
+		<style>
+			.frac {
+				display: inline-flex;
+				flex-direction: column;
+				text-indent: 0;
+				line-height: 1.2em;
+				text-align: center;
+				position: relative;
+				top: -0.6em;
+			}
+			.frac > * {
+				width: 100%;
+			}
+			.frac > *:first-child {
+				border-bottom: 1px solid white;
+			}
+			#pca-var {
+                width: 350px;
+                height: 200px;
+                background-image: url("pictures/pca_variance_black.png");
+            }
+            @media not print {
+                #pca-var {
+                    background-image: url("pictures/pca_variance_white.png");
+                }
+            }
+			#pca-src {
+				position: absolute;
+				left: 425px;
+				bottom: 55px;
+			}
+		</style>
 	</section>
 
 	<section class="slide">
@@ -434,7 +475,20 @@
 			<li>Does not work with sparse matrices.</li>
 			<li>Output is never sparse.</li>
 		</ul>
-		image - https://stats.stackexchange.com/questions/22329/how-does-centering-the-data-get-rid-of-the-intercept-in-regression-and-pca
+		<div class="vista" id="pca-offset"></div>
+		<style>
+			#pca-offset {
+                width: 800px;
+                height: 300px;
+				margin-top: -40px;
+                background-image: url("pictures/pca_offset_black.png");
+            }
+            @media not print {
+                #pca-offset {
+                    background-image: url("pictures/pca_offset_white.png");
+                }
+            }
+		</style>
 	</section>
 
 	<section class="slide">
@@ -443,7 +497,20 @@
 			<li>Unstable to outliers.</li>
 			<li>Possible solutions: filtering; log or any other damping function.</li>
 		</ul>
-		image - outlier
+		<div class="vista" id="pca-outlier"></div>
+		<style>
+			#pca-outlier {
+                width: 800px;
+                height: 300px;
+				margin-top: -10px;
+                background-image: url("pictures/pca_outlier_black.png");
+            }
+            @media not print {
+                #pca-outlier {
+                    background-image: url("pictures/pca_outlier_white.png");
+                }
+            }
+		</style>
 	</section>
 
 	<section class="slide">
@@ -454,7 +521,6 @@
 			<li>Supports sparse input.</li>
 			<li>Output is never sparse.</li>
 		</ul>
-		image - matrix decomposition
 	</section>
 
 	<section class="slide">
