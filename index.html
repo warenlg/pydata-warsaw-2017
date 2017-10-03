@@ -619,12 +619,12 @@
 		<h2>Sequential data</h2>
 		<div id="seq_data">
 			<ul>
-				<li>We are surrounded by sequential data</li>
+				<li>We are surrounded by sequential data:</li>
 				<ul>
 					<li>Texts, system logs, etc.</li>
 				</ul>
 
-				<li>Example: Usenet dataset</li>
+				<li>Usenet dataset example:</li>
 				<ul>
 					<li>Moderate size: ~7B words ~37GB.</li>
 					<li>A lot of unique entities.</li>
@@ -664,28 +664,28 @@
 
 	<section class="slide">
 		<h2>MinHash</h2>
-		<h3>How to reduce complexity of task without ML</h3>
+		<h3>How to reduce complexity of task without ML.</h3>
 		<ul>
-			<li>Efficient search for near-duplicates</li>
-			<li>Example: hard forks pf repositories</li>
+			<li>Efficient search for near-duplicates.</li>
+			<li>Example: hard forks of repositories.</li>
 			<ul>
-				<li>Initially: 13.6 M</li>
-				<li>After MinHash: 9.6 M</li>
-				<li>~30% dataset reduction</li>
+				<li>Initially: 13.6 M.</li>
+				<li>After MinHash: 9.6 M.</li>
+				<li>~30% dataset reduction.</li>
 			</ul>
-			<li><a href="https://github.com/src-d/minhashcuda">MinHash at GPU</a></li>
-			<li><a href="https://blog.sourced.tech/post/minhashcuda/">Blog post</a></li>
+			<li><a href="https://github.com/src-d/minhashcuda">MinHash + GPU</a>.</li>
+			<li><a href="https://blog.sourced.tech/post/minhashcuda/">Blog post</a>.</li>
 		</ul>
 	</section>
 
 	<section class="slide">
 		<h2>Embeddings</h2>
-		<h3>Properties</h3>
+		<h3>Properties:</h3>
 		<ul>
-			<li>Low-dimensional representation</li>
-			<li>Similar contexts -> similar embeddings</li>
-			<li>Analogies search (hi to <a href="https://github.com/facebookresearch/faiss">fb/faiss</a>)</li>
-			<li>Reasoning: W("woman") − W("man") ≃ W("queen") − W("king")</li>
+			<li>Low-dimensional representation.</li>
+			<li>Similar contexts -> similar embeddings.</li>
+			<li>Analogies search (hi to <a href="https://github.com/facebookresearch/faiss">fb/faiss</a>).</li>
+			<li>Reasoning: W("woman") − W("man") ≃ W("queen") − W("king").</li>
 		</ul>
 	</section>
 
@@ -693,13 +693,13 @@
 		<h2>word2vec - skip-gram</h2>
 		<div id="skip-gram">
 			<ul>
-				<li>Predicting the context given the word</li>
+				<li>Predicting the context given the word:</li>
 				<ul>
-					<li>Input: "mcube"</li>
-					<li>Output: "is", "a", "great", "conference"</li>
+					<li>Input: "mcube".</li>
+					<li>Output: "is", "a", "great", "conference".</li>
 				</ul>
-				<li>Works well even with small data</li>
-				<li>Represents well rare words</li>
+				<li>Works well even with small data.</li>
+				<li>Represents well rare words.</li>
 			</ul>
 			<div id="skip-gram-img" class="vista"></div>
 			<style>
@@ -736,13 +736,13 @@
 		<h2>word2vec - CBOW</h2>
 		<div id="cbow">
 			<ul>
-				<li>Predicting the word given its context</li>
+				<li>Predicting the word given its context.</li>
 				<ul>
-					<li>Input: "is", "a", "great", "conference"</li>
-					<li>Output: "mcube"</li>
+					<li>Input: "is", "a", "great", "conference".</li>
+					<li>Output: "mcube".</li>
 				</ul>
-				<li>Faster training than the skip-gram</li>
-				<li>Better accuracy for the frequent words</li>
+				<li>Faster training than the skip-gram.</li>
+				<li>Better accuracy for the frequent words.</li>
 			</ul>
 			<div id="cbow-img" class="vista"></div>
 			<style>
@@ -782,13 +782,13 @@
 		<h2>word2vec - <a href="https://github.com/facebookresearch/fastText">fastText</a></h2>
 		<div id="fastText">
 			<ul>
-				<li>Embeddings for char n-grams</li>
+				<li>Embeddings for char n-grams.</li>
 				<li>Emb(word)= Σ Emb(char n-gram)</li>
 				<ul>
-					<li>-> embeddings for unseen words</li>
+					<li>-> embeddings for unseen words.</li>
 				</ul>
-				<li>Classification of texts</li>
-				<li>Compression of models</li>
+				<li>Classification of texts.</li>
+				<li>Compression of models.</li>
 			</ul>
 			<img src="pictures/fasttext_size_vs_dur.png">
 
@@ -816,8 +816,8 @@
 
 		<div id="emb_explicit">
 			<ul>
-				<li>Global matrix factorization</li>
-				<li>Local context window</li>
+				<li>Global matrix factorization.</li>
+				<li>Local context window.</li>
 			</ul>
 			<div class="vista"></div>
 		</div>
@@ -890,11 +890,11 @@
 		<h2>Swivel</h2>
 		<div id="swivel_vocab">
 			<ul>
-				<li>Features</li>
+				<li>Features:</li>
 				<ul>
-					<li>Multi-GPU support</li>
-					<li>Scales with vocabulary size</li>
-					<li>Efficient sharding algorithm to distribute workload</li>
+					<li>Multi-GPU support.</li>
+					<li>Scales with vocabulary size.</li>
+					<li>Efficient sharding algorithm to distribute workload.</li>
 				</ul>
 			</ul>
 			<div id="swivel-vocab-img" class="vista"></div>
@@ -988,22 +988,22 @@
 		<ul>
 			<li>Social graphs, dependencies graphs, etc.</li>
 		</ul>
-		<p>Properties</p>
+		<p>Properties:</p>
 		<ul>
-			<li>Continuous feature representations for nodes in networks</li>
-			<li>Maximizes the likelihood of of preserving network neighborhoods of nodes</li>
+			<li>Continuous feature representations for nodes in networks.</li>
+			<li>Maximizes the likelihood of of preserving network neighborhoods of nodes.</li>
 		</ul>
 
 	</section>
 
 	<section class="slide">
 		<h2>node2vec</h2>
-		<p>Approach</p>
+		<p>Approach:</p>
 		<ul>
-			<li>Random walks over a graph - gives sequences of nodes</li>
-			<li>Sequences of nodes - stochastic approximation of graph</li>
-			<li>Use these sequences as input to word2vec / Swivel / etc. -> embeddings</li>
-			<li>As result: embeddings for nodes</li>
+			<li>Random walks over a graph - gives sequences of nodes.</li>
+			<li>Sequences of nodes - stochastic approximation of graph.</li>
+			<li>Use these sequences as input to word2vec / Swivel / etc. -> embeddings.</li>
+			<li>As result: embeddings for nodes.</li>
 		</ul>
 	</section>
 
@@ -1060,21 +1060,21 @@
 
 		<div id="wrap">
 			<div id="left_col">
-				<p>Domains</p>
+				<p>Domains:</p>
 				<ul>
-					<li>Personalization</li>
-					<li>Advertisements</li>
-					<li>Item recommendation</li>
-					<li>Search queries</li>
+					<li>Personalization.</li>
+					<li>Advertisements.</li>
+					<li>Item recommendation.</li>
+					<li>Search queries.</li>
 					<li>Etc.</li>
 				</ul>
 			</div>
 			<div id="right_col">
 				<p>Why not collaborative filtering?</p>
 				<ul>
-					<li>Cold start problem</li>
-					<li>New items</li>
-					<li>Long tail distribution</li>
+					<li>Cold start problem.</li>
+					<li>New items.</li>
+					<li>Long tail distribution.</li>
 				</ul>
 			</div>
 		</div>
@@ -1084,14 +1084,14 @@
 		<h2>Deep semantic similarity model</h2>
 		<div id="DSSM">
 			<ul>
-				<li><a href="https://www.microsoft.com/en-us/research/project/dssm/">Article</a></li>
-				<li>Term vector - 500k unique words</li>
+				<li><a href="https://www.microsoft.com/en-us/research/project/dssm/">Article</a>.</li>
+				<li>Term vector - 500k unique words.</li>
 				<li>3-grams of characters (30k):</li>
 				<ul>
 					<li>#bad# -> #ba, bad, ad#</li>
 				</ul>
-				<li>Deep representation</li>
-				<li>Cosine sim</li>
+				<li>Deep representation.</li>
+				<li>Cosine similarity.</li>
 			</ul>
 			<div class="vista"></div>
 		</div>
@@ -1122,22 +1122,22 @@
 		<h2>Worth to mention: <a href="https://arxiv.org/abs/1709.03856">fb/Starspace</a></h2>
 		<p>word2vec approach for everything:</p>
 		<ul>
-			<li>Text classification</li>
-			<li>Ranking of sets of entities</li>
-			<li>Collaborative filtering-based recommendation</li>
-			<li>Content-based recommendation</li>
-			<li>Embedding graphs</li>
-			<li>Learning word, sentence or document embeddings</li>
+			<li>Text classification.</li>
+			<li>Ranking of sets of entities.</li>
+			<li>Collaborative filtering-based recommendation.</li>
+			<li>Content-based recommendation.</li>
+			<li>Embedding graphs.</li>
+			<li>Learning word, sentence or document embeddings.</li>
 		</ul>
 	</section>
 
 	<section class="slide">
 		<h2>Life after DR</h2>
 		<ul>
-			<li>Fast search for similar items: <a href="https://github.com/facebookresearch/faiss">fb/faiss</a></li>
-			<li>Clustering: <a href="https://github.com/facebookresearch/faiss">fb/faiss</a> & <a href="https://github.com/src-d/kmcuda">src-d/kmcuda</a></li>
-			<li>Fast search for similar items on sparse data: <a href="https://github.com/facebookresearch/pysparnn">fb/pysparnn</a></li>
-			<li>Visualization - next slides</li>
+			<li>Fast search for similar items: <a href="https://github.com/facebookresearch/faiss">fb/faiss</a>.</li>
+			<li>Clustering: <a href="https://github.com/facebookresearch/faiss">fb/faiss</a> & <a href="https://github.com/src-d/kmcuda">src-d/kmcuda</a>.</li>
+			<li>Fast search for similar items on sparse data: <a href="https://github.com/facebookresearch/pysparnn">fb/pysparnn</a>.</li>
+			<li>Visualization - next slides.</li>
 		</ul>
 	</section>
 
@@ -1145,7 +1145,7 @@
 		<h2>Data visualization</h2>
 		<p>Task definition:</p>
 		<ul>
-			<li>We are given a collection of high-dim data</li>
+			<li>We are given a collection of high-dim data.</li>
 			<li>How can we get a feel for how these objects are arranged in space?</li>
 		</ul>
 	</section>
@@ -1174,12 +1174,11 @@
 		<h2>t-SNE</h2>
 		<div id="t-sne-idea">
 			<ul>
-				<li>Neighbor preservation</li>
-				<li>Distance preservation</li>
-				<li>Balance local and global aspects</li>
-				<li>Excellent <a href="https://distill.pub/2016/misread-tsne/">blog post</a></li>
-				<li>Complexity: O(d*N<sup>2</sup>)</li>
-				<li>d ~ 10<sup>~2</sup> -> max(N) ~ 10<sup>3~4</sup></li>
+				<li>Neighbor preservation.</li>
+				<li>Distance preservation.</li>
+				<li>Balance local and global aspects.</li>
+				<li>Excellent <a href="https://distill.pub/2016/misread-tsne/">blog post</a>.</li>
+				<li>Complexity: exact O(d*N<sup>2</sup>) & Barnes-Hut O(d*N*log(N)).</li>
 			</ul>
 			<img src="pictures/t_sne_idea.png">
 		</div>
@@ -1203,10 +1202,9 @@
 
 	<section class="slide">
 		<h2>LargeVis</h2>
-		<p>t-SNE on steroids</p>
+		<p>Large scale t-SNE replacement</p>
 		<ul>
-			<li>Complexity: O(s*M*N)</li>
-			<li>s ~ 2, M ~ 10s -> N ~ 10<sup>8~</sup></li>
+			<li>Complexity: O(s*M*N).</li>
 		</ul>
 		<img src="pictures/largevis.png" id="largevis">
 		<style>
