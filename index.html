@@ -1,186 +1,470 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Shower Presentation Engine</title>
+	<title>Analyzing GitHub, how developers change programming languages over time</title>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen-16x10.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen-16x10.css">
 </head>
 <body class="shower list">
+
 	<header class="caption">
-		<h1>Shower Presentation Engine</h1>
-		<p>Yours Truly, Famous Inc.</p>
+		<button type="button" id="fullscreen" title="Go fullscreen" onclick="fullscreen()"><i class="fa fa-arrows-alt"></i></button>
+		<h1>Analyzing GitHub, how developers change programming languages over time</h1>
+		<p>Waren Long, <a href="https://sourced.tech">source{d}</a>.</p>
 	</header>
+
+	<style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+        }
+        -webkit-full-screen {
+            z-index: 1;
+            height: 100%;
+        }
+        :-webkit-full-screen .full section {
+            /* fix buggy Chrome offsets */
+            margin-left: -1px !important;
+            margin-top: -1px !important;
+        }
+        @media not print {
+            .slide {
+                color: white;
+                background: black;
+            }
+            .slide h2 {
+                color: #bababa;
+            }
+        }
+        #fullscreen {
+            float: right;
+            height: 48px;
+            width: 48px;
+            background: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            border: none;
+            color: #3c3d40;
+            position: fixed;
+            right: 10px;
+			top: 10px;
+        }
+        #fullscreen:hover {
+            color: #bababa;
+        }
+        #fullscreen:focus {
+            outline: none;
+        }
+        #fullscreen > i {
+            font-size: 36px;
+            text-align: center;
+        }
+        .slide p {
+            line-height: 1.25;
+        }
+        .slide::after {
+            display: none;
+        }
+        .no-link {
+            background: none !important;
+        }
+        .center {
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h2.bottom {
+            position: absolute;
+            bottom: 50px;
+        }
+        .important {
+            color: red;
+        }
+        .mono {
+            font-family: monospace;
+        }
+        .video {
+            padding-top: 0;
+            padding-bottom: 10px;
+        }
+        .success {
+            color: green;
+        }
+        .vista {
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .vista-cover {
+            background-size: cover;
+        }
+        i.fa {
+            font-style: normal;
+        }
+        ul.no-bullets > li::before {
+            display: none;
+            text-indent: 0;
+        }
+        ul.no-bullets > li {
+            text-indent: 0;
+			padding-left: 0 !important;
+        }
+		ul.columns {
+			overflow: hidden;
+		}
+		ul.columns > li {
+			float: left;
+			display: inline;
+			width: 50%;
+			padding-left: 24px;
+		}
+		code.inline:before, code.inline-no-offset:before {
+			display: none;
+		}
+		code.inline, code.inline-no-offset {
+			padding: 0;
+		}
+		code.inline-no-offset {
+			margin-left: 0 !important;
+			padding-left: 50px !important;
+		}
+		.bottom-space {
+			margin-bottom: 2em !important;
+		}
+    </style>
+
 	<section class="slide" id="cover">
-		<h2>Shower Presentation Engine</h2>
-		<p>Brought to you by <a href="http://pepelsbey.net">Vadim Makeev</a></p>
-		<img src="pictures/cover.jpg" alt="" class="cover">
-		<!--
-			To apply styles to the certain slides
-			set slide ID to get needed elements
-			-->
-		<style>
-			#cover h2 {
-				margin:30px 0 0;
-				color:#FFF;
-				text-align:center;
-				font-size:70px;
-				}
-			#cover p {
-				margin:10px 0 0;
-				text-align:center;
-				color:#FFF;
-				font-style:italic;
-				font-size:20px;
-				}
-				#cover p a {
-					color:#FFF;
-					}
-		</style>
-	</section>
-	<section class="slide">
-		<h2>Shower key features</h2>
-		<ol>
-			<li>Built on HTML, CSS and vanilla JavaScript</li>
-			<li>Works in all modern browsers</li>
-			<li>Themes are separated from engine</li>
-			<li>Modular and extensible</li>
-			<li>Fully keyboard accessible</li>
-			<li>Printable to PDF</li>
-		</ol>
-		<p class="note">Shower ['ʃəuə] noun. A person or thing that shows.</p>
-	</section>
-	<section class="slide">
-		<h2>Plain text on your slides</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur <a href="#4">adipisicing</a> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <em>quis nostrud</em> exercitation ullamco laboris <strong>nisi ut aliquip</strong> ex ea commodo consequat. Duis aute irure <i>dolor</i> in reprehenderit in voluptate velit esse cillum <b>dolore</b> eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in <code>&lt;culpa&gt;</code> qui officia deserunt mollit anim id est laborum.</p>
-	</section>
-	<section class="slide">
-		<h2>Two columns if you like</h2>
-		<p class="double">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-	</section>
-	<section class="slide">
-		<h2>All kind of lists</h2>
-		<ol>
-			<li>Simple lists are marked with bullets</li>
-			<li>Ordered lists begin with a number</li>
-			<li>You can even nest lists one inside another
-				<ul>
-					<li>Or mix their types</li>
-					<li>But do not go too far</li>
-					<li>Otherwise audience will be bored</li>
-				</ul>
-			</li>
-			<li>Look, seven rows exactly!</li>
-		</ol>
-	</section>
-	<section class="slide">
-		<h2>Serious citations</h2>
+		<h2>Analyzing GitHub, how developers change programming languages over time</h2>
+		<p>Waren Long, <a class="no-link" href="https://sourced.tech">source{d}</a></p>
 		<figure>
-			<blockquote>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-			</blockquote>
-			<figcaption>Marcus Tullius Cicero</figcaption>
+			<img class="cover" src="pictures/eigenvect_stack_22lang_crop.png" alt="Hercules Killing the Lernean Hydra">
 		</figure>
-	</section>
-	<section class="slide">
-		<h2>Code samples</h2>
-		<pre>
-			<code>&lt;!DOCTYPE html&gt;</code>
-			<code class="mark">&lt;html lang="en"&gt;</code>
-			<code><mark>&lt;head&gt;</mark> <span class="comment">&lt;!--Comment--&gt;</span></code>
-			<code>    &lt;title&gt;Shower&lt;/title&gt;</code>
-			<code>    &lt;meta charset="<mark class="important">UTF-8</mark>"&gt;</code>
-			<code>    &lt;link rel="stylesheet" href="screen.css"&gt;</code>
-			<code><mark>&lt;/head&gt;</mark></code>
-		</pre>
-	</section>
-	<section class="slide">
-		<h2>Even tables</h2>
-		<table>
-		<tr>
-			<th scope="col">Locavore</th>
-			<th>Umami</th>
-			<th>Helvetica</th>
-			<th>Vegan</th>
-		</tr>
-		<tr>
-			<th scope="row">Fingerstache</th>
-			<td>Kale</td>
-			<td>Chips</td>
-			<td>Keytar</td>
-		</tr>
-		<tr>
-			<th scope="row">Sriracha</th>
-			<td>Gluten-free</td>
-			<td>Ennui</td>
-			<td>Keffiyeh</td>
-		</tr>
-		<tr>
-			<th scope="row">Thundercats</th>
-			<td>Jean</td>
-			<td>Shorts</td>
-			<td>Biodiesel</td>
-		</tr>
-		<tr>
-			<th scope="row">Terry</th>
-			<td>Richardson</td>
-			<td>Swag</td>
-			<td>Blog</td>
-		</tr>
-		</table>
-		<p>It’s good to have information organized.</p>
-	</section>
-	<section class="slide" id="picture">
-		<h2>Pictures</h2>
-		<img src="pictures/picture.jpg" alt="" class="cover">
 		<style>
-			#picture h2 {
-				color:#FFF;
-				}
+            #cover h2 {
+                margin:30px 0 0;
+                color:#FFF;
+                text-align:center;
+                font-size:70px;
+            }
+            #cover p {
+                margin:10px 0 0;
+                text-align:center;
+                color:#FFF;
+                font-style:italic;
+                font-size:20px;
+            }
+                #cover p a {
+                    color:#FFF;
+                }
+            #cover img {
+                width: 100%;
+                object-fit: cover;
+				filter: brightness(0.2);
+            }
+        </style>
+	</section>
+	
+	<section class="slide">
+			<h2>About me</h2>
+			<ul>
+				<li>Intern, Machine Learning @ <a href="http://sourced.tech">source{d}</a></li>
+				<li>Education: Optimization in Paris, France</li>
+			</ul>
+		</section>
+	
+		<section class="slide">
+			<h2>About source{d}</h2>
+			<ul>
+				<li>"AI on code"</li>
+				<li>We started as a hiring middleware</li>
+				<li>You may have read <a href="https://blog.sourced.tech/post/language_migrations/">"how developers change programming languages"</a></li>
+				<li>Open everything! <a href="https://github.com/src-d/landing">web site</a>,
+					<a href="https://github.com/src-d/guide">company rules</a>,
+					<a href="https://github.com/src-d/homebrew">brewery</a>
+				</li>
+				<li>Our technical blog <a href="https://blog.sourced.tech">blog</a></li>
+			</ul>
+		</section>
+
+	<section class="slide">
+		<h2>History</h2>
+		<ul>
+			<li>The story started from Erik Bernhardsson's blog post 
+				<a href="https://erikbern.com/2017/03/15/the-eigenvector-of-why-we-moved-from-language-x-to-language-y.html">The eigenvector of "Why we moved from language X to language Y"</a></li>
+			<li>source{d} opened the 
+				<a href="https://drive.google.com/drive/u/0/folders/0B-w8jGUJto0iVFB2UWc4RlpZV28">dataset</a> containing the language distribution of repositories on GitHub</li>
+			<li>We decided to study <a href="https://blog.sourced.tech/post/language_migrations/">the popularity of languages</a></li> based on developers movings</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>The dataset</h2>
+		<ul>
+			<li>4.5 Million GitHub users</li>
+			<li>393 different languages</li>
+			<li>10 TB of source code in total</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+        <h2>The dataset</h2>
+		<figure>
+			<img src="pictures/gantt_black.png" class="center" id="spark">
+			<figcaption class="black">
+				<a href="https://github.com/apache/spark/commit/7026ee23e0a684e13f9d7dfbb8f85e810106d022#diff-916ca56b663f178f302c265b7ef38499">apache/spark@7026ee23</a>
+			</figcaption>
+		</figure>
+		<style>
+			#spark {
+				height: 400px;
+			}
+			#spark + figcaption {
+				position: absolute;
+				bottom: 50px;
+				right: 180px;
+				font-size: 12px;
+				-webkit-transform-origin: 0 100%;
+				transform-origin: 0 100%;
+				-webkit-transform: translateX(100%) rotate(-90deg);
+				transform: translateX(100%) rotate(-90deg);
+			}
 		</style>
 	</section>
+
 	<section class="slide">
-		<h2 class="shout shrink">You can even shout this way</h2>
-	</section>
-	<section class="slide">
-		<h2>Inner navigation</h2>
-		<ol>
-			<li>Lets you reveal list items one by one</li>
-			<li class="next">To keep some key points</li>
-			<li class="next">In secret from audience</li>
-			<li class="next">But it will work only once</li>
-			<li class="next">Nobody wants to see the same joke twice</li>
-		</ol>
-	</section>
-	<section class="slide grid">
-		<h2>All nicely aligned to grid</h2>
-	</section>
-	<section class="slide" id="see-more">
-		<h2 class="shout">
-			<img src="pictures/logo.svg" alt="Shower logo">
-			<a href="https://github.com/shower/shower">See more on GitHub</a>
-		</h2>
+		<h2>Quantization</h2>
+		<p class="no-margin">We apply Snowball stemmer to words longer than 6 chars</p>
+		<div class="vista center" id="name-lengths"></div>
 		<style>
-			#see-more h2 {
-				font-size:100px
-				}
-			#see-more img {
-				width:0.72em;
-				height:0.72em;
-				}
+			#name-lengths {
+				height: 400px;
+				width: 600px;
+				margin-top: -50px;
+				background: white url("pictures/contributions_black.png");
+			}
 		</style>
 	</section>
-	<p class="badge">
-		<a href="https://github.com/shower/shower">Fork me on GitHub</a>
-	</p>
-	<!--
-		To hide progress bar from entire presentation
-		just remove “progress” element.
-		-->
+
+	<section class="slide">
+        <h2>Quantization</h2>
+		<figure>
+			<img src="pictures/contributions_black.png" class="center" id="spark">
+			<figcaption class="black">
+				<a href="https://github.com/apache/spark/commit/7026ee23e0a684e13f9d7dfbb8f85e810106d022#diff-916ca56b663f178f302c265b7ef38499">apache/spark@7026ee23</a>
+			</figcaption>
+		</figure>
+		<style>
+			#spark {
+				height: 400px;
+			}
+			#spark + figcaption {
+				position: absolute;
+				bottom: 50px;
+				right: 180px;
+				font-size: 12px;
+				-webkit-transform-origin: 0 100%;
+				transform-origin: 0 100%;
+				-webkit-transform: translateX(100%) rotate(-90deg);
+				transform: translateX(100%) rotate(-90deg);
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+        <h2>Transportation Problem</h2>
+		<figure>
+			<img src="pictures/emd_black.png" class="center" id="spark">
+			<figcaption class="black">
+				<a href="https://github.com/apache/spark/commit/7026ee23e0a684e13f9d7dfbb8f85e810106d022#diff-916ca56b663f178f302c265b7ef38499">apache/spark@7026ee23</a>
+			</figcaption>
+		</figure>
+		<style>
+			#spark {
+				height: 400px;
+			}
+			#spark + figcaption {
+				position: absolute;
+				bottom: 50px;
+				right: 180px;
+				font-size: 12px;
+				-webkit-transform-origin: 0 100%;
+				transform-origin: 0 100%;
+				-webkit-transform: translateX(100%) rotate(-90deg);
+				transform: translateX(100%) rotate(-90deg);
+			}
+		</style>
+	</section>
+    
+    <section class="slide">
+        <h2>EMD as minimum-cost flow</h2>
+        <div id="hcenter">
+        <p class="center">$$
+			\left\{
+			\begin{array}{lll}
+			\min   & \sum_{i=1}^S \sum_{j=1}^D ~ x_{i,j} c_{i,j} \\\\
+			s.c.   & \sum_{j=1}^D x_{i,j} = 1 & ~~i = 1,...,S   \\\\
+				   & \sum_{i=1}^S x_{i,j} = 1 & ~~j = 1,...,D   \\\\
+				   & x_{i,j} \geq 0 & ~~i,j = 1,...,S,D
+			\end{array}
+			\right.
+			$$</p>
+        </div>
+        <style>
+            #hcenter {
+                display: flex;
+                align-items: center;
+            }
+        </style>
+	</section>
+
+    <section class="slide" id="matrix">
+        <div class="vista"></div>
+		<h2>Transition</h2>
+        <h2>Matrix</h2>
+        <style>
+            #matrix > div {
+                position: absolute;
+                left: 15%;
+                top: 10%;
+                width: 100%;
+                height: 85%;
+                background-image: url("pictures/sum_matrix_0diag_22lang_black.png");
+            }
+        </style>
+    </section>
+	
+	<section class="slide">
+        <h2>Importance</h2>
+        <p>"Importance" is defined recursively: we gain ego if we contribute to repositories to which other important developers contribute.</p>
+        <p>\[x_ {AR} = \frac{w_ 1 x_ 1 + w_ 2 x_ 2 + w_ 3 x_ 3 + ...}{\lambda} = \frac{1}{\lambda} \sum w_ i x_ i\]</p>
+        <p>We do not distinguish developers and repositories here.</p>
+	</section>
+	
+	<section class="slide" id="matrix-sorted">
+        <div class="vista"></div>
+		<h2>Transition</h2>
+        <h2>Matrix Sorted</h2>
+        <style>
+            #matrix-sorted > div {
+                position: absolute;
+                left: 15%;
+                top: 10%;
+                width: 100%;
+                height: 85%;
+                background-image: url("pictures/sum_matrix_25lang_eig_black.png");
+            }
+        </style>
+	</section>
+	
+	<section class="slide" id="stack">
+        <div class="vista"></div>
+		<h2>Language</h2>
+        <h2>Competition</h2>
+        <style>
+            #stack > div {
+                position: absolute;
+                left: 15%;
+                top: 10%;
+                width: 100%;
+                height: 85%;
+                background-image: url("pictures/eigenvect_stack_22lang.png");
+            }
+        </style>
+    </section>
+	
+	<section class="slide" id="correlation-matrix">
+        <div class="vista"></div>
+		<h2>Correlation</h2>
+        <h2>Matrix</h2>
+        <style>
+            #correlation-matrix > div {
+                position: absolute;
+                left: 15%;
+                top: 10%;
+                width: 100%;
+                height: 85%;
+                background-image: url("pictures/corr_matrix_23lang_black.png");
+            }
+        </style>
+	</section>
+
+
+
+	<section class="slide">
+		<h2>Bonus: blog posts</h2>
+		<ul>
+			<li><a href="https://blog.sourced.tech/post/activity_hours/">Daily commit activity on GitHub</a></li>
+			<li><a href="https://blog.sourced.tech/post/handshakes_pagerank/">GitHub Contributions Graph: Analyzing PageRank & Proving The 6 Handshakes Theory</a></li>
+			<li><a href="https://blog.sourced.tech/post/tab_vs_spaces/">397 Languages, 18,000,000 GitHub repositories, 1.2 billion files, 20 terabytes of code: Spaces or Tabs</a></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+        <h2>Thank you</h2>
+        <ul class="no-bullets columns bottom-space">
+			<li>My contacts</li>
+			<li>source{d}</li>
+			<li><i class="fa fa-envelope"></i> <a href="mailto://waren@sourced.tech">waren@sourced.tech</a></li>
+			<li><i class="fa fa-envelope"></i> <a href="mailto://hello@sourced.tech">machine-learning@sourced.tech</a></li>
+			<li><i class="fa fa-twitter"></i> <a href="https://twitter.com/warenlg">warenlg</a></li>
+			<li><i class="fa fa-twitter"></i> <a href="https://twitter.com/srcd_">srcd_</a></li>
+            <li><i class="fa fa-github"></i> <a href="https://github.com/warenlg">warenlg</a></li>
+			<li><i class="fa fa-github"></i> <a href="https://github.com/src-d">src-d</a></li>
+			<li><i class="fa fa-rss"></i> <a href="https://blog.sourced.tech/post/language_migrations/">blog post</a></li>
+			<li><i class="fa fa-rss"></i> <a href="https://sourced.tech/">sourced.tech</a></li>			
+			
+		</ul>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<div class="progress"></div>
-	<script src="node_modules/shower-core/shower.min.js"></script>
-	<!-- Copyright © 2015 Yours Truly, Famous Inc. -->
-	<!-- Photos by John Carey, fiftyfootshadows.net -->
+
+	<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"></script>
+	<script src="shower/shower.min.js"></script>
+	<script async src="https://use.fontawesome.com/72adc0539b.js"></script>
+	<script>
+    function fullscreen() {
+        if (!document.fullscreenElement && !document.mozFullScreenElement &&
+			!document.webkitFullscreenElement) {
+            var body = document.getElementsByTagName("html")[0];
+            if (body.requestFullscreen) {
+                body.requestFullscreen();
+            } else if (body.mozRequestFullScreen) {
+                body.mozRequestFullScreen();
+            } else if (body.webkitRequestFullScreen) {
+                body.webkitRequestFullScreen();
+            }
+            document.getElementById("fullscreen").title = "Return";
+        } else {
+            if (document.cancelFullScreen) {
+                document.cancelFullScreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+            }
+            document.getElementById("fullscreen").title = "Go fullscreen";
+        }
+    }
+    </script>
 </body>
 </html>
+
+
