@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">width: 100%;
 <head>
-	<title>How AI can help programmers write better code ?</title>
+	<title>Empower developers with ML-assisted code review</title>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
@@ -11,7 +11,7 @@
 
 	<header class="caption">
 		<button type="button" id="fullscreen" title="Go fullscreen" onclick="fullscreen()"><i class="fa fa-arrows-alt"></i></button>
-		<h1>How AI can help programmers write better code ?</h1>
+		<h1>Empower developers with ML-assisted code review</h1>
 		<p>Waren Long, <a href="https://sourced.tech">source{d}</a>.</p>
 	</header>
 
@@ -26,7 +26,7 @@
         }
         :-webkit-full-screen .full section {
             /* fix buggy Chrome offsets */
-            margin-left: -1px !important;
+left: -1px !important;            margin-
             margin-top: -1px !important;
         }
         @media not print {
@@ -162,8 +162,8 @@
     </style>
     
     <section class="slide vista vista-cover" id="cover">
-        <h2 class="black">How AI can help programmers write<br>better code ?</h2>
-        <p class="black">AI & Society - March 4, 2019</p>
+        <h2 class="black">Empower developers with ML<br>assisted code review</h2>
+        <p class="black">AI Meetup - April 18, 2019</p>
         <p class="black">Waren Long</p>
         <p><a href="https://sourced.tech">source{d}</a></p>
 
@@ -207,11 +207,11 @@
             <h2>About source{d}</h2>
             <ul>
                 <li>35 software engineers</li>
-                <li>Offices in Madrid and San Francisco but 100% remote</li>
-                <li>Large scale code analysis and 2 main directions :</li>
+                <li>Offices in Madrid and San Francisco but fully remote</li>
+                <li>2 main directions :</li>
                     <ol>
                         <li><b>Code as Data</b> to turn code into actionable insights</li>
-                        <li><b>ML on Code</b> with assisted code review</li>
+                        <li><b>ML on Code</b> e.g. assisted code review</li>
                     </ol>
             </ul>
             <p class="source-web"><a href="https://sourced.tech/">sourced.tech</a></p>
@@ -220,9 +220,9 @@
     <section class="slide vista" id="plan">
         <h2>Plan</h2>
         <ol>
-            <li>MLonCode, Origins & Motivation</li>
-            <li>Lookout, a Framework for Assisted Code Review</li>
-            <li>style-analyzer, an Adaptative Code Formatter</li>
+            <li>ML on Code: Origins & Motivation</li>
+            <li>Lookout</li>
+            <li>style-analyzer</li>
         </ol>
         <figure>
 			<img class="cover" src="pictures/plan.png" alt="Cover picture">
@@ -239,7 +239,7 @@
     </section>
 
     <section class="slide part">
-        <h2 class="shout shout-smaller">MLonCode</h2>
+        <h2 class="shout shout-smaller">ML on Code</h2>
     </section>
 
     <section class="slide" id="workflow">
@@ -248,18 +248,17 @@
         <style>
             .workflow {
                 position: absolute;
-                top: 200px;
+                top: 220px;
                 width: 800px;
             }
             #workflow ul {
-                margin: 170px 0 0;
+                margin: 220px 0 0;
             }
         </style>
         <ul>
-            <li>5h/week, 13% of coding time, generally done by senior developers</li>
+            <li>5h/week, 13% of coding time, generally done by Sr developers</li>
             <li>72% of developers work with blocking code reviews</li>
             <li>45% of developers lack time to review code</li>
-            <li>Stricter code reviews lead to more time delivering new features instead of fixing bugs.</li>
         </ul>
         <p class="source-web"><a href="https://www.codacy.com/blog/10-facts-about-code-reviews-and-quality/">codacy.com/blog</a></p>
     </section>
@@ -278,7 +277,7 @@
 
     <section class="slide">
         <h2>PR Review Comments on GitHub by Topic</h2>
-        <img src="pictures/pr_comments_topics2.png" class="pr-comments">
+        <img src="pictures/review_comments.svg" class="pr-comments">
         <style>
             .pr-comments {
                 position: absolute;
@@ -286,12 +285,12 @@
                 width: 600px;
             }
         </style>
-        <p class="source-web">dataset extracted from <a href="https://www.gharchive.org/">gharchive.org</a> , January 2015</p>
+        <p class="source-web"><a href="https://github.com/src-d/datasets/tree/master/ReviewComments">dataset</a> collected from <a href="https://www.gharchive.org/">gharchive.org</a></p>
     </section>
 
     <section class="slide" id="ml-perspective">
-        <h2>The Machine Learning Perspective</h2>
-        <h3>The Alternative Hypothesis</h3>
+        <h2>The Alternative Hypothesis</h2>
+        <!-- <h3>The Alternative Hypothesis</h3> -->
         <p><i>"Programming languages are inherently harder to write and read... so programmers deliberately write code as <b>unsurprising</b> as possible."</i></p>
         <p><i>"Code (in all languages) is more predicatble than natural language because it more <b>technical</b> and difficult to learn."</i></p>
         <p class="source"><a href="http://earlbarr.com/publications/naturalness_cacm.pdf">On the Naturalness of Software</a><br>&emsp; P. Devanbu et al. 2016</p>
@@ -303,8 +302,8 @@
     </section>
 
     <section class="slide" id="ml-perspective">
-        <h2>The Machine Learning Perspective</h2>
-        <h3>Software is bimodal</h3>
+        <h2>Software is bimodal</h2>
+        <!-- <h3>Software is bimodal</h3> -->
         <p><i>"Source code is bimodal: it combines a formal algorithmic channel and a natural language channel of identifiers and comments. Because the two channels interact, [...] bimodality is a natural fit for machine learning."</i></p>
         <p class="source"><a href="https://miltos.allamanis.com/publicationfiles/dash2018refinym/dash2018refinym.pdf">RefiNym: Using Names to Refine Types</a><br>&emsp; E. Barr et al, 2018</p>
         <!-- <p><i>"Promising results on real world data & profitable to model source code and NL together. Multiplicative combination of modalities is necessary. Need for better, curated datasets to advance the quality of the bimodal models of source code & NL."</i></p> -->
@@ -326,13 +325,13 @@
                         <li>Periodically, asynchronously</li>
                     </ul>
                 </div>
-                <div class="column">
-                    <ul>Pros and Cons :
-                            <li class="pros">Part of the workflow</li>
-                            <li class="pros">More time to run the models</li>
-                            <li class="pros">Nice UI</li>
-                            <li class="cons">High precision score required</li>
-                            <li class="cons">Longer feedback loop</li>
+                <div class="column pros-cons" id="pros-cons">
+                    <ul>
+                        <li class="pros">Part of the workflow</li>
+                        <li class="pros">More time to run the models</li>
+                        <li class="pros">Nice UI</li>
+                        <li class="cons">High precision score required</li>
+                        <li class="cons">Longer feedback loop</li>
                     </ul>
                 </div>
             </div>
@@ -348,7 +347,7 @@
                     color: red;
                 }
                 .cons::before {
-                    content: "+" !important;
+                    content: "-" !important;
                     color: red;
                 }
                 .li-selected {
@@ -364,6 +363,9 @@
                     color: white;
                     margin-left: 0.5em;
                 }
+                #pros-cons ul {
+                    margin-left: 50px;
+                }
             </style>
     </section>
 
@@ -372,7 +374,7 @@
         <ul>
             <li>Assisted code review platform</li>
             <li>Tight git/GitHub integration</li>
-            <li>Implementation language agnostic</li>
+            <li>Language agnostic</li>
             <li>Batteries included</li>
         </ul>
     </section>
@@ -394,12 +396,12 @@
 
         <section class="slide">
                 <h2>Architecture</h2>
-                <img src="pictures/lookout_arch.svg" class="lookout-diagram">
+                <img src="pictures/lookout_arch_draw.svg" class="lookout-diagram">
                 <style>
                     .lookout-diagram {
                         position: absolute;
                         width: 800px;
-                        top: 250px;
+                        top: 220px;
                         left: 100px;
                     }
                 </style>
@@ -482,18 +484,19 @@
             <li>Parse to intermediate representation</li>
             <li>Train Decision Tree Forest</li>
             <li>Extract production rules</li>
+            <li>Generate fixes from mismatched predictions</li>
         </ol>
     </section>
     
     
     <section class="slide" id="representations">
         <h2>Representations of Source Code</h2>
-        <img src="pictures/snippet_ast2.png" class="representations">
+        <img src="pictures/snippet2.png" class="representations">
         <style>
             .representations {
                 position: absolute;
                 right:100px;
-                top: 210px;
+                top: 200px;
                 width: 400px;
             }
             #representations > p:nth-of-type(1) {
@@ -529,33 +532,88 @@
     </section> -->
     
     <section class="slide">
-        <h2>Babelfish, a Universal Code Parser</h2>
+        <h2>  </h2>
+        <a href="https://doc.bblf.sh"><img class="center" src="pictures/bblfsh-logo.png"></a>
+        <div class="vista center" id="bblfsh-arch"></div>
+        <p class="source-web"><a href="https://doc.bblf.sh/architecture.html">doc.bblf.sh/architecture</a></p>
+        <style>
+            #bblfsh-arch {
+                width: 600px;
+                height: 100px;
+                background-image: url("pictures/bblfsh-arch-black.png");
+            }
+            @media not print {
+                #bblfsh-arch {
+                    background-image: url("pictures/bblfsh-arch-white.png");
+                }
+            }
+        </style>
+    </section>
+
+    <!-- <section class="slide">
+        <h2>Babelfish</h2>
         <ul>
-            <li>Aims to parse any file in any language</li>
-            <li>Extracts ASTs and converts them to <b>uniform</b> structures</li>
+            <li>Universal code parser</li>
+            <li>Extracts ASTs into <b>uniform</b> structures</li>
+            <li>Currently supports 10 languages</li>
             <li>Standard node properties</li>
-            <li>Client/server system that supports XPath queries</li>
+            <li>Supports XPath queries</li>
             <li>4 traversal orders</li>
         </ul>
         <p class="source-web"><a href="https://doc.bblf.sh/architecture.html">doc.bblf.sh/architecture</a></p>
-    </section>
+    </section> -->
 
     <section class="slide" id="classes">
         <h2>Classes Predicted by style-analyzer</h2>
-        <ul>
-            <li>␣ &emsp; whitespace</li>
-            <li>→ &emsp; tabulation</li>
-            <li>↲ &emsp; newline</li>
-            <li>␣+/- &emsp; whitespace indentation increase/decrease</li>
-            <li>→+/- &emsp; tabulation indentation increase/decrease</li>
-            <li>'/" &emsp; single/double quotes</li>
-            <li>∅ &emsp; empty gaps between non-label nodes, NOOP</li>
-        </ul>
+        <table cellpadding="100">
+            <tr>
+                <td class="label">␣</td>
+                <td class="description">whitespace</td>
+            </tr>
+            <tr>
+                <td class="label">→</td>
+                <td class="description">tabulation</td>
+            </tr>
+            <tr>
+                <td class="label">&#8626</td>
+                <td class="description">newline</td>
+            </tr>
+            <tr>
+                <td class="label">␣+/-</td>
+                <td class="description">whitespace indentation increase/decrease</td>
+            </tr>
+            <tr>
+                <td class="label">→+/-</td>
+                <td class="description">tabulation indentation increase/decrease</td>
+            </tr>
+            <tr>
+                <td class="label">'/"</td>
+                <td class="description">single/double quotes</td>
+            </tr>
+            <tr>
+                <td class="label">&#8709</td>
+                <td class="description">empty gaps between non-label nodes, NOOP</td>
+            </tr>
+        </table>
         <style>
-                #classes li:before {
-                    content: "";
-                }
-            </style>
+            .label {
+                text-align: left;
+                width: 25%;
+
+            }
+            .description {
+                text-align: left;
+                width: 90%;
+
+            }
+            #classes table, td {
+                margin-left: -20px;
+                border-collapse: collapse;
+                /* border: 1px solid white; */
+                width: 95%;
+                /* width: 80%; */
+            }
+        </style>
     </section>
 
     
@@ -570,11 +628,10 @@
     
     
     <section class="slide">
-        <h2>Mixed representation</h2>
-        <p>AST-augmented token stream<br>with virtual nodes</p>
+        <h2>Feature Extraction</h2>
         <img src="pictures/vnodes.svg" id="vnodes" class="diagram diagram-right">
-        <pre><code>a = b * 2</code></pre>
-        <ul>Feature extraction :
+        <ul>
+            <li>AST-augmented token stream</li>
             <li>Window size of 10 tokens</li>
             <li>2 levels up in the AST hierarchy</li>
         </ul>
@@ -584,22 +641,32 @@
             }
             .diagram-right {
                 position: absolute;
-                top: 207px;
+                top: 200px;
                 right: 80px;
             }
+            /* @media print {
+                .slide {
+                    background-color: black !important;
+                    -webkit-print-color-adjust: exact; 
+    } */
+}
         </style>
     </section>
 
-    <section class="slide">
+    <section class="slide" id="annotated-snippet">
         <h2>Annotated Code Snippet with Style Mistakes</h2>
-        <img src="pictures/snippet_style_black.png" class="lookout-events">
-        <style>
-            .lookout-events {
-                position: absolute;
-                width: 800px;
-                top: 250px;
-                left: 90px;
-            }
+        <pre><code><span style="color: darkgreen">&#8709</span>function<span style="color: darkgreen">&#9251</span>classesToArray<span style="color: darkgreen">&#8709</span>(<span style="color: darkgreen">&#9251</span>value<span style="color: darkgreen">&#9251</span>)<span style="color: darkgreen">&#9251</span>{<span style="color: darkgreen">&#8626</span></code>
+             <code><span style="color: darkgreen">&#8677</span>   if<span style="color: darkgreen">&#9251</span>(<span style="color: darkgreen">&#9251</span>isArray<span style="color: darkgreen">&#8709</span>(<span style="color: darkgreen">&#9251</span>value<span style="color: darkgreen">&#9251</span>)<span style="color: lightgreen">&#9251</span>)<span style="color: lightgreen">&#9251</span>{<span style="color: red">&#8709</span>return<span style="color: lightgreen">&#9251</span>value<span style="color: lightgreen">&#8709</span>;<span style="color: darkred">&#8709</span>}</code>
+             <code>    if<span style="color: darkgreen">&#9251</span>(<span style="color: darkgreen">&#9251</span>typeof<span style="color: darkgreen">&#9251</span>value<span style="color: darkgreen">&#9251</span>===<span style="color: darkgreen">&#9251"</span>string<span style="color: darkgreen">"&#9251</span>)<span style="color: darkgreen">&#9251</span>{<span style="color: darkgreen">&#8626</span></code>
+             <code><span style="color: darkgreen">&#8677</span>       return<span style="color: darkgreen">&#9251</span>value<span style="color: darkgreen">&#8709</span>.<span style="color: darkgreen">&#8709</span>match(<span style="color: darkgreen">&#9251</span>rnothtml<span style="color: darkgreen">&#9251</span>)<span style="color: darkgreen">&#9251</span>||<span style="color: darkgreen">&#9251</span>[]<span style="color: darkgreen">&#8709</span>;<span style="color: darkgreen">&#8626</span></code>
+             <code><span style="color: darkgreen">&#8676</span>   }<span style="color: darkgreen">&#8626</span></code>
+             <code>    return<span style="color: darkgreen">&#9251</span>[]<span style="color: darkgreen">&#8709</span>;<span style="color: darkgreen">&#8626</span></code>
+             <code><span style="color: darkgreen">&#8676</span>}<span style="color: darkgreen">&#8709</span></code>
+        </pre>
+        <style>        
+            #annotated-snippet pre {
+                    color: rgb(173, 173, 173);
+                }
         </style>
     </section>
     
@@ -612,9 +679,9 @@
             <h2>Explainability is key</h2>
             <ul>
                 <li>Build trust with the users</li>
-                <li>Prefer interpretable output with human-readble decisions</li>
+                <li>Prefer interpretable output with human-readable decisions</li>
                 <li>Decision Tree Forest models</li>
-                <li>Optimization to limit the number and length of the rules </li>
+                <li>Optimize the number and the lengths of the rules</li>
             </ul>
             <p class="source"><a href="https://www.ijcai.org/Proceedings/87-1/Papers/063.pdf">Generating Production Rules From Decision Trees</a><br>&emsp; J.R. Quinlan, 1987</p>
     </section>
@@ -778,16 +845,16 @@
     </section> -->
 
     <section class="slide" id="applications">
-        <h2>Code as Data and MLonCode Applications</h2>
+        <h2>Code as Data and ML on Code Applications</h2>
         <ul>
-            <li>Clone Detection :&emsp; <a href="https://github.com/src-d/gemini">src-d/gemini</a></li>
-            <li>Topic Modeling :&emsp; <a href="https://github.com/src-d/vecino">src-d/vecino</a></li>
-            <li>Developer Similarity :&emsp; <a href="https://github.com/src-d/dev-similarity">src-d/dev-similarity</a></li>
-            <li>Git Repository Analysis :&emsp; <a href="https://github.com/src-d/gitbase">src-d/gitbase</a>&emsp; and &emsp;<a href="https://github.com/src-d/hercules">src-d/hercules</a>
+            <li>Clone Detection:&emsp; <a href="https://github.com/src-d/gemini">src-d/gemini</a></li>
+            <li>Topic Modeling:&emsp; <a href="https://github.com/src-d/vecino">src-d/vecino</a></li>
+            <li>Developer Similarity:&emsp; <a href="https://github.com/src-d/dev-similarity">src-d/dev-similarity</a></li>
+            <li>Git Repository Analysis:
                 <ul>
-                    <li> Security
-                    <li> Productivity and Collaboration
-                    <li> Talent Management
+                    <li> <a href="https://github.com/src-d/engine">src-d/engine</a>
+                    <li> <a href="https://github.com/src-d/gitbase">src-d/gitbase</a>
+                    <li> <a href="https://github.com/src-d/hercules">src-d/hercules</a>
                 </ul>
             </li>
             <!-- <li>Code Suggestion :<br>&emsp; <a href="https://homepages.inf.ed.ac.uk/csutton/publications/accurate-method-and-class.pdf">Suggesting Accurate Method and Class Names</a>, C. Sutton et al. 2015</li>
@@ -800,7 +867,7 @@
                 line-height:40px;
             }
         </style> -->
-        <p class="source-web"><a href="https://github.com/src-d/awesome-machine-learning-on-source-code">src-d/awesome-mloncode</a></p>
+        <!-- <p class="source-web">Research links <a href="https://github.com/src-d/awesome-machine-learning-on-source-code">src-d/awesome-mloncode</a></p> -->
     </section>
     
     <!-- <section class="slide">
@@ -816,7 +883,7 @@
         <h2>Thank you</h2>
         <div class="row">
             <div class="column">
-                <p>Contacts :</p>
+                <p>Contacts:</p>
                 <!-- <p>Slides available at <a href="https://warenlg.github.io/ai-society-paris-2019/#">warenlg.github.io/ai-society-paris-2019</a></p> -->
                 <ul class="no-bullets">
                     <li><i class="fa fa-envelope"></i> <a href="mailto://waren@sourced.tech">waren@sourced.tech</a></li>
@@ -826,7 +893,7 @@
             </ul>
             </div>
             <div class="column">
-                <p>Materials :</p>
+                <p>Ressources:</p>
                 <!-- <p>Slides available at <a href="https://warenlg.github.io/ai-society-paris-2019/#">warenlg.github.io/ai-society-paris-2019</a></p> -->
                 <ul class="no-bullets">
                     <li><a href="https://warenlg.github.io/ai-society-2019-paris/">slides</a></li>
@@ -839,8 +906,9 @@
         </div>
     </section>
 
-	<div class="progress"></div>
-
+    <div class="progress"></div>
+    
+	<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"></script>
 	<script src="node_modules/shower-core/shower.min.js"></script>
 	<script async src="https://use.fontawesome.com/72adc0539b.js"></script>
 	<script>
