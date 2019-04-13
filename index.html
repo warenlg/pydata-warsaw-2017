@@ -20,10 +20,13 @@ MYURL
     <meta property="og:description" content="MYDESCRIPTION" />
     <meta property="og:image" content="https://vmarkovtsev.github.io/MYURL/pictures/cover.jpg" />
     <meta property="twitter:image" content="https://vmarkovtsev.github.io/MYURL/pictures/cover.jpg" />
-	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/styles.css">
+    <link rel="stylesheet" href="node_modules/shower-ribbon/styles/styles.css">
+    <link rel="stylesheet" href="fonts/Proxima_Nova/font.css">
+    <link rel="stylesheet" href="fonts/Source_Sans_Pro/font.css">
     <style>
         .shower {
             --slide-ratio: calc(16 / 9);
+            font-family: 'Source Sans Pro', sans-serif;
         }
     </style>
 </head>
@@ -48,6 +51,9 @@ MYURL
             /* fix buggy Chrome offsets */
             margin-left: -1px !important;
             margin-top: -1px !important;
+        }
+        .slide h2 {
+            font-family: 'Proxima Nova', sans-serif;
         }
         @media not print {
             .slide {
@@ -90,6 +96,9 @@ MYURL
         .slide::after {
             display: none;
         }
+        .slide li::before {
+            opacity: 1 !important;
+        }
         .center {
             display: table;
             margin-left: auto;
@@ -119,6 +128,9 @@ MYURL
         i.fa {
             font-style: normal;
         }
+        ul>li::before {
+            color: white !important;
+        }
         ul.no-bullets > li::before {
             display: none;
             text-indent: 0;
@@ -143,6 +155,7 @@ MYURL
 		}
 		.slide a {
 			background: none;
+			font-family: 'Source Sans Pro', sans-serif;
 		}
         @media not print {
            .slide a {
@@ -161,9 +174,6 @@ MYURL
         .fa-bullets > li {
             margin-left: -1.6em;
         }
-        .black {
-            color: #202020 !important;
-        }
         ul.two-cols {
             overflow: hidden;
         }
@@ -173,10 +183,10 @@ MYURL
             width: 50%;
         }
         .part > h2 {
-            color: black;
+            color: white;
         }
         .part {
-            background: radial-gradient(circle at center, #ffffff 0, black 130%)
+            background: radial-gradient(circle at center, #8719cb 0, #400d9a 130%);
         }
         mark.important {
             background-color: #dd0000;
@@ -210,15 +220,15 @@ MYURL
 
 		<style>
             #cover h2 {
-                margin:30px 0 0;
-                text-align:center;
-                font-size:70px;
+                margin: 30px 0 0;
+                text-align: center;
+                font-size: 70px;
             }
             #cover p {
                 margin: 40px 0 0;
-                text-align:center;
-                font-style:italic;
-                font-size:20px;
+                text-align: center;
+                font-style: italic;
+                font-size: 20px;
             }
 			#cover {
 				background: url("pictures/cover.jpg") black;
