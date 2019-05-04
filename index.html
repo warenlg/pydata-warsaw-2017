@@ -21,7 +21,7 @@ MYURL
     <meta property="og:image" content="https://vmarkovtsev.github.io/MYURL/pictures/cover.jpg" />
     <meta property="twitter:image" content="https://vmarkovtsev.github.io/MYURL/pictures/cover.jpg" />
     <link rel="stylesheet" href="node_modules/shower-ribbon/styles/styles.css">
-    <link rel="stylesheet" href="fonts/Proxima_Nova/font.css">
+    <link rel="stylesheet" href="fonts/Cerebri_Sans/font.css">
     <link rel="stylesheet" href="fonts/Source_Sans_Pro/font.css">
     <style>
         .shower {
@@ -53,7 +53,8 @@ MYURL
             margin-top: -1px !important;
         }
         .slide h2 {
-            font-family: 'Proxima Nova', sans-serif;
+            font-family: 'Cerebri Sans', sans-serif;
+            margin-left: -4px;
         }
         @media not print {
             .slide {
@@ -115,7 +116,7 @@ MYURL
             font-family: monospace;
         }
         .success {
-            color: green;
+            color: #a5c261;
         }
         .vista {
             background-size: contain !important;
@@ -184,6 +185,7 @@ MYURL
         }
         .part > h2 {
             color: white;
+            font-family: 'Cerebri Sans Extra Bold', sans-serif;;
         }
         .part {
             background: radial-gradient(circle at center, #8719cb 0, #400d9a 130%);
@@ -212,6 +214,40 @@ MYURL
         .emoji {
             font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
         }
+        .shout-small {
+            font-size: 70px !important;
+        }
+        .shout-small a {
+           background: none !important;
+        }
+        .fullslide {
+            position: relative;
+            top: -81px;
+            left: -100px;
+            width: calc(100% + 200px);
+            height: calc(100% + 81px);
+            border: 0;
+            object-fit: contain;
+        }
+        .fullslide-padding {
+            width: 100%;
+            height: calc(100% - 50px);
+            object-fit: contain;
+        }
+        .fullwidth > img, img.fullwidth {
+            width: 100%;
+            object-fit: contain;
+            max-height: 380px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .fullwidth > figcaption {
+            position: absolute;
+            font-size: smaller;
+            bottom: 50px;
+            right: 50px;
+            transform: rotate(-90deg);
+        }
     </style>
 
 	<section class="slide vista vista-cover" id="cover">
@@ -219,6 +255,10 @@ MYURL
 		<p>Vadim Markovtsev<br><a href="https://sourced.tech">source{d}</a></p>
 
 		<style>
+            .black {
+                color: #202020;
+                font-weight: bold;
+            }
             #cover h2 {
                 margin: 30px 0 0;
                 text-align: center;
@@ -312,6 +352,15 @@ MYURL
             document.getElementById("fullscreen").title = "Go fullscreen";
         }
     }
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-63575100-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-63575100-2');
     </script>
 </body>
 </html>
