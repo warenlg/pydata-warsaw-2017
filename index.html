@@ -276,6 +276,58 @@
 			}
         </style>
     </section>
+
+    <section class="slide">
+        <h2>Comparison to linters</h2>
+        <table class="center">
+            <tbody>
+                <tr>
+                    <th scope="col"></th>
+                    <th>style-analyzer</th>
+                    <th>linters</th>
+                </tr>
+                <tr>
+                    <th scope="row">Precision</th>
+                    <td class="emoji">✖</td>
+                    <td class="emoji">✔</td>
+                </tr>
+                <tr>
+                    <th scope="row">Interpretability</th>
+                    <td class="emoji">✔</td>
+                    <td class="emoji">✔</td>
+                </tr>
+                <tr>
+                    <th scope="row">Context</th>
+                    <td class="emoji">✔</td>
+                    <td class="emoji">✖</td>
+                </tr>
+                <tr>
+                    <th scope="row">Setup</th>
+                    <td class="emoji">✔</td>
+                    <td class="emoji">✖</td>
+                </tr>
+                <tr>
+                    <th scope="row">Fixes</th>
+                    <td class="emoji">✔</td>
+                    <td class="emoji">✖</td>
+                </tr>
+            </tbody>
+        </table>
+        <style>
+            table.center th:not(:first-of-type), table.center td {
+                text-align: center;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Mining Software Repositories</h2>
+        <h3>Clustering</h3>
+        <p>Given codebases X and Y</p>
+        <p>style_distance(X, Y) - how similar are the formatting styles?</p>
+        <h3>Common formatting rules analysis</h3>
+        <p>Which formatting styles dominate on GitHub?</p>
+    </section>
     
     <section class="slide part">
         <h2 class="shout">Summary</h2>
@@ -284,6 +336,7 @@
 	<section class="slide">
         <h2>Thank you</h2>
         <ul class="no-bullets fa-bullets">
+            <li><i class="fa fa-newspaper-o monofa" aria-hidden="true"></i><a href="https://arxiv.org/abs/1905.06782">arxiv.org/abs/1905.06782</a></li>
             <li><i class="fa fa-envelope monofa" aria-hidden="true"></i><a href="mailto://machine-learning@sourced.tech">machine-learning@sourced.tech</a></li>
             <li><i class="fa fa-twitter monofa" aria-hidden="true"></i><a href="https://twitter.com/sourcedtech">@sourcedtech</a> <a href="https://twitter.com/vadimlearning">@vadimlearning</a> <a href="https://twitter.com/warenlg">@warenlg</a></li>
             <li><i class="fa fa-github monofa" aria-hidden="true"></i><a href="https://github.com/src-d">src-d</a></li>
