@@ -300,58 +300,6 @@
     </section>
 
     <section class="slide">
-        <h2>Comparison to linters</h2>
-        <table class="center">
-            <tbody>
-                <tr>
-                    <th scope="col"></th>
-                    <th>style-analyzer</th>
-                    <th>linters</th>
-                </tr>
-                <tr>
-                    <th scope="row">Precision</th>
-                    <td class="emoji">✖</td>
-                    <td class="emoji">✔</td>
-                </tr>
-                <tr>
-                    <th scope="row">Interpretability</th>
-                    <td class="emoji">✔</td>
-                    <td class="emoji">✔</td>
-                </tr>
-                <tr>
-                    <th scope="row">Context</th>
-                    <td class="emoji">✔</td>
-                    <td class="emoji">✖</td>
-                </tr>
-                <tr>
-                    <th scope="row">Setup</th>
-                    <td class="emoji">✔</td>
-                    <td class="emoji">✖</td>
-                </tr>
-                <tr>
-                    <th scope="row">Fixes</th>
-                    <td class="emoji">✔</td>
-                    <td class="emoji">✖</td>
-                </tr>
-            </tbody>
-        </table>
-        <style>
-            table.center th:not(:first-of-type), table.center td {
-                text-align: center;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <h2>Mining Software Repositories</h2>
-        <h3>Clustering</h3>
-        <p>Given codebases X and Y</p>
-        <p>style_distance(X, Y) - how similar are the formatting styles?</p>
-        <h3>Common formatting rules analysis</h3>
-        <p>Which formatting styles dominate on GitHub?</p>
-    </section>
-
-    <section class="slide">
         <h2>PR review comments on GitHub</h2>
         <object data="pictures/review_comments.svg" type="image/svg+xml" class="fullslide-padding"></object>
         <p class="source-web"><a href="https://github.com/src-d/datasets/tree/master/ReviewComments">dataset</a></p>
@@ -423,16 +371,17 @@
     </section>
 
     <section class="slide">
-        <h2>Lookout comments on GitHub</h2>
-        <img src="pictures/lookout_stg_comment.png" class="lookout-comment">
-        <style>
-            .lookout-comment {
-                position: absolute;
-                top: 200px;
-                left: 150px;
-                width: 650px;
-            }
-        </style>
+        <h2>Lookout</h2>
+    </section>
+
+    <section class="slide">
+        <h2>"White box" is the key</h2>
+        <ul>
+            <li>Builds trust with the users</li>
+            <li>Provides interpretability</li>
+            <li>Allows editing</li>
+            <li>Allows blacklisting</li>
+        </ul>
     </section>
 
     <section class="slide" id="classes">
@@ -515,14 +464,141 @@
     </section>
 
     <section class="slide">
-        <h2>Explainability is the key</h2>
+        <h2>Augmented token stream</h2>
+        <img src="pictures/vnodes.svg" id="vnodes" class="diagram diagram-right">
+        <pre><code>a = b * 2</code></pre>
+        <style>
+            .diagram {
+                height: 350px;
+            }
+            .diagram-right {
+                float: right;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Machine Learning</h2>
+        <img src="pictures/features.svg" class="diagram center">
+    </section>
+
+    <section class="slide">
+        <h2>Machine Learning</h2>
         <ul>
-            <li>Build trust with the users</li>
-            <li>Prefer interpretable output with human-readable decisions</li>
-            <li>Decision Tree Forest model</li>
-            <li>Optimize the number and the lengths of the rules</li>
+            <li>Feature selection (univariate, ANOVA F-criterion)</li>
+            <li>Hyperparameter optimization (Bayesian)</li>
+            <li>80% + 20% split</li>
         </ul>
-        <p class="source"><a href="https://www.ijcai.org/Proceedings/87-1/Papers/063.pdf">Generating Production Rules From Decision Trees</a><br>&emsp; J.R. Quinlan, 1987</p>
+    </section>
+
+    <section class="slide">
+        <h2>Rules</h2>
+        <img src="pictures/rules.svg" class="diagram diagram-right">
+        <ul>
+            <li><code>a&le;5 Λ b&le;1 Λ <span class="oline">c</span> ⇒ &alpha;</code></li>
+            <li><code>a&le;5 Λ 1&lt;b&lt;4 ⇒ &beta;</code></li>
+            <li><code>5&lt;a&lt;10 Λ <span class="oline">c</span> ⇒ &gamma;</code></li>
+            <li><code>a&gt;5 Λ c Λ b&gt;2 ⇒ &alpha;</code></li>
+        </ul>
+        <style>
+            .oline {
+                text-decoration: overline;
+            }
+        </style>
+    </section>
+
+    <section class="slide rules-opt">
+        <h2>Rules optimization</h2>
+        <pre><code><span class="bad">a&gt;5</span> Λ c Λ b&gt;2 Λ <span class="oline">d</span> Λ <span class="bad">a&gt;10</span> ⇒ &alpha;</code><span class="opt-desc">(merge)</span><br>
+<code><span class="good">a&gt;10</span> Λ c Λ <span class="bad">b&gt;2</span> Λ <span class="oline">d</span> ⇒ &alpha;</code><span class="opt-desc">(redundant)</span><br>
+<code>a&gt;10 Λ c Λ <span class="oline bad">d</span> ⇒ &alpha;</code><span class="opt-desc">(feature exclusion)</span><br>
+<code>a&gt;10 Λ c ⇒ &alpha;</code></pre>
+        <h4 class="rules-opt-result">Result</h4>
+        <ul>
+            <li>-40% ~ -60% less attributes</li>
+            <li>-30% ~ -50% less rules</li>
+        </ul>
+        <style>
+            .rules-opt code {
+                display: inline-block !important;
+                width: auto !important;
+            }
+            .bad {
+                color: coral;
+            }
+            .good {
+                color: lightgreen;
+            }
+            .opt-desc {
+                float: right;
+                font-family: "Source Sans Pro", sans-serif;
+            }
+            .rules-opt-result {
+                margin-bottom: 0;
+            }
+        </style>
+    </section>
+
+    <section class="slide rules-opt">
+        <h2>Rules optimization</h2>
+        <pre><code><span class="bad">a&gt;5</span> Λ c Λ b&gt;2 Λ <span class="oline">d</span> Λ <span class="bad">a&gt;10</span> ⇒ &alpha;</code><span class="opt-desc">(merge)</span><br>
+<code><span class="good">a&gt;10</span> Λ c Λ <span class="bad">b&gt;2</span> Λ <span class="oline">d</span> ⇒ &alpha;</code><span class="opt-desc">(redundant)</span><br>
+<code>a&gt;10 Λ c Λ <span class="oline bad">d</span> ⇒ &alpha;</code><span class="opt-desc">(feature exclusion)</span><br>
+<code><span class="bad">a&gt;10 Λ c ⇒ &alpha;</span></code><span class="opt-desc">(confidence threshold)</span></pre>
+        <h4 class="rules-opt-result">Result</h4>
+        <ul>
+            <li>-90% rules with no quality loss</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Slide about multilevel community detection</h2>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-smaller">Precision > Recall</h2>
+        <style>
+            .shout-smaller {
+                font-size: 110px !important;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Inference</h2>
+        <ol>
+            <li>Apply rules
+                <ul>
+                    <li>Fixes to old code?</li>
+                    <li>AST breakage?</li>
+                    <li>Identification?</li>
+                </ul>
+            </li>
+            <li>Generate code
+                <ul>
+                    <li>Indentation?</li>
+                    <li>Multiple lines?</li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Debugging</h2>
+        Screenshot of the Hugo's prodigy tool.
+    </section>
+
+    <section class="slide">
+        <h2>Lookout comments on GitHub</h2>
+        <img src="pictures/lookout_stg_comment.png" class="lookout-comment">
+        <style>
+            .lookout-comment {
+                position: absolute;
+                top: 200px;
+                left: 150px;
+                width: 650px;
+            }
+        </style>
     </section>
 
     <section class="slide">
@@ -543,8 +619,75 @@
         <img src="pictures/PredR_noisy.svg" class="pr-curves">
     </section>
 
+    <section class="slide">
+        <h2>Our results</h2>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-small">Enough quality for a product?</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Comparison to linters</h2>
+        <table class="center">
+            <tbody>
+                <tr>
+                    <th scope="col"></th>
+                    <th>style-analyzer</th>
+                    <th>linters</th>
+                </tr>
+                <tr>
+                    <th scope="row">Precision</th>
+                    <td class="emoji">✖</td>
+                    <td class="emoji">✔</td>
+                </tr>
+                <tr>
+                    <th scope="row">Interpretability</th>
+                    <td class="emoji">✔</td>
+                    <td class="emoji">✔</td>
+                </tr>
+                <tr>
+                    <th scope="row">Context</th>
+                    <td class="emoji">✔</td>
+                    <td class="emoji">✖</td>
+                </tr>
+                <tr>
+                    <th scope="row">Setup</th>
+                    <td class="emoji">✔</td>
+                    <td class="emoji">✖</td>
+                </tr>
+                <tr>
+                    <th scope="row">Fixes</th>
+                    <td class="emoji">✔</td>
+                    <td class="emoji">✖</td>
+                </tr>
+            </tbody>
+        </table>
+        <style>
+            table.center th:not(:first-of-type), table.center td {
+                text-align: center;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-small">But what if the project already uses a linter?</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Mining Software Repositories</h2>
+        <h3>Clustering</h3>
+        <p>Given codebases X and Y</p>
+        <p>style_distance(X, Y) - how similar are the formatting styles?</p>
+        <h3>Common formatting rules analysis</h3>
+        <p>Which formatting styles dominate on GitHub?</p>
+    </section>
+
     <section class="slide part">
         <h2 class="shout">Summary</h2>
+        <ul>
+
+        </ul>
     </section>
 
 	<section class="slide">
