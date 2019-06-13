@@ -250,7 +250,7 @@
 	<section class="slide vista vista-cover" id="cover">
 		<h2>Mining software development history</h2>
         <p>Vadim Markovtsev<br>
-            <a href="https://sourced.tech"><img id="sourced-cover" src="pictures/sourced.svg"></a>
+            <a id="sourced-cover" href="https://sourced.tech"><img src="pictures/sourced.svg"></a>
         </p>
 
 		<style>
@@ -283,13 +283,50 @@
 				bottom: 0;
 				background: rgba(0, 0, 0, 0.5);
 			}
-            #sourced-cover {
+            #sourced-cover > img {
                 width: 100px;
                 margin-top: 5px;
             }
+            #sourced-cover:hover {
+                background: none;
+            }
         </style>
     </section>
+
+    <section class="slide vista" id="plan">
+        <h2>Plan</h2>
+        Intro&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Line evolution&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Time series&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Couples&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Tools
+        <style>
+            #plan {
+                background-image: url("pictures/plan.png");
+            }
+            #plan span {
+                position: relative;
+                top: 2px;
+            }
+        </style>
+    </section>
+
+    <section class="slide part">
+        <h2 class="shout">Introduction</h2>
+    </section>
+
+    <section class="slide part">
+        <h2 class="shout">Line evolution</h2>
+    </section>
     
+    <section class="slide part">
+        <h2 class="shout">Time series</h2>
+    </section>
+
+    <section class="slide part">
+        <h2 class="shout">Couples</h2>
+    </section>
+
+    <section class="slide part">
+        <h2 class="shout">Tools</h2>
+    </section>
+
     <section class="slide part">
         <h2 class="shout">Summary</h2>
     </section>
@@ -298,8 +335,8 @@
         <h2>Thank you</h2>
         <ul class="no-bullets fa-bullets">
             <li><i class="fa fa-envelope monofa" aria-hidden="true"></i><a href="mailto://vadim@sourced.tech">vadim@sourced.tech</a></li>
-            <li><i class="fa fa-twitter monofa" aria-hidden="true"></i><a href="https://twitter.com/vadimlearning">vadimlearning</a></li>
-            <li><i class="fa fa-github monofa" aria-hidden="true"></i><a href="https://github.com/vmarkovtsev">vmarkovtsev</a></li>
+            <li><i class="fa fa-twitter monofa" aria-hidden="true"></i><a href="https://twitter.com/vadimlearning">@vadimlearning</a></li>
+            <li><i class="fa fa-github monofa" aria-hidden="true"></i><a href="https://github.com/vmarkovtsev">@vmarkovtsev</a></li>
             <li><i class="fa fa-rss monofa" aria-hidden="true"></i><a href="https://blog.sourced.tech">blog.sourced.tech</a></li>
             <li><i class="fa fa-trophy monofa" aria-hidden="true"></i><a href="https://github.com/src-d/awesome-machine-learning-on-source-code">Awesome #MLonCode</a></li>
         </ul>
