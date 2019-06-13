@@ -327,6 +327,119 @@
         <h2 class="shout">Tools</h2>
     </section>
 
+    <section class="slide vista vista-cover" id="lake">
+        <h2 class="shout shout-small">Code Lake</h2>
+        <style>
+            #lake {
+                background-image: url("pictures/lake.jpg");
+            }
+            #lake > h2 {
+                color: white;
+            }
+            #lake:before {
+                content: "";
+                position: absolute;
+                z-index: -1;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>github.com/src-d/gitbase</h2>
+        <pre><code><span class="kw">SELECT</span> refs.repository_id
+<span class="kw">FROM</span> refs
+<span class="kw">NATURAL JOIN</span> commits
+<span class="kw">WHERE</span> commits.commit_author_name = <span class="str">'Johnny Bravo'</span>
+    <span class="kw">AND</span> refs.ref_name = <span class="str">'HEAD'</span>;</code></pre>
+        <style>
+            .kw {
+                color: #CC7832;
+                font-weight: bold;
+            }
+
+            .str {
+                color: #6a8759;
+            }
+
+            .func {
+                color: #9e7bb0;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Parsing code</h2>
+        <img src="pictures/bblfsh-logo.png" class="center">
+        <img src="pictures/bblfsh-arch-black.png" class="black fullwidth">
+        <img src="pictures/bblfsh-arch-white.png" class="white fullwidth">
+    </section>
+
+    <section class="slide">
+        <h2>Imports for each commit</h2>
+        <pre><code><span class="kw">SELECT</span> repository_id, commit_hash, file_path,
+    <span class="func">uast_extract</span>(<span class="func">uast</span>(blob_content,
+                      <span class="func">language</span>(file_path),
+                      <span class="str">'//uast:Import/Path'</span>),
+                 <span class="str">"Value"</span>) <span class="kw">AS</span> imports
+<span class="kw">FROM</span> commit_files <span class="kw">NATURAL JOIN</span> blobs
+<span class="kw">WHERE</span> <span class="func">language</span>(file_path) = <span class="str">'Go'</span>
+    <span class="kw">AND</span> <span class="func">array_length</span>(imports) > 0;</code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>github.com/src-d/hercules</h2>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-small">Datasets</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Why?</h2>
+        <ul>
+            <li>What to clone?</li>
+            <li>Cloning many repositories is hard.</li>
+            <li>We don't always need source code.</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-small">GDPR</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Software Heritage Graph Dataset</h2>
+        <img src="pictures/SoftwareHeritage.png" class="fullwidth">
+        <ul>
+            <li>85mm repositories, 1.1m unique commits</li>
+            <li>PostgreSQL, Parquet</li>
+            <li><a href="https://zenodo.org/record/2583978">zenodo.org/record/2583978</a></li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Public Git Archive</h2>
+        <img src="pictures/PGA.png" id="pga-logo">
+        <ul>
+            <li>260k repositories</li>
+            <li>Git packfile-s</li>
+            <li>≥50🟊 on GitHub (early 2019)</li>
+            <li><a href="https://pga.sourced.tech">pga.sourced.tech</a></li>
+        </ul>
+        <style>
+            #pga-logo {
+                height: 150px;
+                float: left;
+                margin: 20px 50px 200px 0;
+            }
+        </style>
+    </section>
+
     <section class="slide part">
         <h2 class="shout">Summary</h2>
     </section>
