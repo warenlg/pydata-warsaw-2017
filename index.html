@@ -228,7 +228,8 @@
         }
         .fullslide-padding {
             width: 100%;
-            height: calc(100% - 50px);
+            height: calc(100% - 100px);
+            margin-top: -34px;
             object-fit: contain;
         }
         .fullwidth > img, img.fullwidth {
@@ -295,7 +296,7 @@
 
     <section class="slide vista" id="plan">
         <h2>Plan</h2>
-        Intro&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Line evolution&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Time series&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Couples&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Tools
+        Intro&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Lines&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Time series&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Couples&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Tools
         <style>
             #plan {
                 background-image: url("pictures/plan.png");
@@ -311,8 +312,225 @@
         <h2 class="shout">Introduction</h2>
     </section>
 
+    <section class="slide">
+        <h2>Git</h2>
+        <img class="fullslide-padding black" src="pictures/git-black.svg">
+        <img class="fullslide-padding white" src="pictures/git-white.svg">
+    </section>
+
+    <section class="slide">
+        <h2>Source code</h2>
+        <img src="pictures/ast-black.svg" class="black diagram diagram-right">
+        <img src="pictures/ast-white.svg" class="white diagram diagram-right">
+        <pre><code>a = b * 2</code></pre>
+        <style>
+            .diagram {
+                height: 350px;
+            }
+            .diagram-right {
+                float: right;
+            }
+        </style>
+    </section>
+
+    <section class="slide vista vista-cover" id="graphs-everywhere">
+        <h2 class="meme">Graphs</h2>
+        <h2 class="meme">graphs everywhere</h2>
+        <style>
+            #graphs-everywhere {
+                background-image: url("pictures/xeverywhere.jpg");
+            }
+            #graphs-everywhere > h2:nth-of-type(2) {
+                top: 250px;
+            }
+            .meme {
+                -webkit-transform: translateZ(0);
+                z-index: 100;
+                text-align: center;
+                position: relative;
+                font-family: impact !important;
+                font-size: 3em !important;
+                font-weight: 600 !important;
+                text-transform: uppercase;
+                color: white !important;
+                letter-spacing: 0px;
+                text-shadow:2px 2px 0 #000,
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                0px 2px 0 #000,
+                2px 0px 0 #000,
+                0px -2px 0 #000,
+                -2px 0px 0 #000,
+                2px 2px 5px #000;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>So you have got graphs...</h2>
+        <ul>
+            <li>Measures, e.g. PageRank</li>
+            <li>Node embeddings</li>
+            <li>Clustering, community detection</li>
+            <li>Gated Graph Neural Networks</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Diffs</h2>
+        <ul>
+            <li>By line: O(N×D)</li>
+            <li>By tree node: O(N×D)</li>
+            <li>By tree node which you really want*: <a href="http://useless-factor.blogspot.com/2008/01/matching-diffing-and-merging-xml.html" class="important">NP-hard, active research</a></li>
+        </ul>
+        *with "move" operation
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-small">AST-annotated line diffs</h2>
+    </section>
+
     <section class="slide part">
-        <h2 class="shout">Line evolution</h2>
+        <h2 class="shout">Lines</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Line burndown</h2>
+        <p><code>git blame foo.go</code></p>
+        <div id="obj" class="blame">
+            <div><span><span class="f2014">●</span>2014</span>
+                <pre><code class="b2014">func foo() {</code>
+<code class="b2014">  println("bar")</code>
+<code class="b2014">}</code></pre>
+            </div>
+            <div><span><span class="f2015">●</span>2015</span><pre><code class="b2014">func foo() {</code>
+<code class="b2014">  println("bar")</code>
+<code class="b2014">}</code>
+<code class="b2015">func qux() {</code>
+<code class="b2015">  println("baz")</code>
+<code class="b2015">}</code></pre></div>
+            <div><span><span class="f2016">●</span>2016</span><pre><code class="b2014">func foo() {</code>
+<code class="b2016">  println("waldo")</code>
+<code class="b2014">}</code>
+<code class="b2016">const X = 10</code>
+<code class="b2016">func spam() {</code>
+<code class="b2015">  println("baz")</code>
+<code class="b2015">}</code></pre></div>
+        </div>
+        <style>
+            .blame code:not(:only-child)::before {
+                opacity: 1 !important;
+            }
+            .blame pre {
+                margin: 0;
+            }
+            #obj {
+                display: flex;
+                height: 400px;
+            }
+            #obj > div {
+                flex-grow: 1;
+                flex-basis: 0;
+                height: 100%;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+            #obj > div:first-child {
+                padding-left: 0;
+            }
+            #obj > div:last-child {
+                padding-right: 8px;
+            }
+            #obj > div > span {
+                text-align: center;
+                width: 100%;
+                display: block;
+            }
+            .blame code {
+                font-size: 0.8em !important;
+                margin-left: 2.5em !important;
+                margin-top: -1px !important;
+                width: auto !important;
+                color: black !important;
+                padding-left: 1px !important;
+            }
+            .blame code:before {
+                color: #585a5e !important;
+                width: calc(2em + 1px) !important;
+                margin-left: -2.5em !important;
+                padding-left: 0.5em !important;
+            }
+            .b2014, .b2014:before {
+                background: #CB8C1D !important;
+            }
+            .b2015, .b2015:before {
+                background: #F1684E !important;
+            }
+            .b2016, .b2016:before {
+                background: #4EB1BA !important;
+            }
+            .f2014 {
+                color: #CB8C1D;
+            }
+            .f2015 {
+                color: #F1684E;
+            }
+            .f2016 {
+                color: #4EB1BA;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Line burndown</h2>
+        <img class="vista fullslide-padding black" src="pictures/objective_black.svg">
+        <img class="vista fullslide-padding white" src="pictures/objective_white.svg">
+    </section>
+
+    <section class="slide" id="linux">
+        <h2>Linux</h2>
+        <img src="pictures/linux.png">
+        <style>
+            #linux > h2 {
+                position: relative;
+                left: 200px;
+            }
+            #linux > img {
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-small">Lines importance</h2>
+    </section>
+
+    <section class="slide">
+        <pre><code>import sys</code>
+<code class="semi-important">import smart_foo</code>
+<code> </code>
+<code>def foo(x: Any) -> int:</code>
+<code>    log("called foo %s", x)</code>
+<code>    # now the hardcore part</code>
+<code class="important">    if smart_foo.complex_cond(x) < 50:</code>
+<code class="semi-important">        return 50</code>
+<code>    return 0</code>
+</pre>
+        <style>
+            .semi-important {
+                color: lightcoral;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-small">Diff 🡒 commit classification</h2>
     </section>
     
     <section class="slide part">
