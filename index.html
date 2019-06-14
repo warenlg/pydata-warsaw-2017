@@ -393,23 +393,128 @@
 
     <section class="slide">
         <h2>github.com/src-d/hercules</h2>
+        <img src="pictures/dag-black.png" class="fullwidth black">
+        <img src="pictures/dag-white.png" class="fullwidth white">
+        <ul>
+            <li>Command-line playground for trying new ideas</li>
+            <li>Data processing: Go (<a href="https://github.com/src-d/go-git">go-git</a>)</li>
+            <li>Data analysis: Python</li>
+        </ul>
     </section>
 
     <section class="slide">
+        <h2>Examples</h2>
+        <pre><code># Lines evolution<br>hercules --burndown | labours -m burndown-project</code></pre>
+        <pre><code># Couples<br>hercules --couples | labours -m couples</code></pre>
+        <pre><code># Commit time series<br>hercules --devs | labours -m devs</code></pre>
+    </section>
+
+    <section class="slide vista" id="dataset">
         <h2 class="shout shout-small">Datasets</h2>
+        <style>
+            #dataset {
+                background-image: url("pictures/dataset-black.png");
+            }
+            #dataset:before {
+                content: "";
+                position: absolute;
+                z-index: -1;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(255, 255, 255, 0.8);
+            }
+            @media not print {
+                #dataset {
+                    background-image: url("pictures/dataset-white.png");
+                }
+                #dataset > h2 {
+                    color: white;
+                }
+                #dataset:before {
+                    content: "";
+                    position: absolute;
+                    z-index: -1;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.8);
+                }
+            }
+        </style>
     </section>
 
     <section class="slide">
         <h2>Why?</h2>
         <ul>
             <li>What to clone?</li>
-            <li>Cloning many repositories is hard.</li>
-            <li>We don't always need source code.</li>
+            <li>Cloning many repositories is hard</li>
+            <li>We don't always need source code</li>
         </ul>
     </section>
 
     <section class="slide">
-        <h2 class="shout shout-small">GDPR</h2>
+        <h2 class="shout shout-small">GDPR
+            <span class="eu-star">★</span>
+            <span class="eu-star">★</span>
+            <span class="eu-star">★</span>
+            <span class="eu-star">★</span>
+            <span class="eu-star">★</span>
+            <span class="eu-star">★</span>
+            <span class="eu-star">★</span>
+            <span class="eu-star">★</span>
+            <span class="eu-star">★</span>
+            <span class="eu-star">★</span>
+            <span class="eu-star">★</span>
+            <span class="eu-star">★</span>
+        </h2>
+        <style>
+            .eu-star {
+                position: absolute;
+                left: calc(50% - 0.2em);
+                top: calc(50% - 0.5em);
+                font-size: 40px;
+                color: yellow;
+            }
+            .eu-star:nth-of-type(1) {
+                transform: rotate(30deg) translate(200px) rotate(-30deg);
+            }
+            .eu-star:nth-of-type(2) {
+                transform: rotate(60deg) translate(200px) rotate(-60deg);
+            }
+            .eu-star:nth-of-type(3) {
+                transform: rotate(90deg) translate(200px) rotate(-90deg);
+            }
+            .eu-star:nth-of-type(4) {
+                transform: rotate(120deg) translate(200px) rotate(-120deg);
+            }
+            .eu-star:nth-of-type(5) {
+                transform: rotate(150deg) translate(200px) rotate(-150deg);
+            }
+            .eu-star:nth-of-type(6) {
+                transform: rotate(180deg) translate(200px) rotate(-180deg);
+            }
+            .eu-star:nth-of-type(7) {
+                transform: rotate(210deg) translate(200px) rotate(-210deg);
+            }
+            .eu-star:nth-of-type(8) {
+                transform: rotate(240deg) translate(200px) rotate(-240deg);
+            }
+            .eu-star:nth-of-type(9) {
+                transform: rotate(270deg) translate(200px) rotate(-270deg);
+            }
+            .eu-star:nth-of-type(10) {
+                transform: rotate(300deg) translate(200px) rotate(-300deg);
+            }
+            .eu-star:nth-of-type(11) {
+                transform: rotate(330deg) translate(200px) rotate(-330deg);
+            }
+            .eu-star:nth-of-type(12) {
+                transform: rotate(360deg) translate(200px) rotate(-360deg);
+            }
+        </style>
     </section>
 
     <section class="slide">
