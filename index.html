@@ -58,7 +58,7 @@
                 color: white;
                 background: black;
             }
-            .slide h2 {
+            .slide h2, .slide li::before {
                 color: #bababa;
             }
         }
@@ -107,7 +107,7 @@
             bottom: 50px;
         }
         .important {
-            color: red;
+            color: #dd0000;
         }
         .mono {
             font-family: monospace;
@@ -537,6 +537,192 @@
         <h2 class="shout">Time series</h2>
     </section>
 
+    <section class="slide">
+        <h2>CPython contributors</h2>
+        <div class="cpython">
+            <img src="pictures/ts8.png"><img src="pictures/ts3.png"><img src="pictures/ts6.png"><img src="pictures/ts4.png">
+        </div>
+        <div class="cpython">
+            <img src="pictures/ts7.png"><img src="pictures/ts1.png"><img src="pictures/ts5.png"><img src="pictures/ts2.png">
+        </div>
+        *some are hidden, e.g. Guido
+        <style>
+            .cpython {
+                height: 103px;
+                margin-bottom: 10px;
+            }
+            .cpython > img {
+                display: inline-block;
+                height: 103px;
+                width: 197px;
+                object-fit: contain;
+                margin-right: 10px;
+            }
+            .cpython > img:last-of-type {
+                margin-right: 0;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>CPython contributors</h2>
+        <div class="cpython">
+            <img src="pictures/ts7.png"><img src="pictures/ts8.png"><img src="pictures/ts2.png"><img src="pictures/ts1.png">
+        </div>
+        <div class="cpython">
+            <img src="pictures/ts3.png"><img src="pictures/ts4.png"><img src="pictures/ts6.png"><img src="pictures/ts5.png">
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>CPython contributors</h2>
+        <div class="cpython">
+            <img src="pictures/ts7_.png"><img src="pictures/ts8_.png"><img src="pictures/ts2_.png"><img src="pictures/ts1_.png">
+        </div>
+        <div class="cpython">
+            <img src="pictures/ts3_.png"><img src="pictures/ts4_.png"><img src="pictures/ts6_.png"><img src="pictures/ts5_.png">
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Use cases</h2>
+        <ul>
+            <li>How many active contributors are today?</li>
+            <li>How did contributors come and leave?</li>
+            <li>(enterprise) Who worked with who?</li>
+            <li>Is everything good or bad?</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Plan</h2>
+        <ol>
+            <li>Define the distance</li>
+            <li>Order by distance (1D)</li>
+            <li>Cluster by distance (2D)</li>
+            <li>Query nearest neighbors</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Euclidean distance</h2>
+        <img src="pictures/commits1-black.svg" class="commits black">
+        <img src="pictures/commits1-white.svg" class="commits white">
+        <img src="pictures/commits2-black.svg" class="commits black">
+        <img src="pictures/commits2-white.svg" class="commits white">
+        <style>
+            .commits {
+                display: inline-block;
+                width: 50%;
+                object-fit: contain;
+            }
+            .commits:nth-of-type(3), .commits:nth-of-type(4) {
+                margin-top: 50px;
+                margin-left: 50%;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-small">d<sub>1</sub> = d<sub>2</sub></h2>
+    </section>
+
+    <section class="slide">
+        <h2>Dynamic Time Warping</h2>
+        <img src="pictures/dtw.png" class="fullslide-padding">
+    </section>
+
+    <section class="slide">
+        <h2>Fast Dynamic Time Warping</h2>
+        <p>Original complexity: <span class="important">O(n<sup>2</sup>)</span></p>
+        <p>Approximation's complexity: <span class="success">O(n)</span></p>
+        <p>Python package:&nbsp;&nbsp;<code class="inline">fastdtw</code></p>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-small">Distance matrix: O(n<sup>2</sup>)</h2>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-small">Agglomerative clustering?<br><br><code class="inline">seaborn.clustermap?</code></h2>
+    </section>
+
+    <section class="slide">
+        <img src="pictures/ser1.png" class="fullslide">
+    </section>
+
+    <section class="slide">
+        <img src="pictures/ser2-black.png" class="fullslide black">
+        <img src="pictures/ser2-white.png" class="fullslide white">
+    </section>
+
+    <section class="slide">
+        <img src="pictures/ser3.png" class="fullslide">
+        <a id="serlabel" href="http://nicolas.kruchten.com/content/2018/02/seriation/">Make Patterns Pop Out of Heatmaps with Seriation<br>by Nicolas Kruchten</a>
+        <style>
+            #serlabel {
+                position: absolute;
+                right: -20px;
+                bottom: calc(50% - 30px);
+                transform: rotate(-90deg);
+                font-size: 23px;
+                font-style: italic;
+                line-height: 25px;
+            }
+        </style>
+    </section>
+
+    <section class="slide formula">
+        <h2>Let's go scientific</h2>
+        <h3 class="formula">
+            $$
+            \min \sum{d_{i,i+1}}
+            $$
+        </h3>
+        <style>
+            .formula > h2 {
+                position: absolute;
+            }
+            .formula > h3 {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                font-size: 80px;
+                margin: 0;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <img src="pictures/tsp-black.png" class="fullslide black">
+        <img src="pictures/tsp-white.png" class="fullslide white">
+    </section>
+
+    <section class="slide">
+        <h2>Seriation</h2>
+        <ul>
+            <li>Ideal for heatmaps and 1D ordering of series</li>
+            <li>Python package:&nbsp;&nbsp;<code class="inline">seriate</code></li>
+            <li>Is not always better than agglomerative clustering</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <img src="pictures/devs_tensorflow-black.png" class="black fullslide">
+        <img src="pictures/devs_tensorflow-white.png" class="white fullslide">
+    </section>
+
+    <section class="slide">
+        <h2>Beyond 1D</h2>
+        <ul>
+            <li>Both t-SNE and UMAP work with an explicit distance matrix</li>
+            <li>t-SNE works better for 2D (kNN+rank loss)</li>
+            <li>UMAP works better for 3+D</li>
+            <li>Best embedding dimensionality: 14 (85% 20NN)</li>
+        </ul>
+    </section>
+
     <section class="slide part">
         <h2 class="shout">Couples</h2>
     </section>
@@ -830,6 +1016,7 @@
         }
     }
     </script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-63575100-2"></script>
