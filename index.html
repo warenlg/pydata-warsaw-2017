@@ -8,9 +8,9 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@vadimlearning" />
     <meta name="twitter:label1" content="Number of slides" />
-    <meta name="twitter:data1" content="???" />
+    <meta name="twitter:data1" content="64" />
     <meta name="twitter:label2" content="Where and when" />
-    <meta name="twitter:data2" content="???" />
+    <meta name="twitter:data2" content="Munich, Germany - 19.06.2019" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="http://vmarkovtsev.github.io/mlconference-2019-munich" />
     <meta property="og:title" content="Mining software development history: approaches and challenges" />
@@ -296,7 +296,7 @@
 
     <section class="slide vista" id="plan">
         <h2>Plan</h2>
-        Intro&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Lines&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Time series&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Couples&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Tools
+        Intro&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Couples&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Lines&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Time series&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Tools
         <style>
             #plan {
                 background-image: url("pictures/plan.png");
@@ -397,6 +397,75 @@
 
     <section class="slide">
         <h2 class="shout shout-small">AST-annotated line diffs</h2>
+    </section>
+
+    <section class="slide part">
+        <h2 class="shout">Couples</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Idea</h2>
+        <ul>
+            <li>If developers often change the same files, there must be something in common.</li>
+            <li>If files often appear in the same commits, there must be something in common.</li>
+        </ul>
+        <img src="pictures/couples-black.svg" class="couples-idea black">
+        <img src="pictures/couples-white.svg" class="couples-idea white">
+        <style>
+            .couples-idea {
+                height: 250px;
+                object-fit: contain;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>word2vec</h2>
+        <ul>
+            <li>Context: sentences</li>
+            <li>Embedding: optimize Pointwise Mutual Information</li>
+            <li>There are algorithms for explicit co-occurrence matrix
+                <ul>
+                    <li><a href="https://nlp.stanford.edu/projects/glove/">GloVe</a></li>
+                    <li><a href="https://arxiv.org/abs/1602.02215">Swivel</a></li>
+                </ul>
+            </li>
+        </ul>
+        <img src="pictures/word2vec-black.png" class="black word2vec">
+        <img src="pictures/word2vec-white.png" class="white word2vec">
+        <style>
+            .word2vec {
+                position: absolute;
+                width: 400px;
+                bottom: 50px;
+                right: 100px;
+                object-fit: contain;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-small">Let's optimize<br><br>Pointwise Mutual Information</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Problems</h2>
+        <ul>
+            <li>Optimal vector size?</li>
+            <li>Convergence on &lt;10k is bad</li>
+            <li>Convergence on &lt;50D is bad</li>
+            <li>GPU is useless on &lt;100 items</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-small">t-SNE over the embeddings</h2>
+    </section>
+
+    <section class="slide">
+        <img src="pictures/tfprojcouples.png" class="fullslide">
     </section>
 
     <section class="slide part">
@@ -522,6 +591,44 @@
     <section class="slide">
         <img class="fullslide black" src="pictures/emberjs_people-black.png">
         <img class="fullslide white" src="pictures/emberjs_people-white.png">
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shout-small">Measuring ownership is hard</h2>
+    </section>
+
+    <section class="slide formula">
+        <h2>Overwrites</h2>
+        <img class="fullslide black" src="pictures/overwrites-black.png">
+        <img class="fullslide white" src="pictures/overwrites-white.png">
+    </section>
+
+    <section class="slide" id="overwrites">
+        <h2>To a man with a hammer...</h2>
+        <ol>
+            <li>Swivel on the similarity matrix</li>
+            <li>t-SNE to visualize the embeddings</li>
+        </ol>
+        <img class="black" src="pictures/tfp_wireshark-black.png">
+        <img class="white" src="pictures/tfp_wireshark-white.png">
+        <style>
+            #overwrites > ol {
+                position: relative;
+                top: 200px;
+                width: 250px;
+                line-height: 1.4em;
+            }
+            #overwrites > ol > li {
+                margin-bottom: calc(50px - 1em);
+            }
+            #overwrites > img {
+                position: absolute;
+                right: 100px;
+                bottom: 20px;
+                width: 700px;
+                object-fit: contain;
+            }
+        </style>
     </section>
 
     <section class="slide">
@@ -741,75 +848,6 @@
     </section>
 
     <section class="slide part">
-        <h2 class="shout">Couples</h2>
-    </section>
-
-    <section class="slide">
-        <h2>Idea</h2>
-        <ul>
-            <li>If developers often change the same files, there must be something in common.</li>
-            <li>If files often appear in the same commits, there must be something in common.</li>
-        </ul>
-        <img src="pictures/couples-black.svg" class="couples-idea black">
-        <img src="pictures/couples-white.svg" class="couples-idea white">
-        <style>
-            .couples-idea {
-                height: 250px;
-                object-fit: contain;
-                margin-left: auto;
-                margin-right: auto;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <h2>word2vec</h2>
-        <ul>
-            <li>Context: sentences</li>
-            <li>Embedding: optimize Pointwise Mutual Information</li>
-            <li>There are algorithms for explicit co-occurrence matrix
-                <ul>
-                    <li><a href="https://nlp.stanford.edu/projects/glove/">GloVe</a></li>
-                    <li><a href="https://arxiv.org/abs/1602.02215">Swivel</a></li>
-                </ul>
-            </li>
-        </ul>
-        <img src="pictures/word2vec-black.png" class="black word2vec">
-        <img src="pictures/word2vec-white.png" class="white word2vec">
-        <style>
-            .word2vec {
-                position: absolute;
-                width: 400px;
-                bottom: 50px;
-                right: 100px;
-                object-fit: contain;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <h2 class="shout shout-small">Let's optimize<br><br>Pointwise Mutual Information</h2>
-    </section>
-
-    <section class="slide">
-        <h2>Problems</h2>
-        <ul>
-            <li>Optimal vector size?</li>
-            <li>Convergence on &lt;10k is bad</li>
-            <li>Convergence on &lt;50D is bad</li>
-            <li>GPU is useless on &lt;100 items</li>
-        </ul>
-    </section>
-
-    <section class="slide">
-        <h2 class="shout shout-small">t-SNE over the embeddings</h2>
-    </section>
-
-    <section class="slide">
-        <img src="pictures/tfprojcouples.png" class="fullslide">
-    </section>
-
-    <section class="slide part">
         <h2 class="shout">Tools</h2>
     </section>
 
@@ -895,41 +933,8 @@
         <pre><code># Commit time series<br>hercules --devs | labours -m devs</code></pre>
     </section>
 
-    <section class="slide vista" id="dataset">
+    <section class="slide">
         <h2 class="shout shout-small">Datasets</h2>
-        <style>
-            #dataset {
-                background-image: url("pictures/dataset-black.png");
-            }
-            #dataset:before {
-                content: "";
-                position: absolute;
-                z-index: -1;
-                left: 0;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(255, 255, 255, 0.8);
-            }
-            @media not print {
-                #dataset {
-                    background-image: url("pictures/dataset-white.png");
-                }
-                #dataset > h2 {
-                    color: white;
-                }
-                #dataset:before {
-                    content: "";
-                    position: absolute;
-                    z-index: -1;
-                    left: 0;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: rgba(0, 0, 0, 0.8);
-                }
-            }
-        </style>
     </section>
 
     <section class="slide">
