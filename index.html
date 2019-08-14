@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Mining software development history: approaches and challenges</title>
+	<title>ML on Code</title>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:creator" content="@vadimlearning" />
+    <meta name="twitter:creator" content="@warenlg" />
     <meta name="twitter:label1" content="Number of slides" />
     <meta name="twitter:data1" content="67" />
     <meta name="twitter:label2" content="Where and when" />
-    <meta name="twitter:data2" content="Munich, Germany - 19.06.2019" />
+    <meta name="twitter:data2" content="Nantes, France - 01.07.2019" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="http://vmarkovtsev.github.io/mlconference-2019-munich" />
-    <meta property="og:title" content="Mining software development history: approaches and challenges" />
-    <meta property="og:description" content="Software development history, typically represented as a Version Control System log, is a rich source of insights into how the project evolved, as well as how its developers worked. What's probably more important is that events from the past can predict the future. This talk gives fun history mining examples and presents some of the available tooling. The involved topics include graph embeddings, manifold learning, dynamic time warping, seriation, and modern clustering algorithms." />
+    <meta property="og:url" content="http://warenlg.github.io/nantes-ml-meetup-2019" />
+    <meta property="og:title" content="Machine Learning onCode: from n-grams to GGNNs" />
+    <meta property="og:description" content="Overview of the ML on Code research field." />
     <meta property="og:image" content="https://vmarkovtsev.github.io/mlconference-2019-munich/pictures/cover.jpg" />
     <meta property="twitter:image" content="https://vmarkovtsev.github.io/mlconference-2019-munich/pictures/cover.jpg" />
     <link rel="stylesheet" href="node_modules/shower-ribbon/styles/styles.css">
     <link rel="stylesheet" href="fonts/Cerebri_Sans/font.css">
     <link rel="stylesheet" href="fonts/Source_Sans_Pro/font.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .shower {
             --slide-ratio: calc(16 / 9);
@@ -31,8 +32,8 @@
 
 	<header class="caption">
 		<button type="button" id="fullscreen" title="Go fullscreen" onclick="fullscreen()"><i class="fa fa-arrows-alt"></i></button>
-		<h1>Mining software development history: approaches and challenges</h1>
-		<p>Vadim Markovtsev, <a href="https://sourced.tech">source{d}</a>.</p>
+		<h1>ML on Code</h1>
+		<p>Waren Long, <a href="https://sourced.tech">source{d}</a>.</p>
 	</header>
 
 	<style>
@@ -61,6 +62,12 @@
             .slide h2, .slide li::before {
                 color: #bababa;
             }
+        }
+        .slide h3 {
+            font-family: 'Cerebri Sans', sans-serif;
+            margin-top: -20px;
+            margin-left: -4px;
+            color: #bababa;
         }
         header.caption {
             padding-right: 134px;
@@ -151,15 +158,6 @@
 			vertical-align: middle;
 			line-height: 400px !important;
 		}
-		.slide a {
-			background: none;
-			font-family: 'Source Sans Pro', sans-serif;
-		}
-        @media not print {
-           .slide a {
-               color: white;
-           } 
-        }
 		.slide a:hover {
 			background: linear-gradient(to top,currentColor .09em,transparent .09em) repeat-x;
 		}
@@ -248,31 +246,78 @@
         }
     </style>
 
+    <section class="slide" id="logorama">
+        <figure>
+            <img class="logorama" src="pictures/logorama.png">
+        </figure>
+        <style>
+            #logorama img {
+                position: absolute;
+                margin: -80px -100px 0;
+                width: 100%;
+                object-fit: cover;
+            }
+        </style>
+    </section>
+
 	<section class="slide vista vista-cover" id="cover">
-		<h2>Mining software development history</h2>
-        <p>Vadim Markovtsev<br>
+        <h2>Machine Learning on Code</h2>
+        <h3><i>from n-grams to GGNNs</i></h3>
+        <p>Waren Long<br>
             <a id="sourced-cover" href="https://sourced.tech"><img src="pictures/sourced.svg"></a>
         </p>
-
+        <p>Nantes ML Meetup - July 1st, 2019</p>
+		<!-- <div class="sponsors">
+            <img src="pictures/sponsor5.png">
+            <img src="pictures/sponsor3.png">
+            <img src="pictures/sponsor4.png">
+        </div> -->
 		<style>
+            #cover > p:nth-of-type(1) {
+                transform: translateY(20px);
+            }
+            #cover > p:nth-of-type(2) {
+                transform: translateY(200px);
+            }
+			.sponsors {
+                display: flex;
+                flex-direction: row;
+                height: 100px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding-bottom: 20px;
+            }
+            .sponsors img {
+                width: calc(20% - 10px);
+                object-fit: contain;
+                margin: 0 75px;
+            }
             .black {
                 color: #202020;
                 font-weight: bold;
             }
             #cover h2 {
-                margin: 30px 0 0;
+                margin: 0px 0 0;
                 text-align: center;
-                font-size: 70px;
-                color: white;
+                font-size: 50px;
+                color: whitesmoke;
+            }
+            #cover h3 {
+                margin: 0px 0 0;
+                text-align: center;
+                font-size: 30px;
+                color: whitesmoke;
             }
             #cover p {
-                margin: 40px 0 0;
                 text-align: center;
                 font-size: 20px;
                 font-family: 'Cerebri Sans', sans-serif;
             }
 			#cover {
-				background: url("pictures/cover.jpg") black;
+				background: url("pictures/sous_marin.jpg") black;
+				background-position-y: -10px !important;
 			}
 			#cover h2:before {
 				content: "";
@@ -282,7 +327,7 @@
 				top: 0;
 				right: 0;
 				bottom: 0;
-				background: rgba(0, 0, 0, 0.5);
+				background: rgba(0, 0, 0, 0.2);
 			}
             #sourced-cover > img {
                 width: 100px;
@@ -291,12 +336,25 @@
             #sourced-cover:hover {
                 background: none;
             }
+            .source-web {
+            position: absolute;
+            bottom: 20px !important;
+            right: 100px !important;
+            font-size: 20px;
+            }
+            .source{
+                position: absolute;
+                bottom: 20px !important;
+                right: 100px !important;
+                line-height: 45px !important;
+                font-size: 20px;
+            }
         </style>
     </section>
 
     <section class="slide vista" id="plan">
-        <h2>Plan</h2>
-        Intro&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Couples&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Lines&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Time series&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Tools
+        <h2>Programs as</h2>
+        <i class="fas fa-walking"></i>Token sequences&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;ASTs&nbsp;&nbsp;<span>➙</span>&nbsp;&nbsp;Graphs&nbsp;
         <style>
             #plan {
                 background-image: url("pictures/plan.png");
@@ -308,834 +366,514 @@
         </style>
     </section>
 
-    <section class="slide part">
-        <h2 class="shout">Introduction</h2>
-    </section>
-
-    <section class="slide">
-        <h2>Git</h2>
-        <img class="fullslide-padding black" src="pictures/git-black.svg">
-        <img class="fullslide-padding white" src="pictures/git-white.svg">
-    </section>
-
-    <section class="slide">
-        <h2>Source code</h2>
-        <img src="pictures/ast-black.svg" class="black diagram diagram-right">
-        <img src="pictures/ast-white.svg" class="white diagram diagram-right">
-        <pre><code>a = b * 2</code></pre>
+    <section class="slide" id="grand-bleu1">
+        <h2>Early days</h2>
+        <h3><i>The first language models</i></h3>
+        <figure>
+            <img class="grand-bleu1" src="pictures/gb_voiture2.jpg">
+        </figure>
         <style>
-            .diagram {
-                height: 350px;
+            #grand-bleu1 h2 {
+                margin: 0px 0 0;
+                color:lightgrey;
+                text-align:left;
+                font-size:50px;
             }
-            .diagram-right {
-                float: right;
+            #grand-bleu1 h3 {
+                margin: 0px 0 0;
+                text-align: left;
+                font-size: 30px;
+                color: whitesmoke;
             }
-        </style>
-    </section>
-
-    <section class="slide vista vista-cover" id="graphs-everywhere">
-        <h2 class="meme">Graphs</h2>
-        <h2 class="meme">graphs everywhere</h2>
-        <style>
-            #graphs-everywhere {
-                background-image: url("pictures/xeverywhere.jpg");
-            }
-            #graphs-everywhere > h2:nth-of-type(2) {
-                top: 250px;
-            }
-            .meme {
-                -webkit-transform: translateZ(0);
-                z-index: 100;
-                text-align: center;
-                position: relative;
-                font-family: impact !important;
-                font-size: 3em !important;
-                font-weight: 600 !important;
-                text-transform: uppercase;
-                color: white !important;
-                letter-spacing: 0px;
-                text-shadow:2px 2px 0 #000,
-                -2px -2px 0 #000,
-                2px -2px 0 #000,
-                -2px 2px 0 #000,
-                0px 2px 0 #000,
-                2px 0px 0 #000,
-                0px -2px 0 #000,
-                -2px 0px 0 #000,
-                2px 2px 5px #000;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <h2>So you have got graphs...</h2>
-        <ul>
-            <li>Measures, e.g. PageRank
-                <ul>
-                    <li><a href="https://github.com/sourcecred/sourcecred">SourceCred</a></li>
-                </ul>
-            </li>
-            <li>Node embeddings
-                <ul>
-                    <li><a href="https://cs.stanford.edu/~jure/pubs/node2vec-kdd16.pdf">node2vec</a></li>
-                </ul>
-            </li>
-            <li>Clustering, community detection</li>
-            <li><a href="https://arxiv.org/abs/1901.00596">Gated Graph Neural Networks</a></li>
-        </ul>
-    </section>
-
-    <section class="slide">
-        <h2>Diffs</h2>
-        <ul>
-            <li>By line: O(N×D)</li>
-            <li>By tree node: O(N×D)</li>
-            <li>By tree node which you really want*: <a href="http://useless-factor.blogspot.com/2008/01/matching-diffing-and-merging-xml.html" class="important">NP-hard, active research</a></li>
-        </ul>
-        *with "move" operation
-    </section>
-
-    <section class="slide">
-        <h2 class="shout shout-small">AST-annotated line diffs</h2>
-    </section>
-
-    <section class="slide part">
-        <h2 class="shout">Couples</h2>
-    </section>
-
-    <section class="slide">
-        <h2>Idea</h2>
-        <ul>
-            <li>If developers often change the same files, there must be something in common.</li>
-            <li>If files often appear in the same commits, there must be something in common.</li>
-        </ul>
-        <img src="pictures/couples-black.svg" class="couples-idea black">
-        <img src="pictures/couples-white.svg" class="couples-idea white">
-        <style>
-            .couples-idea {
-                height: 250px;
-                object-fit: contain;
-                margin-left: auto;
-                margin-right: auto;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <h2>word2vec</h2>
-        <ul>
-            <li>Context: sentences</li>
-            <li>Embedding: optimize Pointwise Mutual Information</li>
-            <li>There are algorithms for explicit co-occurrence matrix
-                <ul>
-                    <li><a href="https://nlp.stanford.edu/projects/glove/">GloVe</a></li>
-                    <li><a href="https://arxiv.org/abs/1602.02215">Swivel</a></li>
-                </ul>
-            </li>
-        </ul>
-        <img src="pictures/word2vec-black.png" class="black word2vec">
-        <img src="pictures/word2vec-white.png" class="white word2vec">
-        <style>
-            .word2vec {
+            #grand-bleu1 img {
                 position: absolute;
-                width: 400px;
-                bottom: 50px;
-                right: 100px;
-                object-fit: contain;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <h2 class="shout shout-small">Let's optimize<br><br>Pointwise Mutual Information</h2>
-    </section>
-
-    <section class="slide">
-        <h2>Problems</h2>
-        <ul>
-            <li>Optimal vector size?</li>
-            <li>Convergence on &lt;10k is bad</li>
-            <li>Convergence on &lt;50D is bad</li>
-            <li>GPU is useless on &lt;100 items</li>
-        </ul>
-    </section>
-
-    <section class="slide">
-        <h2 class="shout shout-small">t-SNE over the embeddings</h2>
-    </section>
-
-    <section class="slide">
-        <img src="pictures/tfprojcouples.png" class="fullslide">
-    </section>
-
-    <section class="slide part">
-        <h2 class="shout">Lines</h2>
-    </section>
-
-    <section class="slide">
-        <h2>Line burndown</h2>
-        <p><code>git blame foo.go</code></p>
-        <div id="obj" class="blame">
-            <div><span><span class="f2014">●</span>2014</span>
-                <pre><code class="b2014">func foo() {</code>
-<code class="b2014">  println("bar")</code>
-<code class="b2014">}</code></pre>
-            </div>
-            <div><span><span class="f2015">●</span>2015</span><pre><code class="b2014">func foo() {</code>
-<code class="b2014">  println("bar")</code>
-<code class="b2014">}</code>
-<code class="b2015">func qux() {</code>
-<code class="b2015">  println("baz")</code>
-<code class="b2015">}</code></pre></div>
-            <div><span><span class="f2016">●</span>2016</span><pre><code class="b2014">func foo() {</code>
-<code class="b2016">  println("waldo")</code>
-<code class="b2014">}</code>
-<code class="b2016">const X = 10</code>
-<code class="b2016">func spam() {</code>
-<code class="b2015">  println("baz")</code>
-<code class="b2015">}</code></pre></div>
-        </div>
-        <style>
-            .blame code:not(:only-child)::before {
-                opacity: 1 !important;
-            }
-            .blame pre {
-                margin: 0;
-            }
-            #obj {
-                display: flex;
-                height: 400px;
-            }
-            #obj > div {
-                flex-grow: 1;
-                flex-basis: 0;
-                height: 100%;
-                padding-left: 5px;
-                padding-right: 5px;
-            }
-            #obj > div:first-child {
-                padding-left: 0;
-            }
-            #obj > div:last-child {
-                padding-right: 8px;
-            }
-            #obj > div > span {
-                text-align: center;
-                width: 100%;
-                display: block;
-            }
-            .blame code {
-                font-size: 0.8em !important;
-                margin-left: 2.5em !important;
-                margin-top: -1px !important;
-                width: auto !important;
-                color: black !important;
-                padding-left: 1px !important;
-            }
-            .blame code:before {
-                color: #585a5e !important;
-                width: calc(2em + 1px) !important;
-                margin-left: -2.5em !important;
-                padding-left: 0.5em !important;
-            }
-            .b2014, .b2014:before {
-                background: #CB8C1D !important;
-            }
-            .b2015, .b2015:before {
-                background: #F1684E !important;
-            }
-            .b2016, .b2016:before {
-                background: #4EB1BA !important;
-            }
-            .f2014 {
-                color: #CB8C1D;
-            }
-            .f2015 {
-                color: #F1684E;
-            }
-            .f2016 {
-                color: #4EB1BA;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <h2>Line burndown</h2>
-        <img class="vista fullslide-padding black" src="pictures/objective_black.svg">
-        <img class="vista fullslide-padding white" src="pictures/objective_white.svg">
-    </section>
-
-    <section class="slide" id="linux">
-        <h2>Linux</h2>
-        <img src="pictures/linux.png">
-        <style>
-            #linux > h2 {
-                position: relative;
-                left: 200px;
-            }
-            #linux > img {
-                position: absolute;
-                left: 0;
-                top: 0;
-                height: 100%;
-                width: 100%;
-                object-fit: contain;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <img class="black fullslide" src="pictures/survival-black.png">
-        <img class="white fullslide" src="pictures/survival-white.png">
-        <a id="erikbern" href="https://erikbern.com/2016/12/05/the-half-life-of-code.html">Kaplan-Meier, Erik Bernhardsson</a>
-        <style>
-            #erikbern {
-                position: absolute;
-                right: 150px;
-                top: 55px;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <h2 class="shout shout-small">Ownership</h2>
-    </section>
-
-    <section class="slide">
-        <img class="fullslide black" src="pictures/emberjs_people-black.png">
-        <img class="fullslide white" src="pictures/emberjs_people-white.png">
-    </section>
-
-    <section class="slide">
-        <h2 class="shout shout-small">Measuring ownership is hard</h2>
-    </section>
-
-    <section class="slide formula">
-        <h2>Overwrites</h2>
-        <img class="fullslide black" src="pictures/overwrites-black.png">
-        <img class="fullslide white" src="pictures/overwrites-white.png">
-    </section>
-
-    <section class="slide" id="overwrites">
-        <h2>To a man with a hammer...</h2>
-        <ol>
-            <li>Swivel on the similarity matrix</li>
-            <li>t-SNE to visualize the embeddings</li>
-        </ol>
-        <img class="black" src="pictures/tfp_wireshark-black.png">
-        <img class="white" src="pictures/tfp_wireshark-white.png">
-        <style>
-            #overwrites > ol {
-                position: relative;
-                top: 200px;
-                width: 250px;
-                line-height: 1.4em;
-            }
-            #overwrites > ol > li {
-                margin-bottom: calc(50px - 1em);
-            }
-            #overwrites > img {
-                position: absolute;
-                right: 100px;
-                bottom: 20px;
-                width: 700px;
-                object-fit: contain;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <h2 class="shout shout-small">Lines importance</h2>
-    </section>
-
-    <section class="slide">
-        <pre><code>import sys</code>
-<code class="semi-important">import smart_foo</code>
-<code> </code>
-<code>def foo(x: Any) -> int:</code>
-<code>    log("called foo %s", x)</code>
-<code>    # now the hardcore part</code>
-<code class="important">    if smart_foo.complex_cond(x) < 50:</code>
-<code class="semi-important">        return 50</code>
-<code>    return 0</code>
-</pre>
-        <style>
-            .semi-important {
-                color: lightcoral;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <h2 class="shout shout-small">Diff 🡒 commit classification</h2>
-    </section>
-    
-    <section class="slide part">
-        <h2 class="shout">Time series</h2>
-    </section>
-
-    <section class="slide">
-        <h2>CPython contributors</h2>
-        <div class="cpython">
-            <img src="pictures/ts8.png"><img src="pictures/ts3.png"><img src="pictures/ts6.png"><img src="pictures/ts4.png">
-        </div>
-        <div class="cpython">
-            <img src="pictures/ts7.png"><img src="pictures/ts1.png"><img src="pictures/ts5.png"><img src="pictures/ts2.png">
-        </div>
-        *some are hidden, e.g. Guido
-        <style>
-            .cpython {
-                height: 103px;
-                margin-bottom: 10px;
-            }
-            .cpython > img {
-                display: inline-block;
-                height: 103px;
-                width: 197px;
-                object-fit: contain;
-                margin-right: 10px;
-            }
-            .cpython > img:last-of-type {
-                margin-right: 0;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <h2>CPython contributors</h2>
-        <div class="cpython">
-            <img src="pictures/ts7.png"><img src="pictures/ts8.png"><img src="pictures/ts2.png"><img src="pictures/ts1.png">
-        </div>
-        <div class="cpython">
-            <img src="pictures/ts3.png"><img src="pictures/ts4.png"><img src="pictures/ts6.png"><img src="pictures/ts5.png">
-        </div>
-    </section>
-
-    <section class="slide">
-        <h2>CPython contributors</h2>
-        <div class="cpython">
-            <img src="pictures/ts7_.png"><img src="pictures/ts8_.png"><img src="pictures/ts2_.png"><img src="pictures/ts1_.png">
-        </div>
-        <div class="cpython">
-            <img src="pictures/ts3_.png"><img src="pictures/ts4_.png"><img src="pictures/ts6_.png"><img src="pictures/ts5_.png">
-        </div>
-    </section>
-
-    <section class="slide">
-        <h2>Use cases</h2>
-        <ul>
-            <li>How many active contributors are today?</li>
-            <li>How did contributors come and leave?</li>
-            <li>(enterprise) Who worked with who?</li>
-        </ul>
-    </section>
-
-    <section class="slide">
-        <h2>Plan</h2>
-        <ol>
-            <li>Define the distance</li>
-            <li>Order by distance (1D)</li>
-            <li>Cluster by distance (2D)</li>
-            <li>Query nearest neighbors</li>
-        </ol>
-    </section>
-
-    <section class="slide">
-        <h2>Euclidean distance</h2>
-        <img src="pictures/commits1-black.svg" class="commits black">
-        <img src="pictures/commits1-white.svg" class="commits white">
-        <img src="pictures/commits2-black.svg" class="commits black">
-        <img src="pictures/commits2-white.svg" class="commits white">
-        <style>
-            .commits {
-                display: inline-block;
-                width: 50%;
-                object-fit: contain;
-            }
-            .commits:nth-of-type(3), .commits:nth-of-type(4) {
-                margin-top: 50px;
-                margin-left: 50%;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <h2 class="shout shout-small">d<sub>1</sub> = d<sub>2</sub></h2>
-    </section>
-
-    <section class="slide">
-        <h2>Dynamic Time Warping</h2>
-        <img src="pictures/dtw.png" class="fullslide-padding">
-    </section>
-
-    <section class="slide">
-        <h2>Fast Dynamic Time Warping</h2>
-        <p>Original complexity: <span class="important">O(n<sup>2</sup>)</span></p>
-        <p>Approximation's complexity: <span class="success">O(n)</span></p>
-        <p>Python package:&nbsp;&nbsp;<code class="inline">fastdtw</code></p>
-    </section>
-
-    <section class="slide">
-        <h2 class="shout shout-small">"Distance" matrix: O(n<sup>2</sup>)</h2>
-    </section>
-
-    <section class="slide">
-        <h2 class="shout shout-small">Agglomerative clustering?<br><br><code class="inline">seaborn.clustermap?</code></h2>
-    </section>
-
-    <section class="slide">
-        <img src="pictures/ser1.png" class="fullslide">
-    </section>
-
-    <section class="slide">
-        <img src="pictures/ser2-black.png" class="fullslide black">
-        <img src="pictures/ser2-white.png" class="fullslide white">
-    </section>
-
-    <section class="slide">
-        <img src="pictures/ser3.png" class="fullslide">
-        <a id="serlabel" href="http://nicolas.kruchten.com/content/2018/02/seriation/">Make Patterns Pop Out of Heatmaps with Seriation<br>by Nicolas Kruchten</a>
-        <style>
-            #serlabel {
-                position: absolute;
-                right: -20px;
-                bottom: calc(50% - 30px);
-                transform: rotate(-90deg);
-                font-size: 23px;
-                font-style: italic;
-                line-height: 25px;
-            }
-        </style>
-    </section>
-
-    <section class="slide formula">
-        <h2>Let's go scientific</h2>
-        <h3 class="formula">
-            $$
-            \min \sum{d_{i,i+1}}
-            $$
-        </h3>
-        <style>
-            .formula > h2 {
-                position: absolute;
-            }
-            .formula > h3 {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 100%;
-                font-size: 80px;
-                margin: 0;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <img src="pictures/tsp-black.png" class="fullslide black">
-        <img src="pictures/tsp-white.png" class="fullslide white">
-    </section>
-
-    <section class="slide">
-        <h2>Seriation</h2>
-        <ul>
-            <li>Ideal for heatmaps and 1D ordering of series</li>
-            <li>Python package:&nbsp;&nbsp;<code class="inline">seriate</code></li>
-            <li>Is not always better than agglomerative clustering</li>
-        </ul>
-    </section>
-
-    <section class="slide">
-        <h2>HDBSCAN</h2>
-        <p>aka I could not be bothered more by clustering</p>
-        <img src="pictures/hdbscan2.png" class="hdbscan">
-        <img src="pictures/hdbscan3.png" class="hdbscan">
-        <style>
-            .hdbscan {
-                width: 350px;
-                object-fit: contain;
-                display: inline-block;
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <img src="pictures/devs_tensorflow-black.png" class="black fullslide">
-        <img src="pictures/devs_tensorflow-white.png" class="white fullslide">
-    </section>
-
-    <section class="slide">
-        <h2>Beyond 1D</h2>
-        <ul>
-            <li>Both t-SNE and UMAP work with an explicit distance matrix</li>
-            <li>t-SNE works better for 2D (kNN+rank loss)</li>
-            <li>UMAP works better for 3+D</li>
-            <li>Best embedding dimensionality: 14 (85% 20NN)</li>
-        </ul>
-    </section>
-
-    <section class="slide part">
-        <h2 class="shout">Tools</h2>
-    </section>
-
-    <section class="slide vista vista-cover" id="lake">
-        <h2 class="shout shout-small">Code Lake</h2>
-        <style>
-            #lake {
-                background-image: url("pictures/lake.jpg");
-            }
-            #lake > h2 {
-                color: white;
-            }
-            #lake:before {
-                content: "";
-                position: absolute;
+                margin: -190px -100px 0;
+                width: 105%;
+                object-fit: cover;
+                filter: brightness(0.4);
                 z-index: -1;
-                left: 0;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.5);
             }
         </style>
     </section>
 
     <section class="slide">
-        <h2>github.com/src-d/gitbase</h2>
-        <pre><code><span class="kw">SELECT</span> refs.repository_id
-<span class="kw">FROM</span> refs
-<span class="kw">NATURAL JOIN</span> commits
-<span class="kw">WHERE</span> commits.commit_author_name = <span class="str">'Johnny Bravo'</span>
-    <span class="kw">AND</span> refs.ref_name = <span class="str">'HEAD'</span>;</code></pre>
-        <style>
-            .kw {
-                color: #CC7832;
-                font-weight: bold;
-            }
-
-            .str {
-                color: #6a8759;
-            }
-
-            .func {
-                color: #9e7bb0;
-            }
-        </style>
+        <h2>Code is bimodal</h2>
+        <p><i>"Source code is bimodal: it combines a formal algorithmic channel and a natural language channel of identifiers and comments. Because the two channels interact, [...] bimodality is a natural fit for machine learning."</i></p>
+        <p>&emsp;&emsp;Earl Barr</p>
+        <p>fMRI scans of skilled programmers show NLP parts of the brain active when reading code</p>
+        <p class="source"><a href="https://web.eecs.umich.edu/~weimerw/p/weimer-icse2017-preprint.pdf">Decoding the representation of code in the brain</a><br>&emsp; B. Floyd et al. 2017</p>
     </section>
 
     <section class="slide">
-        <h2>Parsing code</h2>
-        <img src="pictures/bblfsh-logo.png" class="center">
-        <img src="pictures/bblfsh-arch-black.png" class="black fullwidth">
-        <img src="pictures/bblfsh-arch-white.png" class="white fullwidth">
+        <h2>... but code is hard to write</h2>
+        <p><i>"Programming languages are inherently harder to write and read... so programmers deliberately write code as <b>unsurprising</b> as possible."</i></p>
+        <p><i>"Code (in all languages) is more predicatble than natural language because it more <b>technical</b> and difficult to learn."</i></p>
+        <p>&emsp;&emsp;Prem Devanbu at ML4P</p>
+        <p class="source"><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.221.1261&rep=rep1&type=pdf">On the natualness of Software</a><br>&emsp; A. Hindle et al. 2012</p>
     </section>
 
     <section class="slide">
-        <h2>Imports for each commit</h2>
-        <pre><code><span class="kw">SELECT</span> repository_id, commit_hash, file_path,
-    <span class="func">uast_extract</span>(<span class="func">uast</span>(blob_content,
-                      <span class="func">language</span>(file_path),
-                      <span class="str">'//uast:Import/Path'</span>),
-                 <span class="str">"Value"</span>) <span class="kw">AS</span> imports
-<span class="kw">FROM</span> commit_files <span class="kw">NATURAL JOIN</span> blobs
-<span class="kw">WHERE</span> <span class="func">language</span>(file_path) = <span class="str">'Go'</span>
-    <span class="kw">AND</span> <span class="func">array_length</span>(imports) > 0;</code></pre>
-    </section>
-
-    <section class="slide">
-        <h2>github.com/src-d/hercules</h2>
-        <img src="pictures/dag-black.png" class="fullwidth black">
-        <img src="pictures/dag-white.png" class="fullwidth white">
+        <h2>n-gram language model</h2>
         <ul>
-            <li>Command-line playground for trying new ideas</li>
-            <li>Data processing: Go (<a href="https://github.com/src-d/go-git">go-git</a>)</li>
-            <li>Data analysis: Python</li>
+            <li>Use a code corpus to estimate the probability distribution of code sequences.</li>
+            <li>Markovian assumption: the next token can be predicted using only the previous n−1 tokens</li>
+            <li>Infinite number of unknown tokens</li>
+            <li>Smoothing methods e.g. Katz smoothing</li>
         </ul>
+        <p class="source"><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.221.1261&rep=rep1&type=pdf">On the natualness of Software</a><br>&emsp; A. Hindle et al. 2012</p>
     </section>
 
     <section class="slide">
-        <h2>Examples</h2>
-        <pre><code># Lines evolution<br>hercules --burndown | labours -m burndown-project</code></pre>
-        <pre><code># Couples<br>hercules --couples | labours -m couples</code></pre>
-        <pre><code># Commit time series<br>hercules --devs | labours -m devs</code></pre>
-    </section>
-
-    <section class="slide">
-        <h2 class="shout shout-small">Datasets</h2>
-    </section>
-
-    <section class="slide">
-        <h2>Why?</h2>
+        <h2>Source code vocabularies</h2>
         <ul>
-            <li>What to clone?</li>
-            <li>Cloning many repositories is hard</li>
-            <li>We don't always need source code</li>
+            <li>Classic NLP preprocessing (stemming, lemming, etc...)</li>
+            <li>Spitting identifiers using BiLSTM</li>
+            <li>Byte Pair Encoding</li>
         </ul>
+        <p class="source"><a href="https://arxiv.org/pdf/1904.01873.pdf">Modeling Vocabulary for Big Code Machine Learning</a><br>&emsp; R. Robbes et al. 2019</p>
     </section>
 
     <section class="slide">
-        <h2 class="shout shout-small">GDPR
-            <span class="eu-star">★</span>
-            <span class="eu-star">★</span>
-            <span class="eu-star">★</span>
-            <span class="eu-star">★</span>
-            <span class="eu-star">★</span>
-            <span class="eu-star">★</span>
-            <span class="eu-star">★</span>
-            <span class="eu-star">★</span>
-            <span class="eu-star">★</span>
-            <span class="eu-star">★</span>
-            <span class="eu-star">★</span>
-            <span class="eu-star">★</span>
-        </h2>
-        <style>
-            .eu-star {
+        <h2>Token-based applications</h2>
+        <ul>
+            <li>Code completion/suggestion </li>
+            <li>Coding convention: Naturalize</li>
+            <li>Code dediplication: CCFinder, SourcererCC</li>
+            <li>Bug detection: DeepBugs</li>
+        </ul>
+        <!-- <p class="source"><a href="https://arxiv.org/pdf/1904.01873.pdf">Modeling Vocabulary for Big Code Machine Learning</a><br>&emsp; R. Robbes et al. 2019</p> -->
+    </section>
+
+    <section class="slide" id="grand-bleu2">
+        <h2>The unveiling</h2>
+        <h3><i>Syntactical Features</i></h3>
+        <figure>
+            <img class="grand-bleu2" src="pictures/gb_enzo.jpg">
+		</figure>
+		<style>
+            #grand-bleu2 h2 {
+                margin: 0px 0 0;
+                color:lightgrey;
+                text-align:left;
+                font-size:50px;
+            }
+            #grand-bleu2 h3 {
+                margin: 0px 0 0;
+                text-align: left;
+                font-size: 30px;
+                color: whitesmoke;
+            }
+            #grand-bleu2 img {
                 position: absolute;
-                left: calc(50% - 0.2em);
-                top: calc(50% - 0.5em);
-                font-size: 40px;
-                color: yellow;
+                margin: -190px -100px 0;
+                width: 105%;
+                object-fit: cover;
+				filter: brightness(0.4);
+                z-index: -1;
             }
-            .eu-star:nth-of-type(1) {
-                transform: rotate(30deg) translate(200px) rotate(-30deg);
+        </style>
+    </section>
+
+    <section class="slide" id="representations">
+        <h2>Syntactical representation</h2>
+        <table cellspacing="50" cellpadding="50">
+            <tr>
+                <th>Natural Language</th>
+                <th>Code</th>
+            </tr>
+            <tr>
+                <td>I shot an elephant in my pyjamas</td>
+                <td>
+                    <pre>
+                        <code>Assert.NotNull(clazz)</code>
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <td><img class="sentence" src="pictures/graph_nlp.png"/></td>
+                <td><img class="snippet" src="pictures/ast.png"/></td>
+            </tr>
+        </table>
+        <style>
+            #representations pre {
+                font-size: 20px;
+                margin-left: -200px;
+                /* text-align: left; */
             }
-            .eu-star:nth-of-type(2) {
-                transform: rotate(60deg) translate(200px) rotate(-60deg);
+            #representations th {
+                text-align: center;
             }
-            .eu-star:nth-of-type(3) {
-                transform: rotate(90deg) translate(200px) rotate(-90deg);
+            .sentence {
+                text-align: center;
+                width: 200px;
             }
-            .eu-star:nth-of-type(4) {
-                transform: rotate(120deg) translate(200px) rotate(-120deg);
+            .snippet {
+                text-align: center;
+                width: 350px;
             }
-            .eu-star:nth-of-type(5) {
-                transform: rotate(150deg) translate(200px) rotate(-150deg);
-            }
-            .eu-star:nth-of-type(6) {
-                transform: rotate(180deg) translate(200px) rotate(-180deg);
-            }
-            .eu-star:nth-of-type(7) {
-                transform: rotate(210deg) translate(200px) rotate(-210deg);
-            }
-            .eu-star:nth-of-type(8) {
-                transform: rotate(240deg) translate(200px) rotate(-240deg);
-            }
-            .eu-star:nth-of-type(9) {
-                transform: rotate(270deg) translate(200px) rotate(-270deg);
-            }
-            .eu-star:nth-of-type(10) {
-                transform: rotate(300deg) translate(200px) rotate(-300deg);
-            }
-            .eu-star:nth-of-type(11) {
-                transform: rotate(330deg) translate(200px) rotate(-330deg);
-            }
-            .eu-star:nth-of-type(12) {
-                transform: rotate(360deg) translate(200px) rotate(-360deg);
+            #representations table {
+                margin-left: -100px;
+                border-collapse: collapse;
+                text-align: center;
+                /* border: 1px solid white; */
+                /* width: 80%; */
             }
         </style>
     </section>
 
     <section class="slide">
-        <h2>Software Heritage Graph Dataset</h2>
-        <img src="pictures/SoftwareHeritage.png" class="fullwidth">
-        <ul>
-            <li>85mm repositories, 1.1m unique commits</li>
-            <li>PostgreSQL, Parquet</li>
-            <li><a href="https://zenodo.org/record/2583978">zenodo.org/record/2583978</a></li>
-        </ul>
-    </section>
-
-    <section class="slide">
-        <h2>Public Git Archive</h2>
-        <img src="pictures/PGA.png" id="pga-logo">
-        <ul>
-            <li>260k repositories</li>
-            <li>Git packfile-s</li>
-            <li>≥50🟊 on GitHub (early 2019)</li>
-            <li><a href="https://pga.sourced.tech">pga.sourced.tech</a></li>
-        </ul>
+        <h2>  </h2>
+        <a href="https://doc.bblf.sh"><img class="center" src="pictures/bblfsh-logo.png"></a>
+        <div class="vista center" id="bblfsh-arch"></div>
         <style>
-            #pga-logo {
-                height: 150px;
-                float: left;
-                margin: 20px 50px 200px 0;
+            #bblfsh-arch {
+                width: 600px;
+                height: 100px;
+                background-image: url("pictures/bblfsh-arch-black.png");
+            }
+            @media not print {
+                #bblfsh-arch {
+                    background-image: url("pictures/bblfsh-arch-white.png");
+                }
             }
         </style>
     </section>
 
-    <section class="slide part">
-        <h2 class="shout">Summary</h2>
-    </section>
-
-    <section class="slide">
-        <h2>Summary</h2>
-        <ul id="summary">
-            <li>Embed similarity matrices with Swivel</li>
-            <li>Embed distance matrices with t-SNE (2-3D) and UMAP</li>
-            <li>Compare time series with Fast Dynamic Time Warping
-                <ul>
-                    <li>But remember about the △ inequality</li>
-                </ul>
-            </li>
-            <li>Order sequences and heatmaps with Seriation</li>
-            <li>Mining software development history is fun</li>
-        </ul>
+    <section class="slide" id="context">
+        <h2>Different Context</h2>
+        <img src="pictures/context1.png" class="context1">
+        <img src="pictures/context2.png" class="context2">
+        <img src="pictures/context3.png" class="context3">
+        <p>&bull;&emsp;Token neighbors</p>
+        <p>&bull;&emsp;AST-node neighbors</p>
+        <p>&bull;&emsp;AST paths</p>
         <style>
-            #summary > li:before {
-                content: "✓";
-            }
-            #summary li li:before {
-                content: "🙁";
-            }
-        </style>
-    </section>
-
-    <section class="slide">
-        <img class="fullslide" src="pictures/xrays.jpg">
-    </section>
-
-    <section class="slide">
-        <h2>Mining Software Repositories</h2>
-        <a href="https://msrconf.org" id="msrconf">msrconf.org</a>
-        <img class="fullslide-padding" src="pictures/msr.svg">
-        <style>
-            #msrconf {
+            .context1 {
                 position: absolute;
+                right:100px;
+                top: 120px;
+                width: 300px;
+            }
+            .context2 {
+                position: absolute;
+                right:100px;
+                top: 260px;
+                width: 300px;
+            }
+            .context3 {
+                position: absolute;
+                right:100px;
+                top: 420px;
+                width: 300px;
+            }
+            #context > p:nth-of-type(1) {
+                margin-top: 60px;
+                margin-left: 10px;
+            }
+            #context > p:nth-of-type(2) {
+                margin-top: 120px;
+                margin-left: 10px;
+            }
+            #context > p:nth-of-type(3) {
+                margin-top: 120px;
+                margin-left: 10px;
             }
         </style>
     </section>
+
+    <!-- <section class="slide" id="flatten">
+        <h2>UAST Flattening</h2>
+        <img src="pictures/context2.png" class="flatten">
+        <ol>
+            <li>Parse the source code</li>
+            <li>3TB of Git packfiles i.e. include history</li>
+            <li>455 distinct programming languages</li>
+            <li>54M </li>
+        </ol>
+        <p class="source"><a href="http://www.cs.wm.edu/~mtufano/publications/C9.pdf">Deep Learning Similarities from Different Representations of Source Code</a><br>&emsp; M. Di Penta et al. 2018</p>
+        <style>
+            .flatten {
+                position: absolute;
+                right:100px;
+                top: 170px;
+                width: 350px;
+            }
+        </style>
+    </section> -->
+
+    <section class="slide" id="code2vec">
+        <h2>Design tradeoff from code2vec</h2>
+        <img src="pictures/code2vec_graph.png" class="code2vec">
+        <style>
+            .code2vec {
+                position: absolute;
+                left:80px;
+                top: 170px;
+                width: 650px;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Gemini</h2>
+        <h3><i>Code deduplication at Scale</i></h3>
+        <ol>
+            <li>Create <a href="https://github.com/src-d/datasets/tree/master/PublicGitArchive">Public Git Archive</a>, dataset of 180k popular GitHub repos</li>
+            <li>Extract UASTs and combine various syntactical features</li>
+            <li>Create a pairwise similarity graph using <a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">Locality Sensitive Hashing</a></li>
+            <li>Extract connected components from the graph</li>
+            <li>Perform comunity detection to display highlight clone communities</li>
+        </ol>
+        <p class="source-web"><a href="https://github.com/src-d/gemini">src-d/gemini</a>, source{d}</p>
+    </section>
+
+    <section class="slide" id="pga">
+        <h2>1. Public Git Archive</h2>
+        <img src="pictures/PGA.png" class="pga">
+        <ul>
+            <li>Dataset of 182,014 GitHub repositories with +50*</li>
+            <li>3TB of Git packfiles i.e. include history</li>
+            <li>455 distinct programming languages</li>
+            <li>54 million files</li>
+            <li>16 billion LoC</li>
+        </ul>
+        <p class="source"><a href="https://dl.acm.org/citation.cfm?id=3196464">Public git archive: a big code dataset for all</a><br>&emsp; V. Markovtsev et al. 2018</p>
+        <style>
+            .pga {
+                position: absolute;
+                right:130px;
+                top: 200px;
+                width: 300px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="gemini-features">
+        <h2>2. Feature extraction</h2>
+        <img src="pictures/graphlet.png" class="gemini-features">
+        <ul>
+            <li>Identifiers and literals</li>
+            <li>Quantized number of children</li>
+            <li>Graphlets or tree skip gram &emsp;&emsp;&emsp;&rArr;</li>
+            <li>Random walks</li>
+            <li>AST paths (DFS + limited length)</li>
+        </ul>
+        <style>
+            .gemini-features {
+                position: absolute;
+                right:180px;
+                top: 160px;
+                width: 200px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="gemini">
+        <h2>3. Community detection</h2>
+        <img src="pictures/gemini_visual.png" class="gemini">
+        <style>
+            .gemini {
+                position: absolute;
+                left:150px;
+                top: 190px;
+                width: 700px;
+            }
+        </style>
+    </section>
+
+    <!-- <section class="slide" id="gemini-features">
+        <h2>3. Hashing</h2>
+        <img src="pictures/graphlet.png" class="gemini-features">
+        <ul>
+            <li>Impossible to compute similarity between each snippet</li>
+            <li>Quantized number of children</li>
+            <li>Graphlets or tree skip gram &emsp;&emsp;&emsp;&rArr;</li>
+            <li>Random walks</li>
+            <li>AST paths (DFS + limited length)</li>
+        </ul>
+        <style>
+            .gemini-features {
+                position: absolute;
+                right:180px;
+                top: 160px;
+                width: 200px;
+            }
+        </style>
+    </section> -->
+
+    <section class="slide" id="code2vec1">
+        <h2>code2vec</h2>
+        <ol>
+            <li>AST path extraction</li>
+            <li>Distributed representation of contexts</li>
+            <li>Path-attention network</a></li>
+            <li>Evaluation on semantic labelling</li>
+        </ol>
+        <img src="pictures/code2vec1.png" class="code2vec1">
+        <p class="source"><a href="https://arxiv.org/pdf/1803.09473.pdf">code2vec: Learning Distributed Representations of Code</a><br> Alon et. al. 2018</p>
+        <style>
+            .code2vec1 {
+                position: absolute;
+                right:100px;
+                top: 80px;
+                width: 350px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="code2vec2">
+        <h2>Attention mechanism</h2>
+        <img src="pictures/code2vec2.png" class="code2vec2">
+        <!-- <p class="source"><a href="https://arxiv.org/pdf/1803.09473.pdf">code2vec: Learning Distributed Representations of Code</a><br> Alon et. al. 2018</p> -->
+        <style>
+            .code2vec2 {
+                position: absolute;
+                right:130px;
+                top: 180px;
+                width: 800px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="grand-bleu3">
+        <h2>State of the Art</h2>
+        <h3><i>GGNNs</i></h3>
+        <figure>
+            <img class="grand-bleu3" src="pictures/gb_enzo_it.jpg">
+        </figure>
+        <style>
+            #grand-bleu3 h2 {
+                margin: 0px 0 0;
+                color:lightgrey;
+                text-align:left;
+                font-size:50px;
+            }
+            #grand-bleu3 h3 {
+                margin: 0px 0 0;
+                text-align: left;
+                font-size: 30px;
+                color: whitesmoke;
+            }
+            #grand-bleu3 img {
+                position: absolute;
+                margin: -190px -100px 0;
+                width: 105%;
+                object-fit: cover;
+                filter: brightness(0.4);
+                z-index: -1;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="programs-graph">
+        <h2>Programs as graphs</h2>
+        <h3><i>Start from syntax</i></h3>
+        <img src="pictures/miltos_graph1.png" class="programs-graph">
+        <pre>
+            <code>Assert.NotNull(clazz)</code>
+        </pre>
+        <!-- <p class="source"><a href="https://arxiv.org/abs/1711.00740">Learning to Represent Programs with Graphs</a><br>M. Allamanis et. al. 2018</p> -->
+        <style>
+            #programs-graph pre {
+                font-size: 20px;
+            }
+            .programs-graph {
+                position: absolute;
+                right:100px;
+                top: 220px;
+                width: 550px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="programs-graph2">
+        <h2>Programs as graphs</h2>
+        <h3><i>Adding data flows</i></h3>
+        <img src="pictures/miltos_graph2.png" class="programs-graph2">
+        <!-- <p class="source"><a href="https://arxiv.org/abs/1711.00740">Learning to Represent Programs with Graphs</a><br>M. Allamanis et. al. 2018</p> -->
+        <style>
+            .programs-graph2 {
+                position: absolute;
+                right:300px;
+                top: 250px;
+                width: 600px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="programs-graph3">
+        <h2>Potentially big graphs</h2>
+        <img src="pictures/miltos_graph3.png" class="programs-graph3">
+        <pre>
+            <code>def sum_positive(arr, lim):</code>
+            <code>  sum = 0</code>
+            <code>  for i in range(lim):</code>
+            <code>      if arr[i] > 0:</code>
+            <code>          sum += arr[i]</code>
+            <code>  return sum</code>
+        </pre>
+        <!-- <p class="source"><a href="https://arxiv.org/abs/1711.00740">Learning to Represent Programs with Graphs</a><br>M. Allamanis et. al. 2018</p> -->
+        <p>~900 nodes/graph</p>
+        <p>~8k edges/graph</p>
+       <style>
+            #programs-graph3 pre {
+                font-size: 17px;
+            }
+            .programs-graph3 {
+                position: absolute;
+                right:170px;
+                top: 120px;
+                width: 230px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="programs-graph3">
+        <h2>Graph Neural Networks</h2>
+        <ul>
+            <li>Extend NNs to process a more general class of graphs (cyclic, directed)</li>
+            <li>Encode one graph into an dense representation</li>
+            <li>Suitable for both graph and node focuses applications</li>
+            <li>Each node of the graph is replaced by a unit computing the function</li>
+            <li>AST paths (DFS + limited length)</li>
+        </ul>
+        <p class="source"><a href="https://persagen.com/files/misc/scarselli2009graph.pdf">The Graph Neural Network Model</a><br>F. Scarselli et. al. 2009</p>
+    </section>
+
+    <section class="slide" id="programs-graph3">
+        <h2>Graph Neural Networks</h2>
+        <img src="pictures/gnn1.png" class="gnn1">
+        <img src="pictures/gnn2.png" class="gnn2">
+        <p class="source"><a href="https://persagen.com/files/misc/scarselli2009graph.pdf">The Graph Neural Network Model</a><br>F. Scarselli et. al. 2009</p>
+        <style>
+            .gnn1 {
+                position: absolute;
+                left:100px;
+                top: 180px;
+                width: 450px;
+            }
+        </style>
+        <style>
+            .gnn2 {
+                position: absolute;
+                right:120px;
+                top: 200px;
+                width: 300px;
+            }
+        </style>
+    </section>
+
+
 
 	<section class="slide">
         <h2>Thank you</h2>
         <ul class="no-bullets fa-bullets">
-            <li><i class="fa fa-envelope monofa" aria-hidden="true"></i><a href="mailto://vadim@sourced.tech">vadim@sourced.tech</a></li>
-            <li><i class="fa fa-twitter monofa" aria-hidden="true"></i><a href="https://twitter.com/vadimlearning">@vadimlearning</a></li>
-            <li><i class="fa fa-github monofa" aria-hidden="true"></i><a href="https://github.com/vmarkovtsev">@vmarkovtsev</a></li>
+            <li><i class="fa fa-envelope monofa" aria-hidden="true"></i><a href="mailto://waren@sourced.tech">waren@sourced.tech</a></li>
+            <li><i class="fa fa-twitter monofa" aria-hidden="true"></i><a href="https://twitter.com/warenlg">@warenlg</a></li>
+            <li><i class="fa fa-github monofa" aria-hidden="true"></i><a href="https://github.com/warenlg">@warenlg</a></li>
             <li><i class="fa fa-rss monofa" aria-hidden="true"></i><a href="https://blog.sourced.tech">blog.sourced.tech</a></li>
             <li><i class="fa fa-trophy monofa" aria-hidden="true"></i><a href="https://github.com/src-d/awesome-machine-learning-on-source-code">Awesome #MLonCode</a></li>
         </ul>
-        <div id="qrcode-container">
-            <img class="qrcode black" src="pictures/qrcode_black.svg">
-            <img class="qrcode white" src="pictures/qrcode_white.svg">
-            <a href="http://bit.ly/2KLXbS7" id="bitly">bit.ly/2KLXbS7</a>
-        </div>
-        <style>
-            #qrcode-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 380px;
-                position: absolute;
-                right: 81px;
-                top: 81px;
-            }
-            .qrcode {
-                height: 380px;
-            }
-            #bitly {
-                display: block;
-                font-size: 120%;
-            }
-        </style>
     </section>
 
 	<div class="progress"></div>
